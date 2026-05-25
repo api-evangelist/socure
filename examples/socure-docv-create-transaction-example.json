@@ -1,0 +1,14 @@
+{
+  "request": {
+    "modules": ["docvtransaction"],
+    "documentType": "license",
+    "country": "US",
+    "redirectUrl": "https://your-app.example/onboarding/complete",
+    "webhookUrl": "https://your-app.example/socure/docv/webhook"
+  },
+  "response": {
+    "referenceId": "01HV7K9MX4ZJQ3T0SOCURE-DOCV-EX",
+    "docvTransactionId": "docv-tx-9c1d2e3f-4a5b-6c7d-8e9f-0123456789ab",
+    "sessionUrl": "https://docv.socure.com/session/9c1d2e3f4a5b6c7d8e9f"
+  }
+}

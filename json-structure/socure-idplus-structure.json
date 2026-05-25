@@ -1,0 +1,63 @@
+{
+  "structure": "0.1",
+  "title": "Socure ID+ Structure",
+  "description": "Cross-format structural map of Socure ID+ resources. Surfaces the canonical request and response shapes irrespective of OpenAPI or JSON Schema encoding.",
+  "resources": [
+    {
+      "name": "IdPlusRequest",
+      "kind": "object",
+      "properties": {
+        "modules": "array<enum>",
+        "customerUserId": "string",
+        "firstName": "string",
+        "surName": "string",
+        "dob": "date",
+        "nationalId": "string",
+        "email": "email",
+        "mobileNumber": "string",
+        "physicalAddress": "string",
+        "city": "string",
+        "state": "string",
+        "zip": "string",
+        "country": "iso-3166-1-alpha-2",
+        "ipAddress": "string",
+        "userConsent": "boolean",
+        "consentTimestamp": "datetime",
+        "deviceSessionId": "string",
+        "docvTransactionId": "string"
+      }
+    },
+    {
+      "name": "IdPlusResponse",
+      "kind": "object",
+      "properties": {
+        "referenceId": "string",
+        "kyc": "KycResult",
+        "fraud": "SigmaResult",
+        "synthetic": "SigmaResult",
+        "emailRisk": "RiskScoreResult",
+        "phoneRisk": "RiskScoreResult",
+        "addressRisk": "RiskScoreResult",
+        "watchlist": "WatchlistResult",
+        "decision": "DecisionResult"
+      }
+    },
+    {
+      "name": "DecisionResult",
+      "kind": "object",
+      "properties": {
+        "name": "string",
+        "value": "enum<accept|reject|review|refer|resubmit>",
+        "ruleSet": "string",
+        "version": "string"
+      }
+    },
+    {
+      "name": "WatchlistResult",
+      "kind": "object",
+      "properties": {
+        "global.sources": "array<{ sourceListName, matchCount }>"
+      }
+    }
+  ]
+}

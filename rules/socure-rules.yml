@@ -1,0 +1,53 @@
+extends:
+- spectral:oas
+rules:
+  socure-info-contact-required:
+    description: Every Socure OpenAPI spec must declare info.contact pointing to developer.socure.com.
+    severity: error
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+  socure-server-host:
+    description: Production server must use api.socure.com or api.socure.us (GovCloud).
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://(api|sandbox)\\.socure\\.(com|us)$"
+  socure-security-apikey:
+    description: All Socure operations must require the SocureToken apiKey security scheme.
+    severity: error
+    given: $.security[*]
+    then:
+      function: truthy
+  socure-title-case-summaries:
+    description: All operation summaries must use Title Case.
+    severity: warn
+    given: $.paths[*][*].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-zA-Z0-9]*)( ([A-Z][a-zA-Z0-9]*|A|An|And|The|Of|For|To|In|On|With|By|Or))*$"
+  socure-operation-id-required:
+    description: Every operation must declare an operationId.
+    severity: error
+    given: $.paths[*][*]
+    then:
+      field: operationId
+      function: truthy
+  socure-tags-required:
+    description: Every operation must be tagged.
+    severity: warn
+    given: $.paths[*][*]
+    then:
+      field: tags
+      function: truthy
+  socure-reference-id-property:
+    description: Successful response bodies should include a referenceId property where applicable.
+    severity: info
+    given: $.paths[*].post.responses['200'].content['application/json'].schema.properties
+    then:
+      field: referenceId
+      function: truthy

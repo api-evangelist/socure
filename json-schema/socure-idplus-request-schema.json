@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/socure/refs/heads/main/json-schema/socure-idplus-request-schema.json",
+  "title": "Socure ID+ Request",
+  "type": "object",
+  "required": ["modules"],
+  "properties": {
+    "modules": {
+      "type": "array",
+      "description": "Modules to evaluate in this request.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "kyc",
+          "ecbsv",
+          "sigma",
+          "synthetic",
+          "fraud",
+          "emailrisk",
+          "phonerisk",
+          "addressrisk",
+          "decision",
+          "watchlist",
+          "watchliststandard",
+          "alertlist",
+          "decasedcheck",
+          "devicerisk",
+          "graphintelligence",
+          "accountintelligence",
+          "prefill",
+          "docvtransaction"
+        ]
+      }
+    },
+    "customerUserId": { "type": "string" },
+    "firstName": { "type": "string" },
+    "surName": { "type": "string" },
+    "dob": { "type": "string", "format": "date" },
+    "nationalId": { "type": "string" },
+    "email": { "type": "string", "format": "email" },
+    "mobileNumber": { "type": "string" },
+    "physicalAddress": { "type": "string" },
+    "city": { "type": "string" },
+    "state": { "type": "string" },
+    "zip": { "type": "string" },
+    "country": { "type": "string" },
+    "ipAddress": { "type": "string" },
+    "userConsent": { "type": "boolean" },
+    "consentTimestamp": { "type": "string", "format": "date-time" },
+    "deviceSessionId": { "type": "string" },
+    "docvTransactionId": { "type": "string" }
+  }
+}

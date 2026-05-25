@@ -1,0 +1,7 @@
+{
+  "eventType": "VERIFICATION_COMPLETED",
+  "docvTransactionId": "docv-tx-9c1d2e3f-4a5b-6c7d-8e9f-0123456789ab",
+  "customerUserId": "demo-user-001",
+  "eventTime": "2026-05-25T15:42:11Z",
+  "decision": "accept"
+}

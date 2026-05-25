@@ -1,0 +1,279 @@
+aid: socure
+url: https://raw.githubusercontent.com/api-evangelist/socure/refs/heads/main/apis.yml
+apis:
+- aid: socure:socure-idplus-api
+  name: Socure ID+ API
+  tags:
+  - Identity Verification
+  - Fraud Prevention
+  - KYC
+  - Compliance
+  - AML
+  humanURL: https://developer.socure.com/reference/idplus
+  properties:
+  - url: https://developer.socure.com/reference/idplus
+    type: Documentation
+  - url: https://developer.socure.com/docs/id-plus/endpoints-and-apis/api-endpoints
+    type: Documentation
+  - url: https://developer.socure.com/reference/authentication
+    name: API Authentication
+    type: Documentation
+  - url: openapi/socure-idplus-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/socure-idplus-request-schema.json
+    type: JSONSchema
+  - url: json-schema/socure-idplus-response-schema.json
+    type: JSONSchema
+  - url: json-ld/socure-context.jsonld
+    type: JSONLD
+  - type: NaftikoCapability
+    url: capabilities/idplus-identity-verification.yaml
+  - type: NaftikoCapability
+    url: capabilities/idplus-fraud-scoring.yaml
+  - type: NaftikoCapability
+    url: capabilities/idplus-watchlist-screening.yaml
+  description: The Socure ID+ API is the unified REST surface for the ID+ platform, exposing every module — KYC
+    (Socure Verify), eCBSV, Sigma Identity Fraud, Sigma Synthetic, Sigma First-Party Fraud, Email/Phone/Address
+    RiskScore, Digital Intelligence, Graph Intelligence, Global Watchlist Screening, Deceased Check, Account
+    Intelligence, Prefill, and the Decision rules engine — through a single multi-module POST that returns a
+    combined response with referenceId, decision, KYC, fraud, and risk score blocks.
+- aid: socure:socure-docv-api
+  name: Socure Predictive DocV API
+  tags:
+  - Identity Verification
+  - Document Verification
+  - Biometrics
+  - Liveness
+  humanURL: https://developer.socure.com/docs/id-plus/modules/docv/docv-overview
+  properties:
+  - url: https://developer.socure.com/docs/id-plus/modules/docv/docv-overview
+    type: Documentation
+  - url: https://developer.socure.com/docs/webhooks/docv-events
+    name: DocV Webhook Events
+    type: Documentation
+  - url: openapi/socure-docv-api-openapi.yml
+    type: OpenAPI
+  - url: asyncapi/socure-docv-asyncapi.yml
+    type: AsyncAPI
+  - type: NaftikoCapability
+    url: capabilities/docv-document-verification.yaml
+  description: Predictive Document Verification (DocV) verifies government-issued ID documents and matches them to
+    a live selfie with liveness detection. Includes a session-orchestration REST API (create transaction, retrieve
+    decision, manage uploads) and a webhook stream (`APP_OPENED`, `DOCUMENTS_UPLOADED`, `VERIFICATION_COMPLETED`,
+    `SESSION_EXPIRED`) for asynchronous notification of session lifecycle events.
+- aid: socure:socure-watchlist-monitoring-api
+  name: Socure Global Watchlist Monitoring API
+  tags:
+  - AML
+  - Compliance
+  - Watchlist
+  - Sanctions
+  - PEP
+  humanURL: https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
+  properties:
+  - url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
+    type: Documentation
+  - url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
+    name: Watchlist Monitoring Webhooks
+    type: Documentation
+  - url: openapi/socure-watchlist-monitoring-api-openapi.yml
+    type: OpenAPI
+  - url: asyncapi/socure-watchlist-asyncapi.yml
+    type: AsyncAPI
+  - type: NaftikoCapability
+    url: capabilities/watchlist-monitoring.yaml
+  description: Continuous monitoring of customers against global sanctions lists (OFAC, UN, EU, HMT, DFAT), PEP
+    lists, and adverse media. Submit profiles for ongoing screening, retrieve match alerts, manage match
+    dispositions, and receive webhook callbacks when a customer matches a newly added or updated list entry.
+- aid: socure:socure-decision-api
+  name: Socure Decision API
+  tags:
+  - Decisioning
+  - Rules Engine
+  - Identity Verification
+  humanURL: https://developer.socure.com/docs/id-plus/modules/decision
+  properties:
+  - url: https://developer.socure.com/docs/id-plus/modules/decision
+    type: Documentation
+  - url: openapi/socure-decision-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/decision-decisioning.yaml
+  description: Socure's rule-based decisioning module returns a single deterministic outcome — accept, reject,
+    review, refer, or resubmit — derived from ID+ module scores and customer-configured rules. Decision rules are
+    authored in the Socure Console and applied on every ID+ call when the `decision.module` block is included in
+    the request modules array.
+- aid: socure:socure-account-intelligence-api
+  name: Socure Account Intelligence API
+  tags:
+  - Bank Account Verification
+  - Account Validation
+  - Open Banking
+  humanURL: https://developer.socure.com/docs/id-plus/modules/account-intelligence
+  properties:
+  - url: https://developer.socure.com/docs/id-plus/modules/account-intelligence
+    type: Documentation
+  - url: openapi/socure-account-intelligence-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/account-intelligence.yaml
+  description: Real-time validation of US bank accounts — verifying open/closed status, ownership (name match),
+    and account-type signals. Powers funding-account checks for fintech onboarding, payroll, and ACH origination
+    flows without requiring micro-deposits or end-user credentials.
+- aid: socure:socure-riskos-api
+  name: Socure RiskOS API
+  tags:
+  - Orchestration
+  - Workflows
+  - Identity Verification
+  - Fraud Prevention
+  humanURL: https://help.socure.com/riskos/docs
+  properties:
+  - url: https://help.socure.com/riskos/docs
+    type: Documentation
+  description: RiskOS is Socure's identity and fraud orchestration platform that combines ID+ modules,
+    customer-configured workflows, case management, and a no-code rules editor under a unified API. RiskOS
+    Enterprise supports custom workflow deployments; RiskOS Launch is the self-serve productized workflow
+    offering. Note - the RiskOS API surface is gated behind customer onboarding; this profile tracks the
+    documentation entry point only.
+common:
+- url: https://www.socure.com
+  type: Portal
+- url: https://developer.socure.com
+  name: Socure DevHub
+  type: Portal
+- url: https://developer.socure.com/docs
+  type: Documentation
+- url: https://developer.socure.com/reference
+  type: Documentation
+- url: https://developer.socure.com/docs/id-plus/getting-started
+  type: GettingStarted
+- url: https://developer.socure.com/docs/id-plus/getting-started/quick-start-guide
+  name: ID+ Quick Start Guide
+  type: GettingStarted
+- url: https://developer.socure.com/reference/authentication
+  name: API Authentication
+  type: Authentication
+- url: https://www.socure.com/products
+  name: Products
+  type: ProductsPage
+- url: https://www.socure.com/pricing
+  type: Pricing
+- url: https://www.socure.com/company/about
+  type: AboutUs
+- url: https://www.socure.com/company/contact
+  type: ContactUs
+- url: https://www.socure.com/blog
+  type: Blog
+- url: https://www.socure.com/news
+  name: News
+  type: Blog
+- url: https://www.socure.com/resources
+  name: Resource Center
+  type: ResourceCenter
+- url: https://www.socure.com/customers
+  name: Customer Stories
+  type: CaseStudies
+- url: https://www.socure.com/legal/privacy-policy
+  type: PrivacyPolicy
+- url: https://www.socure.com/legal/terms
+  type: TermsOfService
+- url: https://trust.socure.com
+  type: TrustCenter
+- url: https://status.socure.com
+  type: StatusPage
+- url: https://www.socure.com/careers
+  type: Careers
+- url: https://github.com/socure-inc
+  type: GitHubOrganization
+- url: https://github.com/socure-inc/socure-docv-sdk-ios
+  name: DocV iOS SDK
+  type: SDK
+- url: https://github.com/socure-inc/socure-docv-sdk-android
+  name: DocV Android SDK
+  type: SDK
+- url: https://github.com/socure-inc/socure-docv-demo-app-react-native
+  name: DocV React Native Demo App
+  type: SDK
+- url: https://github.com/socure-inc/socure-sigmadevice-sdk-ios
+  name: SigmaDevice iOS SDK (Digital Intelligence)
+  type: SDK
+- url: https://github.com/socure-inc/socure-sigmadevice-sdk-android
+  name: SigmaDevice Android SDK (Digital Intelligence)
+  type: SDK
+- url: https://github.com/socure-inc/socure-sigmadevice-demo-app-react-native
+  name: SigmaDevice React Native Demo App
+  type: SDK
+- url: https://github.com/socure-inc/riskos-integration-skill
+  name: RiskOS Integration Skill
+  type: Tool
+- url: https://www.linkedin.com/company/socure-inc-
+  type: LinkedIn
+- url: https://twitter.com/socure
+  type: Twitter
+- url: https://www.youtube.com/c/Socure
+  type: YouTube
+- url: https://developer.socure.com/docs/webhooks/docv-events
+  name: DocV Webhooks
+  type: Webhooks
+- url: https://help.socure.com
+  name: Customer Help Center
+  type: Support
+- url: https://help.socure.com/riskos/docs
+  name: RiskOS Documentation
+  type: Documentation
+- url: https://developer.socure.us
+  name: GovCloud Developer Portal
+  type: Documentation
+- url: plans/socure-plans-pricing.yml
+  type: Plans
+- url: rate-limits/socure-rate-limits.yml
+  type: RateLimits
+- url: finops/socure-finops.yml
+  type: FinOps
+- url: vocabulary/socure-vocabulary.yml
+  type: Vocabulary
+- url: rules/socure-rules.yml
+  type: SpectralRules
+- type: Features
+  data:
+  - Vertically integrated digital identity verification and fraud prevention platform
+  - ID+ unified multi-module REST API — pass `modules` array in one request to combine KYC, fraud, risk, and
+    document verification
+  - Socure Verify (KYC) with industry-leading auto-approval rates and inclusive coverage
+  - Sigma Identity Fraud, Sigma Synthetic Fraud, and Sigma First-Party Fraud risk scores
+  - Email RiskScore, Phone RiskScore, and Address RiskScore for low-friction risk signals
+  - Predictive DocV with biometric face match, liveness detection, and webhook-driven session lifecycle
+  - Global Watchlist Screening with continuous Monitoring across OFAC, UN, EU, HMT, DFAT, PEP, and adverse media
+  - Deceased Check against SSA Death Master File and proprietary deceased records
+  - eCBSV — instant electronic Consent Based SSN Verification with the Social Security Administration
+  - Digital Intelligence (SigmaDevice SDK) for device fingerprinting and behavioral biometrics
+  - Graph Intelligence — Network Identity Graph features surfaced as request-time attributes
+  - Account Intelligence — bank account ownership and status verification
+  - Prefill — SSN/ITIN autofill to reduce onboarding friction
+  - Decision module — deterministic rule-based accept/reject/review/refer/resubmit outcomes
+  - RiskOS orchestration platform (Enterprise and Launch deployment models)
+  - Native iOS, Android, Web, and React Native SDKs for DocV and SigmaDevice
+  - Webhook event streams for DocV session lifecycle and Watchlist Monitoring alerts
+  - SOC 2 Type II, ISO 27001, PCI-DSS, and US FedRAMP-aligned GovCloud environment (developer.socure.us)
+  - Available globally with country-specific coverage across US, Canada, UK, EU, and LATAM
+  sources:
+  - https://developer.socure.com
+  - https://www.socure.com/products
+  - https://www.socure.com
+  updated: '2026-05-25'
+created: '2026-05-25'
+modified: '2026-05-25'
+position: Consuming
+description: Socure is the leading vertically-integrated digital identity verification and fraud-prevention
+  platform, used by 3,000+ banks, fintechs, crypto exchanges, marketplaces, gaming operators, and public-sector
+  agencies. The ID+ API exposes Socure's KYC, document verification (DocV), Sigma fraud models, RiskScore (email
+  / phone / address), Global Watchlist screening, Deceased Check, eCBSV, Digital Intelligence (SigmaDevice),
+  Graph Intelligence, Account Intelligence, Prefill, and Decision modules through a single multi-module REST
+  call, complemented by the RiskOS orchestration platform, native mobile SDKs, and webhook event streams. Socure
+  is headquartered in Incline Village, Nevada with origins in New York City.
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com
+  X: apievangelist
+  url: https://apievangelist.com

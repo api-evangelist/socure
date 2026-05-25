@@ -1,0 +1,78 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Socure ID+ — Fraud Scoring
+  description: Socure ID+ fraud scoring capability. Submits a `modules` array containing `sigma`, `synthetic`,
+    `emailrisk`, `phonerisk`, `addressrisk`, `devicerisk`, and `graphintelligence` and returns the consolidated
+    fraud and risk score blocks.
+  tags:
+  - Socure
+  - Fraud Prevention
+  - Risk Scoring
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    SOCURE_API_KEY: SOCURE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: idplus-fraud
+    baseUri: https://api.socure.com
+    description: Socure ID+ Fraud Scoring business capability.
+    resources:
+    - name: idplus-fraud-evaluate
+      path: /api/3.0/EmailAuthScore
+      operations:
+      - name: evaluateFraud
+        method: POST
+        description: Socure Evaluate Fraud Risk
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'SocureApiKey {{env.SOCURE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: idplus-fraud-rest
+    port: 8080
+    resources:
+    - path: /v1/idplus/fraud
+      name: idplus-fraud-evaluate
+      operations:
+      - method: POST
+        name: evaluateFraud
+        description: Socure Evaluate Fraud Risk
+        call: idplus-fraud.evaluateFraud
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: idplus-fraud-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: socure-evaluate-fraud
+      description: Socure Evaluate Fraud Risk (Sigma + RiskScore + Digital + Graph Intelligence)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: idplus-fraud.evaluateFraud
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/socure/refs/heads/main/json-schema/socure-idplus-response-schema.json",
+  "title": "Socure ID+ Response",
+  "type": "object",
+  "properties": {
+    "referenceId": {
+      "type": "string",
+      "description": "Globally unique identifier for this evaluation."
+    },
+    "kyc": {
+      "type": "object",
+      "properties": {
+        "reasonCodes": { "type": "array", "items": { "type": "string" } },
+        "fieldValidations": {
+          "type": "object",
+          "additionalProperties": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "fraud": { "$ref": "#/$defs/SigmaResult" },
+    "synthetic": { "$ref": "#/$defs/SigmaResult" },
+    "emailRisk": { "$ref": "#/$defs/RiskScoreResult" },
+    "phoneRisk": { "$ref": "#/$defs/RiskScoreResult" },
+    "addressRisk": { "$ref": "#/$defs/RiskScoreResult" },
+    "watchlist": {
+      "type": "object",
+      "properties": {
+        "global": {
+          "type": "object",
+          "properties": {
+            "sources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "sourceListName": { "type": "string" },
+                  "matchCount": { "type": "integer" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "value": {
+          "type": "string",
+          "enum": ["accept", "reject", "review", "refer", "resubmit"]
+        },
+        "ruleSet": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "SigmaResult": {
+      "type": "object",
+      "properties": {
+        "scores": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "version": { "type": "string" },
+              "score": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        },
+        "reasonCodes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "RiskScoreResult": {
+      "type": "object",
+      "properties": {
+        "score": { "type": "number", "minimum": 0, "maximum": 1 },
+        "reasonCodes": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

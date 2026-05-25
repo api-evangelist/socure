@@ -1,0 +1,79 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Socure ID+ — Watchlist Screening
+  description: Socure ID+ watchlist screening capability. Submits a `modules` array containing `watchlist` or
+    `watchliststandard` and returns the consolidated global watchlist match block (OFAC, UN, EU, HMT, DFAT, PEP,
+    adverse media).
+  tags:
+  - Socure
+  - AML
+  - Compliance
+  - Watchlist
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    SOCURE_API_KEY: SOCURE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: idplus-watchlist
+    baseUri: https://api.socure.com
+    description: Socure ID+ Global Watchlist Screening capability.
+    resources:
+    - name: idplus-watchlist-evaluate
+      path: /api/3.0/EmailAuthScore
+      operations:
+      - name: screenWatchlist
+        method: POST
+        description: Socure Screen Identity Against Global Watchlist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'SocureApiKey {{env.SOCURE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: idplus-watchlist-rest
+    port: 8080
+    resources:
+    - path: /v1/idplus/watchlist
+      name: idplus-watchlist-evaluate
+      operations:
+      - method: POST
+        name: screenWatchlist
+        description: Socure Screen Identity Against Global Watchlist
+        call: idplus-watchlist.screenWatchlist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: idplus-watchlist-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: socure-screen-watchlist
+      description: Socure Screen Identity Against Global Watchlist
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: idplus-watchlist.screenWatchlist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

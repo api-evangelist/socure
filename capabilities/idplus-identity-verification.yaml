@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Socure ID+ — Identity Verification (KYC)
+  description: Socure ID+ identity verification capability. Submits a `modules` array containing `kyc` (Socure
+    Verify) along with optional eCBSV, Deceased Check, and Prefill modules, and returns the consolidated KYC
+    result block.
+  tags:
+  - Socure
+  - Identity Verification
+  - KYC
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    SOCURE_API_KEY: SOCURE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: idplus-kyc
+    baseUri: https://api.socure.com
+    description: Socure ID+ KYC business capability. Self-contained, no shared references.
+    resources:
+    - name: idplus-evaluate
+      path: /api/3.0/EmailAuthScore
+      operations:
+      - name: evaluateIdentity
+        method: POST
+        description: Socure Evaluate Identity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON) with `modules` array selecting `kyc` and any other modules.
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'SocureApiKey {{env.SOCURE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: idplus-kyc-rest
+    port: 8080
+    description: REST adapter for Socure ID+ KYC. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/idplus/evaluate
+      name: idplus-evaluate
+      description: REST surface for ID+ identity evaluation.
+      operations:
+      - method: POST
+        name: evaluateIdentity
+        description: Socure Evaluate Identity
+        call: idplus-kyc.evaluateIdentity
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: idplus-kyc-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Socure ID+ KYC. One tool per consumed operation.
+    tools:
+    - name: socure-evaluate-identity
+      description: Socure Evaluate Identity (ID+ multi-module)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: idplus-kyc.evaluateIdentity
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

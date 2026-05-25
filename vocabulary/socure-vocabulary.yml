@@ -1,0 +1,93 @@
+vocabulary: 0.1
+info:
+  provider: Socure
+  domain: Digital Identity Verification and Fraud Prevention
+  updated: '2026-05-25'
+terms:
+- term: ID+
+  definition: Socure's unified identity-verification and risk platform exposing every module behind a single
+    multi-module REST API call.
+  category: Platform
+- term: RiskOS
+  definition: Socure's identity and fraud orchestration platform combining ID+ modules, workflows, case
+    management, and a no-code rules editor.
+  category: Platform
+- term: RiskOS Launch
+  definition: Self-serve, productized RiskOS deployment with packaged workflow templates.
+  category: Platform
+- term: RiskOS Enterprise
+  definition: Custom RiskOS deployment with bespoke workflows and dedicated customer success.
+  category: Platform
+- term: Socure Verify
+  definition: Socure's KYC identity verification module, evaluating name, DOB, address, SSN/ITIN, phone, email,
+    and IP against authoritative and proprietary sources.
+  category: Module
+- term: Sigma Identity Fraud
+  definition: Third-party identity fraud risk model returning a fraud score and reason codes.
+  category: Module
+- term: Sigma Synthetic
+  definition: Synthetic identity fraud risk model targeting fabricated or manipulated identities.
+  category: Module
+- term: Sigma First-Party Fraud
+  definition: Consortium-based first-party fraud risk model targeting payment default and dispute abuse.
+  category: Module
+- term: Email RiskScore
+  definition: Email risk and ownership prediction module.
+  category: Module
+- term: Phone RiskScore
+  definition: Phone risk and ownership prediction module.
+  category: Module
+- term: Address RiskScore
+  definition: Physical-address risk prediction module.
+  category: Module
+- term: Predictive DocV
+  definition: Document Verification module covering document authenticity, OCR extraction, biometric face
+    match, and liveness detection.
+  category: Module
+- term: Global Watchlist Screening
+  definition: Sanctions, PEP, and adverse-media screening module covering OFAC, UN, EU, HMT, DFAT, and adverse
+    media sources.
+  category: Module
+- term: Global Watchlist Monitoring
+  definition: Continuous re-screening of enrolled profiles with webhook alerts on new or updated matches.
+  category: Module
+- term: Deceased Check
+  definition: Vital-status verification module against SSA Death Master File and proprietary deceased records.
+  category: Module
+- term: eCBSV
+  definition: Electronic Consent Based SSN Verification — instant SSA-backed match on name, DOB, and SSN with
+    end-user consent.
+  category: Module
+- term: Digital Intelligence (SigmaDevice)
+  definition: Device-fingerprint and behavioral-biometric risk module powered by the SigmaDevice SDK.
+  category: Module
+- term: Graph Intelligence
+  definition: Network Identity Graph features surfaced as request-time attributes for connected-fraud detection.
+  category: Module
+- term: Account Intelligence
+  definition: US bank-account validation module verifying account status and ownership match.
+  category: Module
+- term: Prefill
+  definition: SSN/ITIN autofill module that reduces onboarding friction by completing partial PII.
+  category: Module
+- term: Decision
+  definition: Rule-based decisioning module returning accept, reject, review, refer, or resubmit outcomes.
+  category: Module
+- term: referenceId
+  definition: Globally unique identifier Socure assigns to each ID+ evaluation; key for cross-referencing
+    monitoring profiles and audit trails.
+  category: Identifier
+- term: customerUserId
+  definition: Integrator-supplied unique identifier for the end user.
+  category: Identifier
+- term: docvTransactionId
+  definition: DocV transaction identifier used to retrieve verification results and correlate webhook events.
+  category: Identifier
+- term: reasonCodes
+  definition: Codes returned by ID+ modules explaining the contribution to the score or decision; mapped in
+    customer reason-code dictionaries.
+  category: SemanticOutput
+- term: deviceSessionId
+  definition: Session identifier produced by the SigmaDevice SDK on the client used to correlate device-risk
+    signals with the ID+ call.
+  category: Identifier

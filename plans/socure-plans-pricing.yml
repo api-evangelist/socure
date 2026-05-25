@@ -1,0 +1,67 @@
+apiCommonsPlans: 0.1
+info:
+  provider: Socure
+  productLine: ID+ Platform
+  currency: USD
+  region: Global
+  updated: '2026-05-25'
+  source:
+  - https://www.socure.com/pricing
+  - https://www.socure.com/products
+  - https://developer.socure.com
+  notes: |
+    Socure does not publish list pricing for the ID+ platform. Pricing is per-transaction and configured per
+    customer based on module mix, expected volume, geography, and orchestration tier (RiskOS Enterprise vs.
+    RiskOS Launch). The plans below capture the publicly described commercial structure; specific per-call
+    rates are agreed in the Master Service Agreement.
+plans:
+- id: riskos-launch
+  name: RiskOS Launch
+  type: SelfServe
+  description: |
+    Self-serve, production-ready workflow tier. Sign up, configure a workflow from packaged templates, and
+    consume ID+ modules per transaction with a published rate card.
+  pricingModel: PerTransaction
+  pricing:
+  - unit: transaction
+    description: Per-transaction billing across selected ID+ modules; rate card varies by module mix.
+  features:
+  - ID+ modules (KYC, DocV, Sigma fraud models, RiskScore, Watchlist)
+  - Packaged workflow templates
+  - Console rules editor
+  - Standard support
+  signup: https://www.socure.com/products/socure-launch
+- id: riskos-enterprise
+  name: RiskOS Enterprise
+  type: Enterprise
+  description: |
+    Custom orchestration deployment with bespoke workflows, dedicated customer success, advanced case
+    management, and enterprise-grade SLAs. Pricing negotiated per contract with volume commitments and
+    geographic coverage clauses.
+  pricingModel: ContractedVolume
+  pricing:
+  - unit: contract
+    description: Annual contract with volume commitments and bundled module access.
+  features:
+  - All ID+ modules including premium fraud models (Sigma Synthetic, Sigma First-Party)
+  - Custom RiskOS workflows
+  - Case management
+  - Dedicated customer success
+  - Enterprise SLA, SOC 2 Type II, ISO 27001
+  - Available in GovCloud (developer.socure.us) for public-sector workloads
+  contact: https://www.socure.com/company/contact
+- id: free-trial
+  name: Sandbox Access
+  type: Sandbox
+  description: |
+    Sandbox environment is available to qualified customers during evaluation. Sandbox traffic uses synthetic
+    test identities and does not incur production usage charges.
+  pricingModel: Free
+  pricing:
+  - unit: sandbox
+    description: No charge for sandbox traffic during evaluation.
+  features:
+  - Sandbox API key
+  - Test identities
+  - Full ID+ surface for evaluation
+  contact: https://www.socure.com/company/contact

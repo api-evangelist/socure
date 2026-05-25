@@ -1,0 +1,42 @@
+apiCommonsRateLimits: 0.1
+info:
+  provider: Socure
+  productLine: ID+ Platform
+  updated: '2026-05-25'
+  source:
+  - https://developer.socure.com
+  - https://developer.socure.com/reference
+  notes: |
+    Socure does not publish a fixed public rate limit table — production throughput is provisioned per customer
+    based on contracted volume. The limits below reflect the operational guidance Socure communicates to
+    integrators and are subject to customer-specific overrides. Sandbox traffic is typically capped at a low
+    per-minute rate to protect the shared sandbox.
+limits:
+- id: idplus-production
+  scope: api-key
+  description: Per-customer production throughput for the ID+ API (api.socure.com).
+  policy:
+  - type: ProvisionedThroughput
+    description: Provisioned transactions per second negotiated at contract; bursts above the provisioned rate
+      are throttled with HTTP 429.
+- id: idplus-sandbox
+  scope: api-key
+  description: Sandbox throughput on sandbox.socure.com.
+  policy:
+  - type: PerMinute
+    description: Sandbox is shared and rate-limited to a small per-minute envelope; for load testing use a
+      production environment with a provisioned rate.
+- id: watchlist-monitoring-webhooks
+  scope: customer-endpoint
+  description: Watchlist Monitoring alert webhook delivery to customer endpoints.
+  policy:
+  - type: BurstWithRetry
+    description: Alerts are delivered with exponential-backoff retries on 5xx and timeouts; customer endpoint
+      should accept bursts of alert events when watchlist data refreshes.
+- id: docv-webhooks
+  scope: customer-endpoint
+  description: DocV session lifecycle webhook delivery.
+  policy:
+  - type: BestEffortRetry
+    description: DocV events are delivered with retry on transient failures; deduplicate on
+      `docvTransactionId` plus `eventType`.

@@ -1,0 +1,59 @@
+finops: 0.1
+info:
+  provider: Socure
+  productLine: ID+ Platform
+  alignedTo: FinOps Framework / FOCUS 1.0
+  currency: USD
+  updated: '2026-05-25'
+  source:
+  - https://www.socure.com/products
+  - https://developer.socure.com
+billingSurface:
+  model: PerTransactionContracted
+  unit: transaction
+  description: |
+    Billing is per-transaction across the selected ID+ modules. Each module consumed within a single ID+
+    request increments the customer's usage counter for that module. Contracts typically include monthly
+    volume commits with overage billed at agreed unit rates.
+  charges:
+  - id: idplus-module-call
+    description: Per-call charge for each ID+ module invoked.
+    pricingType: ContractedPerUnit
+    chargeCategory: Usage
+    serviceCategory: Identity Verification
+  - id: docv-transaction
+    description: Per-DocV-transaction charge — document capture, OCR, biometric match, and liveness.
+    pricingType: ContractedPerUnit
+    chargeCategory: Usage
+    serviceCategory: Identity Verification / DocV
+  - id: watchlist-monitoring
+    description: Recurring per-monitored-profile charge for continuous watchlist monitoring.
+    pricingType: ContractedRecurring
+    chargeCategory: Subscription
+    serviceCategory: Compliance / Watchlist
+  - id: riskos-platform
+    description: Platform fee for RiskOS orchestration (Enterprise tier).
+    pricingType: ContractedRecurring
+    chargeCategory: Subscription
+    serviceCategory: Identity Orchestration
+costAllocation:
+- dimension: module
+  description: Allocate cost by ID+ module name (kyc, sigma, synthetic, emailrisk, ...).
+- dimension: customerUserId
+  description: Allocate cost by integrator-supplied customerUserId for per-end-user analysis.
+- dimension: workflow
+  description: Allocate cost by RiskOS workflow ID when using RiskOS Enterprise or Launch.
+- dimension: environment
+  description: Sandbox vs Production vs GovCloud.
+reporting:
+  recommended:
+  - Monthly module-mix breakdown per workflow
+  - Cost-per-approved-customer (CPA / CPAC) for KYC workflows
+  - Fraud loss avoided vs Sigma module spend
+  - Watchlist monitoring profile count and trend
+  source:
+  - https://www.socure.com/company/contact
+notes: |
+  Socure does not currently expose a programmatic Usage/Cost API publicly; usage and invoicing are surfaced via
+  the Socure Console and through customer success. Customers seeking FOCUS-aligned exports should request the
+  monthly usage CSV via their account team.

@@ -1,0 +1,78 @@
+asyncapi: 2.6.0
+info:
+  title: Socure Global Watchlist Monitoring Webhooks
+  version: '1.0'
+  description: |
+    Webhook event stream emitted by the Socure Global Watchlist Monitoring service.
+    Once a profile is enrolled for continuous monitoring, Socure POSTs alert events
+    to the integrator's registered webhook URL when a customer matches a newly added
+    or updated sanctions, PEP, or adverse media list entry.
+defaultContentType: application/json
+servers:
+  customer-webhook:
+    url: '{customerWebhookUrl}'
+    protocol: https
+    description: Integrator-hosted endpoint that receives Watchlist Monitoring alerts.
+    variables:
+      customerWebhookUrl:
+        default: https://your-app.example/socure/watchlist/webhook
+channels:
+  watchlist/alerts:
+    description: Continuous monitoring match alerts.
+    subscribe:
+      summary: Receive watchlist monitoring alert events
+      operationId: receiveWatchlistAlert
+      message:
+        oneOf:
+        - $ref: '#/components/messages/NewMatch'
+        - $ref: '#/components/messages/UpdatedMatch'
+        - $ref: '#/components/messages/Cleared'
+components:
+  messages:
+    NewMatch:
+      name: WATCHLIST_NEW_MATCH
+      title: WATCHLIST_NEW_MATCH
+      summary: A newly identified match was generated for a monitored profile.
+      payload:
+        $ref: '#/components/schemas/WatchlistAlertEvent'
+    UpdatedMatch:
+      name: WATCHLIST_UPDATED_MATCH
+      title: WATCHLIST_UPDATED_MATCH
+      summary: An existing match was updated (new source data or revised attributes).
+      payload:
+        $ref: '#/components/schemas/WatchlistAlertEvent'
+    Cleared:
+      name: WATCHLIST_CLEARED
+      title: WATCHLIST_CLEARED
+      summary: A previously confirmed match no longer applies.
+      payload:
+        $ref: '#/components/schemas/WatchlistAlertEvent'
+  schemas:
+    WatchlistAlertEvent:
+      type: object
+      required:
+      - eventType
+      - profileId
+      - alertId
+      - eventTime
+      properties:
+        eventType:
+          type: string
+          enum:
+          - WATCHLIST_NEW_MATCH
+          - WATCHLIST_UPDATED_MATCH
+          - WATCHLIST_CLEARED
+        profileId:
+          type: string
+        alertId:
+          type: string
+        customerUserId:
+          type: string
+        sourceListName:
+          type: string
+        matchDetails:
+          type: object
+          additionalProperties: true
+        eventTime:
+          type: string
+          format: date-time

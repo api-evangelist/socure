@@ -1,0 +1,92 @@
+openapi: 3.0.3
+info:
+  title: Socure Decision API
+  version: '3.0'
+  description: |
+    The Decision module returns a deterministic outcome — accept, reject, review,
+    refer, or resubmit — derived from ID+ module scores and customer-configured rules
+    authored in the Socure Console. Decision is applied on every ID+ call when the
+    `decision` module is included in the request modules array.
+servers:
+- url: https://api.socure.com
+  description: Production
+- url: https://sandbox.socure.com
+  description: Sandbox
+security:
+- SocureToken: []
+tags:
+- name: Decision
+paths:
+  /api/3.0/EmailAuthScore:
+    post:
+      tags:
+      - Decision
+      operationId: evaluateDecision
+      summary: Evaluate A Decision
+      description: |
+        Invoke the Decision module alongside other ID+ modules. The Decision block in
+        the response carries the configured rule set name, version, and the resulting
+        outcome.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - modules
+              properties:
+                modules:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - decision
+                    - kyc
+                    - sigma
+                    - synthetic
+                    - watchlist
+                customerUserId:
+                  type: string
+                firstName:
+                  type: string
+                surName:
+                  type: string
+                dob:
+                  type: string
+                  format: date
+                nationalId:
+                  type: string
+      responses:
+        '200':
+          description: Decision result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  referenceId:
+                    type: string
+                  decision:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+                        enum:
+                        - accept
+                        - reject
+                        - review
+                        - refer
+                        - resubmit
+                      ruleSet:
+                        type: string
+                      version:
+                        type: string
+components:
+  securitySchemes:
+    SocureToken:
+      type: apiKey
+      in: header
+      name: Authorization

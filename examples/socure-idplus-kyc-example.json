@@ -1,0 +1,50 @@
+{
+  "request": {
+    "modules": ["kyc", "fraud", "watchlist", "decision"],
+    "customerUserId": "demo-user-001",
+    "firstName": "Jane",
+    "surName": "Doe",
+    "dob": "1985-04-12",
+    "nationalId": "123-45-6789",
+    "email": "jane.doe@example.com",
+    "mobileNumber": "+15555550123",
+    "physicalAddress": "885 Tahoe Blvd Suite 1",
+    "city": "Incline Village",
+    "state": "NV",
+    "zip": "89451",
+    "country": "US",
+    "ipAddress": "203.0.113.10"
+  },
+  "response": {
+    "referenceId": "01HV7K9MX4ZJQ3T0SOCURE-EXAMPLE",
+    "kyc": {
+      "reasonCodes": ["I123", "I919"],
+      "fieldValidations": {
+        "firstName": 0.99,
+        "surName": 0.99,
+        "dob": 0.99,
+        "nationalId": 1.0,
+        "physicalAddress": 0.95,
+        "email": 0.92,
+        "mobileNumber": 0.98
+      }
+    },
+    "fraud": {
+      "scores": [
+        { "name": "sigma", "version": "4.0", "score": 0.08 }
+      ],
+      "reasonCodes": ["R208"]
+    },
+    "watchlist": {
+      "global": {
+        "sources": []
+      }
+    },
+    "decision": {
+      "name": "default-onboarding",
+      "value": "accept",
+      "ruleSet": "kyc-low-risk-v3",
+      "version": "2026.04"
+    }
+  }
+}

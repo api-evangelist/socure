@@ -1,0 +1,85 @@
+asyncapi: 2.6.0
+info:
+  title: Socure DocV Webhooks
+  version: '1.0'
+  description: |
+    Webhook event stream emitted by the Socure Predictive DocV service to notify the
+    integrator of session lifecycle events. The customer registers a webhook URL when
+    creating a DocV transaction; Socure POSTs JSON event payloads to that URL as the
+    end user progresses through the DocV flow.
+defaultContentType: application/json
+servers:
+  customer-webhook:
+    url: '{customerWebhookUrl}'
+    protocol: https
+    description: Integrator-hosted endpoint that receives DocV events.
+    variables:
+      customerWebhookUrl:
+        default: https://your-app.example/socure/docv/webhook
+channels:
+  docv/events:
+    description: All DocV session lifecycle events.
+    subscribe:
+      summary: Receive DocV session lifecycle events
+      operationId: receiveDocvEvent
+      message:
+        oneOf:
+        - $ref: '#/components/messages/AppOpened'
+        - $ref: '#/components/messages/DocumentsUploaded'
+        - $ref: '#/components/messages/VerificationCompleted'
+        - $ref: '#/components/messages/SessionExpired'
+components:
+  messages:
+    AppOpened:
+      name: APP_OPENED
+      title: APP_OPENED
+      summary: End user has opened the DocV capture flow.
+      payload:
+        $ref: '#/components/schemas/DocvEvent'
+    DocumentsUploaded:
+      name: DOCUMENTS_UPLOADED
+      title: DOCUMENTS_UPLOADED
+      summary: End user has uploaded all required documents.
+      payload:
+        $ref: '#/components/schemas/DocvEvent'
+    VerificationCompleted:
+      name: VERIFICATION_COMPLETED
+      title: VERIFICATION_COMPLETED
+      summary: DocV verification has completed; decision is available via Get A DocV Transaction.
+      payload:
+        $ref: '#/components/schemas/DocvEvent'
+    SessionExpired:
+      name: SESSION_EXPIRED
+      title: SESSION_EXPIRED
+      summary: DocV session expired without completion.
+      payload:
+        $ref: '#/components/schemas/DocvEvent'
+  schemas:
+    DocvEvent:
+      type: object
+      required:
+      - eventType
+      - docvTransactionId
+      - eventTime
+      properties:
+        eventType:
+          type: string
+          enum:
+          - APP_OPENED
+          - DOCUMENTS_UPLOADED
+          - VERIFICATION_COMPLETED
+          - SESSION_EXPIRED
+        docvTransactionId:
+          type: string
+        customerUserId:
+          type: string
+        eventTime:
+          type: string
+          format: date-time
+        decision:
+          type: string
+          description: Present only on VERIFICATION_COMPLETED.
+          enum:
+          - accept
+          - reject
+          - resubmit

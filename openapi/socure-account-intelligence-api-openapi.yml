@@ -1,0 +1,96 @@
+openapi: 3.0.3
+info:
+  title: Socure Account Intelligence API
+  version: '3.0'
+  description: |
+    Real-time validation of US bank accounts — verifying open/closed status,
+    ownership (name match), and account-type signals. Powers funding-account checks
+    for fintech onboarding, payroll, and ACH origination flows without requiring
+    micro-deposits or end-user credentials.
+servers:
+- url: https://api.socure.com
+  description: Production
+- url: https://sandbox.socure.com
+  description: Sandbox
+security:
+- SocureToken: []
+tags:
+- name: Account Intelligence
+paths:
+  /api/3.0/EmailAuthScore:
+    post:
+      tags:
+      - Account Intelligence
+      operationId: validateBankAccount
+      summary: Validate A Bank Account
+      description: |
+        Validate a US bank account by routing number and account number with the
+        `accountintelligence` module.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - modules
+              - routingNumber
+              - accountNumber
+              properties:
+                modules:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - accountintelligence
+                routingNumber:
+                  type: string
+                  description: 9-digit ABA routing number.
+                accountNumber:
+                  type: string
+                accountType:
+                  type: string
+                  enum:
+                  - checking
+                  - savings
+                firstName:
+                  type: string
+                surName:
+                  type: string
+      responses:
+        '200':
+          description: Account Intelligence result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  referenceId:
+                    type: string
+                  accountIntelligence:
+                    type: object
+                    properties:
+                      accountStatus:
+                        type: string
+                        enum:
+                        - open
+                        - closed
+                        - unknown
+                      ownerMatch:
+                        type: string
+                        enum:
+                        - exact
+                        - partial
+                        - none
+                      accountType:
+                        type: string
+                      reasonCodes:
+                        type: array
+                        items:
+                          type: string
+components:
+  securitySchemes:
+    SocureToken:
+      type: apiKey
+      in: header
+      name: Authorization
