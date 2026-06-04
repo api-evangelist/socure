@@ -1,0 +1,127 @@
+arazzo: 1.0.1
+info:
+  title: Socure Identity Decision Branch
+  summary: Run a multi-module ID+ evaluation and branch onboarding on the returned decision outcome.
+  description: >-
+    The core onboarding decision flow. The workflow submits an ID+ evaluation
+    across KYC, identity fraud, watchlist, and the decision rules engine, then
+    branches on the decision value: accepted identities are enrolled into
+    continuous watchlist monitoring, while rejected or review outcomes end the
+    flow for downstream manual handling. Every step inlines its request so the
+    decision flow can be read and executed without opening the underlying
+    OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: idplusApi
+  url: ../openapi/socure-idplus-api-openapi.yml
+  type: openapi
+- name: watchlistApi
+  url: ../openapi/socure-watchlist-monitoring-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: identity-decision-branch
+  summary: Evaluate an identity and enroll monitoring only when the decision is accept.
+  description: >-
+    Submits an ID+ evaluation with the decision module, then routes on the
+    decision value, enrolling the identity into watchlist monitoring on accept.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - customerUserId
+    - firstName
+    - surName
+    properties:
+      apiKey:
+        type: string
+        description: Socure API key presented as `SocureApiKey <api-key>`.
+      customerUserId:
+        type: string
+        description: Customer-supplied unique identifier for the end user.
+      firstName:
+        type: string
+      surName:
+        type: string
+      dob:
+        type: string
+      nationalId:
+        type: string
+      email:
+        type: string
+      mobileNumber:
+        type: string
+      physicalAddress:
+        type: string
+      monitoringWebhookUrl:
+        type: string
+        description: Callback URL for watchlist monitoring match alerts.
+  steps:
+  - stepId: evaluateIdentity
+    description: >-
+      Run an ID+ evaluation across KYC, identity fraud, watchlist, and the
+      decision rules engine and capture the resulting decision value.
+    operationId: evaluateIdentity
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        modules:
+        - kyc
+        - fraud
+        - watchlist
+        - decision
+        customerUserId: $inputs.customerUserId
+        firstName: $inputs.firstName
+        surName: $inputs.surName
+        dob: $inputs.dob
+        nationalId: $inputs.nationalId
+        email: $inputs.email
+        mobileNumber: $inputs.mobileNumber
+        physicalAddress: $inputs.physicalAddress
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      referenceId: $response.body#/referenceId
+      decision: $response.body#/decision/value
+      kycReasonCodes: $response.body#/kyc/reasonCodes
+    onSuccess:
+    - name: accepted
+      type: goto
+      stepId: enrollMonitoring
+      criteria:
+      - context: $response.body
+        condition: $.decision.value == "accept"
+        type: jsonpath
+    - name: notAccepted
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.decision.value != "accept"
+        type: jsonpath
+  - stepId: enrollMonitoring
+    description: >-
+      Enroll the accepted identity into continuous global watchlist monitoring
+      using the referenceId from the ID+ evaluation.
+    operationId: enrollMonitoringProfile
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        referenceId: $steps.evaluateIdentity.outputs.referenceId
+        customerUserId: $inputs.customerUserId
+        webhookUrl: $inputs.monitoringWebhookUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      profileId: $response.body#/profileId
+      monitoringStatus: $response.body#/status
+  outputs:
+    referenceId: $steps.evaluateIdentity.outputs.referenceId
+    decision: $steps.evaluateIdentity.outputs.decision
+    profileId: $steps.enrollMonitoring.outputs.profileId

@@ -1,0 +1,128 @@
+arazzo: 1.0.1
+info:
+  title: Socure Bank Account Onboarding
+  summary: Validate a funding bank account, then run a decision evaluation on the account owner when the account is open.
+  description: >-
+    The funding-account onboarding flow for fintech and ACH origination. The
+    workflow validates a US bank account by routing and account number through
+    Account Intelligence, branches on the returned account status, and — when the
+    account is open — runs a decision evaluation against the account owner so a
+    deterministic accept, reject, or review outcome is produced. Every step
+    inlines its request so the funding flow can be read and executed without
+    opening the underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: accountIntelligenceApi
+  url: ../openapi/socure-account-intelligence-api-openapi.yml
+  type: openapi
+- name: decisionApi
+  url: ../openapi/socure-decision-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: bank-account-onboarding
+  summary: Validate a bank account and run an owner decision only when the account is open.
+  description: >-
+    Validates a US bank account, branches on account status, and runs a decision
+    evaluation against the account owner when the account is open.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - routingNumber
+    - accountNumber
+    - firstName
+    - surName
+    properties:
+      apiKey:
+        type: string
+        description: Socure API key presented as `SocureApiKey <api-key>`.
+      routingNumber:
+        type: string
+        description: 9-digit ABA routing number.
+      accountNumber:
+        type: string
+        description: Bank account number to validate.
+      accountType:
+        type: string
+        description: Account type (checking or savings).
+      firstName:
+        type: string
+      surName:
+        type: string
+      customerUserId:
+        type: string
+      dob:
+        type: string
+      nationalId:
+        type: string
+  steps:
+  - stepId: validateAccount
+    description: >-
+      Validate the funding bank account with the accountintelligence module and
+      capture its open/closed status and owner match.
+    operationId: validateBankAccount
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        modules:
+        - accountintelligence
+        routingNumber: $inputs.routingNumber
+        accountNumber: $inputs.accountNumber
+        accountType: $inputs.accountType
+        firstName: $inputs.firstName
+        surName: $inputs.surName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      referenceId: $response.body#/referenceId
+      accountStatus: $response.body#/accountIntelligence/accountStatus
+      ownerMatch: $response.body#/accountIntelligence/ownerMatch
+    onSuccess:
+    - name: accountOpen
+      type: goto
+      stepId: evaluateOwner
+      criteria:
+      - context: $response.body
+        condition: $.accountIntelligence.accountStatus == "open"
+        type: jsonpath
+    - name: accountNotOpen
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.accountIntelligence.accountStatus != "open"
+        type: jsonpath
+  - stepId: evaluateOwner
+    description: >-
+      Run a decision evaluation against the account owner so a deterministic
+      onboarding outcome is produced for the validated funding account.
+    operationId: evaluateDecision
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        modules:
+        - decision
+        - kyc
+        customerUserId: $inputs.customerUserId
+        firstName: $inputs.firstName
+        surName: $inputs.surName
+        dob: $inputs.dob
+        nationalId: $inputs.nationalId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      referenceId: $response.body#/referenceId
+      decision: $response.body#/decision/value
+      ruleSet: $response.body#/decision/ruleSet
+  outputs:
+    accountReferenceId: $steps.validateAccount.outputs.referenceId
+    accountStatus: $steps.validateAccount.outputs.accountStatus
+    ownerMatch: $steps.validateAccount.outputs.ownerMatch
+    decision: $steps.evaluateOwner.outputs.decision

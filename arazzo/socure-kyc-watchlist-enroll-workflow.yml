@@ -1,0 +1,136 @@
+arazzo: 1.0.1
+info:
+  title: Socure KYC Watchlist Enroll
+  summary: Screen an identity against KYC and global watchlist, then enroll it for ongoing monitoring and confirm the profile.
+  description: >-
+    The compliance onboarding flow. The workflow runs an ID+ evaluation across
+    KYC and global watchlist screening, enrolls the screened identity into
+    continuous watchlist monitoring keyed by the evaluation referenceId, and then
+    reads the monitoring profile back to confirm it is active. Every step inlines
+    its request so the screening-to-monitoring flow can be read and executed
+    without opening the underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: idplusApi
+  url: ../openapi/socure-idplus-api-openapi.yml
+  type: openapi
+- name: watchlistApi
+  url: ../openapi/socure-watchlist-monitoring-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: kyc-watchlist-enroll
+  summary: Screen an identity for KYC and watchlist, enroll monitoring, and confirm the profile.
+  description: >-
+    Runs a KYC plus global watchlist ID+ evaluation, enrolls the identity into
+    monitoring, and retrieves the resulting monitoring profile to confirm it is
+    active.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - customerUserId
+    - firstName
+    - surName
+    properties:
+      apiKey:
+        type: string
+        description: Socure API key presented as `SocureApiKey <api-key>`.
+      customerUserId:
+        type: string
+        description: Customer-supplied unique identifier for the end user.
+      firstName:
+        type: string
+      surName:
+        type: string
+      dob:
+        type: string
+      nationalId:
+        type: string
+      physicalAddress:
+        type: string
+      city:
+        type: string
+      state:
+        type: string
+      zip:
+        type: string
+      country:
+        type: string
+      monitoringWebhookUrl:
+        type: string
+        description: Callback URL for watchlist monitoring match alerts.
+  steps:
+  - stepId: screenIdentity
+    description: >-
+      Run an ID+ evaluation across KYC and global watchlist screening, capturing
+      the referenceId and any watchlist source matches.
+    operationId: evaluateIdentity
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        modules:
+        - kyc
+        - watchlist
+        customerUserId: $inputs.customerUserId
+        firstName: $inputs.firstName
+        surName: $inputs.surName
+        dob: $inputs.dob
+        nationalId: $inputs.nationalId
+        physicalAddress: $inputs.physicalAddress
+        city: $inputs.city
+        state: $inputs.state
+        zip: $inputs.zip
+        country: $inputs.country
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      referenceId: $response.body#/referenceId
+      kycReasonCodes: $response.body#/kyc/reasonCodes
+      watchlistSources: $response.body#/watchlist/global/sources
+  - stepId: enrollMonitoring
+    description: >-
+      Enroll the screened identity into continuous watchlist monitoring using the
+      referenceId from the screening evaluation.
+    operationId: enrollMonitoringProfile
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        referenceId: $steps.screenIdentity.outputs.referenceId
+        customerUserId: $inputs.customerUserId
+        webhookUrl: $inputs.monitoringWebhookUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      profileId: $response.body#/profileId
+  - stepId: confirmProfile
+    description: >-
+      Read the monitoring profile back to confirm enrollment is active.
+    operationId: getMonitoringProfile
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    - name: profileId
+      in: path
+      value: $steps.enrollMonitoring.outputs.profileId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "active"
+      type: jsonpath
+    outputs:
+      profileId: $response.body#/profileId
+      status: $response.body#/status
+      enrolledAt: $response.body#/enrolledAt
+  outputs:
+    referenceId: $steps.screenIdentity.outputs.referenceId
+    profileId: $steps.confirmProfile.outputs.profileId
+    status: $steps.confirmProfile.outputs.status

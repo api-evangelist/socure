@@ -1,0 +1,118 @@
+arazzo: 1.0.1
+info:
+  title: Socure Watchlist Alert Triage
+  summary: List open watchlist monitoring alerts for a profile and move a selected alert through its disposition.
+  description: >-
+    The analyst triage flow for ongoing watchlist monitoring. The workflow lists
+    new alerts for a monitoring profile, takes the first open alert, moves it into
+    review, and then records a final disposition of cleared or confirmed. Every
+    step inlines its request so the alert triage flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: watchlistApi
+  url: ../openapi/socure-watchlist-monitoring-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: watchlist-alert-triage
+  summary: Pull a profile's new alerts, set the first to in_review, and record its final disposition.
+  description: >-
+    Lists new monitoring alerts for a profile, transitions the first alert into
+    review, and then writes a final disposition with analyst notes.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - profileId
+    - finalStatus
+    properties:
+      apiKey:
+        type: string
+        description: Socure API key presented as `SocureApiKey <api-key>`.
+      profileId:
+        type: string
+        description: Monitoring profile whose alerts are being triaged.
+      finalStatus:
+        type: string
+        description: Final disposition for the alert (cleared or confirmed).
+      reviewNotes:
+        type: string
+        description: Analyst notes recorded when moving the alert into review.
+      dispositionNotes:
+        type: string
+        description: Analyst notes recorded with the final disposition.
+  steps:
+  - stepId: listNewAlerts
+    description: >-
+      List the new (unworked) alerts for the monitoring profile and capture the
+      first alert id to triage.
+    operationId: listMonitoringAlerts
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    - name: profileId
+      in: query
+      value: $inputs.profileId
+    - name: status
+      in: query
+      value: new
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstAlertId: $response.body#/0/alertId
+      sourceListName: $response.body#/0/sourceListName
+    onSuccess:
+    - name: hasAlert
+      type: goto
+      stepId: openReview
+      criteria:
+      - context: $response.body
+        condition: $.length > 0
+        type: jsonpath
+    - name: noAlerts
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.length == 0
+        type: jsonpath
+  - stepId: openReview
+    description: >-
+      Move the selected alert into the in_review state with analyst notes.
+    operationId: updateMonitoringAlert
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    - name: alertId
+      in: path
+      value: $steps.listNewAlerts.outputs.firstAlertId
+    requestBody:
+      contentType: application/json
+      payload:
+        status: in_review
+        notes: $inputs.reviewNotes
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: recordDisposition
+    description: >-
+      Record the final disposition for the alert, clearing or confirming the
+      match with analyst notes.
+    operationId: updateMonitoringAlert
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    - name: alertId
+      in: path
+      value: $steps.listNewAlerts.outputs.firstAlertId
+    requestBody:
+      contentType: application/json
+      payload:
+        status: $inputs.finalStatus
+        notes: $inputs.dispositionNotes
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    alertId: $steps.listNewAlerts.outputs.firstAlertId
+    sourceListName: $steps.listNewAlerts.outputs.sourceListName

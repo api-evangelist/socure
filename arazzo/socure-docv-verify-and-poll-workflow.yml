@@ -1,0 +1,168 @@
+arazzo: 1.0.1
+info:
+  title: Socure DocV Verify And Poll
+  summary: Create a document verification transaction, upload the ID and selfie, finalize verification, and poll for the outcome.
+  description: >-
+    The end-to-end Predictive Document Verification flow. The workflow creates a
+    DocV transaction, uploads the captured document image and a selfie against
+    the transaction's device, finalizes the transaction to trigger document and
+    liveness verification, and then polls the transaction until a terminal
+    decision (accept, reject, or resubmit) is returned. Every step inlines its
+    request so the document verification flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: docvApi
+  url: ../openapi/socure-docv-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: docv-verify-and-poll
+  summary: Run a full DocV transaction from creation through a polled decision.
+  description: >-
+    Creates a DocV transaction, uploads the document and selfie images, finalizes
+    the transaction, and polls the transaction record until a decision value is
+    present.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - deviceId
+    - documentType
+    - documentImage
+    - selfieImage
+    properties:
+      apiKey:
+        type: string
+        description: Socure API key presented as `SocureApiKey <api-key>`.
+      deviceId:
+        type: string
+        description: Device identifier the captured images are uploaded against.
+      documentType:
+        type: string
+        description: Document type to verify (license, passport, or residence_permit).
+      documentUploadType:
+        type: string
+        description: Upload image type for the document (license_front, license_back, passport, or residence_permit).
+      documentImage:
+        type: string
+        description: Binary document image to upload.
+      selfieImage:
+        type: string
+        description: Binary selfie image to upload for liveness and face match.
+      country:
+        type: string
+        description: Issuing country of the document.
+      webhookUrl:
+        type: string
+        description: Optional callback URL for DocV session lifecycle events.
+  steps:
+  - stepId: createTransaction
+    description: >-
+      Create a DocV transaction by passing the docvTransaction module, returning
+      the transaction id and the hosted session URL.
+    operationId: createDocvTransaction
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        modules:
+        - docvtransaction
+        documentType: $inputs.documentType
+        country: $inputs.country
+        webhookUrl: $inputs.webhookUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      docvTransactionId: $response.body#/docvTransactionId
+      sessionUrl: $response.body#/sessionUrl
+      referenceId: $response.body#/referenceId
+  - stepId: uploadDocument
+    description: >-
+      Upload the captured document image against the device for this transaction.
+    operationId: uploadDocvDocument
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    - name: deviceId
+      in: path
+      value: $inputs.deviceId
+    requestBody:
+      contentType: multipart/form-data
+      payload:
+        type: $inputs.documentUploadType
+        image: $inputs.documentImage
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: uploadSelfie
+    description: >-
+      Upload the selfie image against the device so liveness and face match can
+      be evaluated.
+    operationId: uploadDocvDocument
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    - name: deviceId
+      in: path
+      value: $inputs.deviceId
+    requestBody:
+      contentType: multipart/form-data
+      payload:
+        type: selfie
+        image: $inputs.selfieImage
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: finalizeVerification
+    description: >-
+      Finalize the transaction to trigger document and selfie verification.
+    operationId: verifyDocvDocument
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        docvTransactionId: $steps.createTransaction.outputs.docvTransactionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      verifyDecision: $response.body#/decision/value
+  - stepId: pollTransaction
+    description: >-
+      Retrieve the transaction and confirm a terminal decision value has been
+      produced; loop back if the decision is not yet present.
+    operationId: getDocvTransaction
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    - name: docvTransactionId
+      in: path
+      value: $steps.createTransaction.outputs.docvTransactionId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.decision.value != null
+      type: jsonpath
+    onFailure:
+    - name: retryPoll
+      type: retry
+      stepId: pollTransaction
+      retryAfter: 5
+      retryLimit: 12
+    outputs:
+      decision: $response.body#/decision/value
+      reasonCodes: $response.body#/decision/reasonCodes
+      documentData: $response.body#/documentData
+      selfieMatchScore: $response.body#/selfieMatch/score
+      livenessDecision: $response.body#/liveness/decision
+  outputs:
+    docvTransactionId: $steps.createTransaction.outputs.docvTransactionId
+    decision: $steps.pollTransaction.outputs.decision
+    documentData: $steps.pollTransaction.outputs.documentData
+    selfieMatchScore: $steps.pollTransaction.outputs.selfieMatchScore

@@ -1,0 +1,142 @@
+arazzo: 1.0.1
+info:
+  title: Socure Contact Risk Then Decision
+  summary: Score email, phone, and address risk for an applicant, then run a decision when all contact signals are low risk.
+  description: >-
+    The contact-signal gating flow. The workflow runs an ID+ evaluation across
+    the email, phone, and address RiskScore modules, branches on the combined
+    risk scores, and — when every contact signal scores below the configured
+    threshold — runs a decision evaluation to produce a deterministic onboarding
+    outcome. Every step inlines its request so the contact-risk flow can be read
+    and executed without opening the underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: idplusApi
+  url: ../openapi/socure-idplus-api-openapi.yml
+  type: openapi
+- name: decisionApi
+  url: ../openapi/socure-decision-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: contact-risk-then-decision
+  summary: Score email, phone, and address risk and run a decision only when all are low risk.
+  description: >-
+    Runs the email, phone, and address RiskScore modules, branches on the
+    returned scores, and runs a decision evaluation when all contact signals are
+    below the threshold.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - email
+    - mobileNumber
+    - physicalAddress
+    properties:
+      apiKey:
+        type: string
+        description: Socure API key presented as `SocureApiKey <api-key>`.
+      email:
+        type: string
+      mobileNumber:
+        type: string
+      physicalAddress:
+        type: string
+      city:
+        type: string
+      state:
+        type: string
+      zip:
+        type: string
+      country:
+        type: string
+      customerUserId:
+        type: string
+      firstName:
+        type: string
+      surName:
+        type: string
+      dob:
+        type: string
+      nationalId:
+        type: string
+      riskThreshold:
+        type: number
+        description: Maximum acceptable contact risk score (0-1) for each signal.
+        default: 0.5
+  steps:
+  - stepId: scoreContactRisk
+    description: >-
+      Run an ID+ evaluation across email, phone, and address RiskScore modules
+      and capture each contact risk score.
+    operationId: evaluateIdentity
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        modules:
+        - emailrisk
+        - phonerisk
+        - addressrisk
+        customerUserId: $inputs.customerUserId
+        email: $inputs.email
+        mobileNumber: $inputs.mobileNumber
+        physicalAddress: $inputs.physicalAddress
+        city: $inputs.city
+        state: $inputs.state
+        zip: $inputs.zip
+        country: $inputs.country
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      referenceId: $response.body#/referenceId
+      emailScore: $response.body#/emailRisk/score
+      phoneScore: $response.body#/phoneRisk/score
+      addressScore: $response.body#/addressRisk/score
+    onSuccess:
+    - name: lowRisk
+      type: goto
+      stepId: runDecision
+      criteria:
+      - context: $response.body
+        condition: $.emailRisk.score <= $inputs.riskThreshold && $.phoneRisk.score <= $inputs.riskThreshold && $.addressRisk.score <= $inputs.riskThreshold
+        type: jsonpath
+    - name: highRisk
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.emailRisk.score > $inputs.riskThreshold || $.phoneRisk.score > $inputs.riskThreshold || $.addressRisk.score > $inputs.riskThreshold
+        type: jsonpath
+  - stepId: runDecision
+    description: >-
+      Run a decision evaluation for the applicant now that all contact signals
+      scored below the configured threshold.
+    operationId: evaluateDecision
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        modules:
+        - decision
+        - kyc
+        customerUserId: $inputs.customerUserId
+        firstName: $inputs.firstName
+        surName: $inputs.surName
+        dob: $inputs.dob
+        nationalId: $inputs.nationalId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      referenceId: $response.body#/referenceId
+      decision: $response.body#/decision/value
+  outputs:
+    riskReferenceId: $steps.scoreContactRisk.outputs.referenceId
+    emailScore: $steps.scoreContactRisk.outputs.emailScore
+    phoneScore: $steps.scoreContactRisk.outputs.phoneScore
+    addressScore: $steps.scoreContactRisk.outputs.addressScore
+    decision: $steps.runDecision.outputs.decision

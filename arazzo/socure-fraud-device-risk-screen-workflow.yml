@@ -1,0 +1,135 @@
+arazzo: 1.0.1
+info:
+  title: Socure Fraud And Device Risk Screen
+  summary: Screen an applicant for identity fraud, synthetic fraud, and device risk, then enroll watchlist monitoring on a clean result.
+  description: >-
+    The fraud-and-device gating flow. The workflow runs an ID+ evaluation across
+    Sigma Identity Fraud, Sigma Synthetic Fraud, and device risk using a
+    SigmaDevice session id, branches on the fraud scores, and — when the
+    applicant clears the fraud threshold — enrolls the identity into continuous
+    global watchlist monitoring. Every step inlines its request so the
+    fraud-screen flow can be read and executed without opening the underlying
+    OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: idplusApi
+  url: ../openapi/socure-idplus-api-openapi.yml
+  type: openapi
+- name: watchlistApi
+  url: ../openapi/socure-watchlist-monitoring-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: fraud-device-risk-screen
+  summary: Run identity, synthetic, and device fraud screening and enroll monitoring on a clean result.
+  description: >-
+    Runs Sigma identity fraud, synthetic fraud, and device risk modules, branches
+    on the fraud scores, and enrolls watchlist monitoring when the applicant
+    clears the threshold.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - customerUserId
+    - deviceSessionId
+    properties:
+      apiKey:
+        type: string
+        description: Socure API key presented as `SocureApiKey <api-key>`.
+      customerUserId:
+        type: string
+        description: Customer-supplied unique identifier for the end user.
+      deviceSessionId:
+        type: string
+        description: Device session ID from the SigmaDevice SDK.
+      firstName:
+        type: string
+      surName:
+        type: string
+      dob:
+        type: string
+      nationalId:
+        type: string
+      email:
+        type: string
+      mobileNumber:
+        type: string
+      ipAddress:
+        type: string
+      fraudThreshold:
+        type: number
+        description: Maximum acceptable fraud score (0-1).
+        default: 0.6
+      monitoringWebhookUrl:
+        type: string
+        description: Callback URL for watchlist monitoring match alerts.
+  steps:
+  - stepId: screenFraud
+    description: >-
+      Run an ID+ evaluation across identity fraud, synthetic fraud, and device
+      risk, capturing the top fraud and synthetic scores.
+    operationId: evaluateIdentity
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        modules:
+        - fraud
+        - synthetic
+        - devicerisk
+        customerUserId: $inputs.customerUserId
+        firstName: $inputs.firstName
+        surName: $inputs.surName
+        dob: $inputs.dob
+        nationalId: $inputs.nationalId
+        email: $inputs.email
+        mobileNumber: $inputs.mobileNumber
+        ipAddress: $inputs.ipAddress
+        deviceSessionId: $inputs.deviceSessionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      referenceId: $response.body#/referenceId
+      fraudScore: $response.body#/fraud/scores/0/score
+      syntheticScore: $response.body#/synthetic/scores/0/score
+    onSuccess:
+    - name: cleared
+      type: goto
+      stepId: enrollMonitoring
+      criteria:
+      - context: $response.body
+        condition: $.fraud.scores[0].score <= $inputs.fraudThreshold && $.synthetic.scores[0].score <= $inputs.fraudThreshold
+        type: jsonpath
+    - name: flagged
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.fraud.scores[0].score > $inputs.fraudThreshold || $.synthetic.scores[0].score > $inputs.fraudThreshold
+        type: jsonpath
+  - stepId: enrollMonitoring
+    description: >-
+      Enroll the cleared identity into continuous global watchlist monitoring
+      using the referenceId from the fraud screen.
+    operationId: enrollMonitoringProfile
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        referenceId: $steps.screenFraud.outputs.referenceId
+        customerUserId: $inputs.customerUserId
+        webhookUrl: $inputs.monitoringWebhookUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      profileId: $response.body#/profileId
+      monitoringStatus: $response.body#/status
+  outputs:
+    referenceId: $steps.screenFraud.outputs.referenceId
+    fraudScore: $steps.screenFraud.outputs.fraudScore
+    syntheticScore: $steps.screenFraud.outputs.syntheticScore
+    profileId: $steps.enrollMonitoring.outputs.profileId

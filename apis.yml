@@ -137,6 +137,36 @@ apis:
     offering. Note - the RiskOS API surface is gated behind customer onboarding; this profile tracks the
     documentation entry point only.
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/socure-bank-account-onboarding-workflow.yml
+    name: Socure Bank Account Onboarding
+    summary: Validate a funding bank account, then run a decision evaluation on the account owner when the account is open.
+  - url: arazzo/socure-contact-risk-then-decision-workflow.yml
+    name: Socure Contact Risk Then Decision
+    summary: Score email, phone, and address risk for an applicant, then run a decision when all contact signals are low risk.
+  - url: arazzo/socure-docv-then-identity-workflow.yml
+    name: Socure DocV Then Identity
+    summary: Verify a government ID through DocV, then fold the document result into an ID+ identity evaluation.
+  - url: arazzo/socure-docv-verify-and-poll-workflow.yml
+    name: Socure DocV Verify And Poll
+    summary: Create a document verification transaction, upload the ID and selfie, finalize verification, and poll for the outcome.
+  - url: arazzo/socure-fraud-device-risk-screen-workflow.yml
+    name: Socure Fraud And Device Risk Screen
+    summary: Screen an applicant for identity fraud, synthetic fraud, and device risk, then enroll watchlist monitoring on a clean result.
+  - url: arazzo/socure-identity-decision-branch-workflow.yml
+    name: Socure Identity Decision Branch
+    summary: Run a multi-module ID+ evaluation and branch onboarding on the returned decision outcome.
+  - url: arazzo/socure-kyc-watchlist-enroll-workflow.yml
+    name: Socure KYC Watchlist Enroll
+    summary: Screen an identity against KYC and global watchlist, then enroll it for ongoing monitoring and confirm the profile.
+  - url: arazzo/socure-monitoring-offboard-workflow.yml
+    name: Socure Monitoring Offboard
+    summary: Confirm a watchlist monitoring profile is active, then remove it when a customer is offboarded.
+  - url: arazzo/socure-watchlist-alert-triage-workflow.yml
+    name: Socure Watchlist Alert Triage
+    summary: List open watchlist monitoring alerts for a profile and move a selected alert through its disposition.
 - url: https://www.socure.com
   type: Portal
 - url: https://developer.socure.com

@@ -1,0 +1,142 @@
+arazzo: 1.0.1
+info:
+  title: Socure DocV Then Identity
+  summary: Verify a government ID through DocV, then fold the document result into an ID+ identity evaluation.
+  description: >-
+    Chains Predictive Document Verification into the unified ID+ evaluation. The
+    workflow creates a DocV transaction, polls until the document decision is
+    available, and then submits an ID+ evaluation that references the completed
+    DocV transaction id so KYC, fraud, and decision modules can be scored against
+    the verified document. Every step inlines its request so the cross-product
+    flow can be read and executed without opening the underlying OpenAPI
+    descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: docvApi
+  url: ../openapi/socure-docv-api-openapi.yml
+  type: openapi
+- name: idplusApi
+  url: ../openapi/socure-idplus-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: docv-then-identity
+  summary: Run DocV and feed its transaction id into an ID+ identity evaluation.
+  description: >-
+    Creates a DocV transaction, polls for its decision, then runs an ID+
+    evaluation that includes the DocV transaction id alongside KYC, fraud, and
+    decision modules.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - documentType
+    - customerUserId
+    properties:
+      apiKey:
+        type: string
+        description: Socure API key presented as `SocureApiKey <api-key>`.
+      documentType:
+        type: string
+        description: Document type to verify (license, passport, or residence_permit).
+      country:
+        type: string
+        description: Issuing country of the document.
+      customerUserId:
+        type: string
+        description: Customer-supplied unique identifier for the end user.
+      firstName:
+        type: string
+      surName:
+        type: string
+      dob:
+        type: string
+      nationalId:
+        type: string
+      email:
+        type: string
+      mobileNumber:
+        type: string
+  steps:
+  - stepId: createTransaction
+    description: >-
+      Create a DocV transaction for the document capture session.
+    operationId: createDocvTransaction
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        modules:
+        - docvtransaction
+        documentType: $inputs.documentType
+        country: $inputs.country
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      docvTransactionId: $response.body#/docvTransactionId
+      sessionUrl: $response.body#/sessionUrl
+  - stepId: pollTransaction
+    description: >-
+      Poll the DocV transaction until a decision value is present, retrying while
+      the document is still being processed.
+    operationId: getDocvTransaction
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    - name: docvTransactionId
+      in: path
+      value: $steps.createTransaction.outputs.docvTransactionId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.decision.value != null
+      type: jsonpath
+    onFailure:
+    - name: retryPoll
+      type: retry
+      stepId: pollTransaction
+      retryAfter: 5
+      retryLimit: 12
+    outputs:
+      docvDecision: $response.body#/decision/value
+      documentData: $response.body#/documentData
+  - stepId: evaluateWithDocument
+    description: >-
+      Run an ID+ identity evaluation that references the completed DocV
+      transaction so document verification results are folded into KYC, fraud,
+      and the decision outcome.
+    operationId: evaluateIdentity
+    parameters:
+    - name: Authorization
+      in: header
+      value: SocureApiKey $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        modules:
+        - kyc
+        - fraud
+        - decision
+        - docvtransaction
+        customerUserId: $inputs.customerUserId
+        firstName: $inputs.firstName
+        surName: $inputs.surName
+        dob: $inputs.dob
+        nationalId: $inputs.nationalId
+        email: $inputs.email
+        mobileNumber: $inputs.mobileNumber
+        docvTransactionId: $steps.createTransaction.outputs.docvTransactionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      referenceId: $response.body#/referenceId
+      kycReasonCodes: $response.body#/kyc/reasonCodes
+      decision: $response.body#/decision/value
+  outputs:
+    docvTransactionId: $steps.createTransaction.outputs.docvTransactionId
+    docvDecision: $steps.pollTransaction.outputs.docvDecision
+    referenceId: $steps.evaluateWithDocument.outputs.referenceId
+    decision: $steps.evaluateWithDocument.outputs.decision
