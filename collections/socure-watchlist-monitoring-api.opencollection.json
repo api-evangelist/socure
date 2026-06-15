@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Socure Global Watchlist Monitoring API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Enroll A Monitoring Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.socure.com/api/3.0/watchlist/monitoring/profiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enroll an identity for continuous watchlist monitoring."
+        },
+        {
+          "info": {
+            "name": "Get A Monitoring Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.socure.com/api/3.0/watchlist/monitoring/profiles/:profileId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get A Monitoring Profile"
+        },
+        {
+          "info": {
+            "name": "Remove A Monitoring Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.socure.com/api/3.0/watchlist/monitoring/profiles/:profileId",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove A Monitoring Profile"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Monitoring Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.socure.com/api/3.0/watchlist/monitoring/alerts",
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Monitoring Alerts"
+        },
+        {
+          "info": {
+            "name": "Update A Monitoring Alert Disposition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.socure.com/api/3.0/watchlist/monitoring/alerts/:alertId",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update A Monitoring Alert Disposition"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

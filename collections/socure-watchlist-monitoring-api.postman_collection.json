@@ -1,0 +1,576 @@
+{
+  "item": [
+    {
+      "id": "6fdc2668-49ea-469e-8395-eb63dda07859",
+      "name": "Monitoring",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1fc49599-cc93-4d83-bee1-c305717f1b99",
+          "name": "Enroll A Monitoring Profile",
+          "request": {
+            "name": "Enroll A Monitoring Profile",
+            "description": {
+              "content": "Enroll an identity for continuous watchlist monitoring.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "3.0",
+                "watchlist",
+                "monitoring",
+                "profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceId\": \"<string>\",\n  \"customerUserId\": \"<string>\",\n  \"webhookUrl\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8bf879c6-b5dc-4ef1-89f9-c8e001e9bb5e",
+              "name": "Profile enrolled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "3.0",
+                    "watchlist",
+                    "monitoring",
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"<string>\",\n  \"customerUserId\": \"<string>\",\n  \"webhookUrl\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"profileId\": \"string\",\n  \"customerUserId\": \"string\",\n  \"enrolledAt\": \"1995-11-24T21:35:44.570Z\",\n  \"status\": \"removed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e329ff7-6b23-418c-87fe-7400fa0710a8",
+          "name": "Get A Monitoring Profile",
+          "request": {
+            "name": "Get A Monitoring Profile",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "3.0",
+                "watchlist",
+                "monitoring",
+                "profiles",
+                ":profileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92fef7a4-0d6c-404d-8131-9ff51e6790e2",
+              "name": "Monitoring profile.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "3.0",
+                    "watchlist",
+                    "monitoring",
+                    "profiles",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"profileId\": \"string\",\n  \"customerUserId\": \"string\",\n  \"enrolledAt\": \"1995-11-24T21:35:44.570Z\",\n  \"status\": \"removed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea21d223-d424-462f-a711-ab27bb1265e0",
+          "name": "Remove A Monitoring Profile",
+          "request": {
+            "name": "Remove A Monitoring Profile",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "3.0",
+                "watchlist",
+                "monitoring",
+                "profiles",
+                ":profileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74767ff3-66d4-48c2-8afc-f61d5decc103",
+              "name": "Profile removed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "3.0",
+                    "watchlist",
+                    "monitoring",
+                    "profiles",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ef9f5948-fba1-43f6-9cea-42c3091fcf1e",
+      "name": "Alerts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "12e1c497-64a9-4df9-b742-7eeb6b58cbd1",
+          "name": "List Monitoring Alerts",
+          "request": {
+            "name": "List Monitoring Alerts",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "3.0",
+                "watchlist",
+                "monitoring",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "profileId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c63a6a4-a10c-41f7-99fc-276a531013cc",
+              "name": "Alert list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "3.0",
+                    "watchlist",
+                    "monitoring",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "profileId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"alertId\": \"string\",\n    \"profileId\": \"string\",\n    \"sourceListName\": \"string\",\n    \"matchDetails\": {\n      \"key_0\": 2480.0684452571686,\n      \"key_1\": 4853.1398934737435\n    },\n    \"status\": \"string\",\n    \"createdAt\": \"1969-01-02T11:40:55.663Z\"\n  },\n  {\n    \"alertId\": \"string\",\n    \"profileId\": \"string\",\n    \"sourceListName\": \"string\",\n    \"matchDetails\": {\n      \"key_0\": 1607.8357229128492,\n      \"key_1\": 5711.090512961227\n    },\n    \"status\": \"string\",\n    \"createdAt\": \"1951-11-19T23:39:57.224Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1ab34a9-7ca3-4e7e-88f7-1b38747d56b0",
+          "name": "Update A Monitoring Alert Disposition",
+          "request": {
+            "name": "Update A Monitoring Alert Disposition",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "3.0",
+                "watchlist",
+                "monitoring",
+                "alerts",
+                ":alertId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alertId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d3796076-1372-476b-8a39-64bbf1f6c246",
+              "name": "Alert updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "3.0",
+                    "watchlist",
+                    "monitoring",
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.socure.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fde4a4a6-de90-4eec-898b-d3110e661fee",
+    "name": "Socure Global Watchlist Monitoring API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Continuous monitoring of customer identities against global sanctions lists\n(OFAC, UN, EU, HMT, DFAT), PEP lists, and adverse media sources. Submit profiles\nfor monitoring, retrieve match alerts, manage match dispositions, and receive\nwebhook callbacks when a customer matches a newly added or updated list entry.\n",
+      "type": "text/plain"
+    }
+  }
+}

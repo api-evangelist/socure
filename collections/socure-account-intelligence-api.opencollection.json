@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Socure Account Intelligence API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Intelligence",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate A Bank Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.socure.com/api/3.0/EmailAuthScore",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate a US bank account by routing number and account number with the\n`accountintelligence` module.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

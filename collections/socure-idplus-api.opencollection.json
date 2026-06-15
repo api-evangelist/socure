@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Socure ID+ API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ID+",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Evaluate Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.socure.com/api/3.0/EmailAuthScore",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an identity payload along with a `modules` array selecting one or more\nSocure modules to evaluate. Returns the combined module result blocks and an\noptional `decision` block when the Decision module is requested.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

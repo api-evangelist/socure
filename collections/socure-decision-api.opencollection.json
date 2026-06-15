@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Socure Decision API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Decision",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Evaluate A Decision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.socure.com/api/3.0/EmailAuthScore",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Invoke the Decision module alongside other ID+ modules. The Decision block in\nthe response carries the configured rule set name, version, and the resulting\noutcome.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

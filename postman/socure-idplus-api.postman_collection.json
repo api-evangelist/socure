@@ -1,0 +1,346 @@
+{
+  "info": {
+    "_postman_id": "634527ee-3876-48c2-9f47-2415d65e6bb8",
+    "name": "Socure ID+ API",
+    "description": "The Socure ID+ API is the unified REST surface for the ID+ platform. A single\n`POST /api/3.0/EmailAuthScore` (legacy name retained for compatibility) accepts a\n`modules` array describing which modules to evaluate \u2014 KYC (Socure Verify), eCBSV,\nSigma Identity Fraud, Sigma Synthetic Fraud, Sigma First-Party Fraud, Email\nRiskScore, Phone RiskScore, Address RiskScore, Digital Intelligence, Graph\nIntelligence, Global Watchlist Screening, Deceased Check, Account Intelligence,\nPrefill, and the Decision rules engine \u2014 and returns a single combined response\nwith `referenceId`, module result blocks, and an optional `decision` block.\n\n\nContact Support:\n Name: Socure Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:49.000Z",
+    "updatedAt": "2026-06-05T15:17:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-634527ee-3876-48c2-9f47-2415d65e6bb8"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "3.0",
+          "item": [
+            {
+              "name": "EmailAuthScore",
+              "item": [
+                {
+                  "name": "Evaluate Identity",
+                  "id": "c6e352a8-99b2-405a-b639-5dcad9e14ca6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"modules\": [\n    \"kyc\",\n    \"docvtransaction\"\n  ],\n  \"customerUserId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"surName\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"nationalId\": \"<string>\",\n  \"email\": \"<email>\",\n  \"mobileNumber\": \"<string>\",\n  \"physicalAddress\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"ipAddress\": \"<string>\",\n  \"userConsent\": \"<boolean>\",\n  \"consentTimestamp\": \"<dateTime>\",\n  \"deviceSessionId\": \"<string>\",\n  \"docvTransactionId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/3.0/EmailAuthScore",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "3.0",
+                        "EmailAuthScore"
+                      ]
+                    },
+                    "description": "Submit an identity payload along with a `modules` array selecting one or more\nSocure modules to evaluate. Returns the combined module result blocks and an\noptional `decision` block when the Decision module is requested.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "4717ce54-9779-42e9-81be-d2e64c55521e",
+                      "name": "Identity evaluation result",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"modules\": [\n    \"kyc\",\n    \"docvtransaction\"\n  ],\n  \"customerUserId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"surName\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"nationalId\": \"<string>\",\n  \"email\": \"<email>\",\n  \"mobileNumber\": \"<string>\",\n  \"physicalAddress\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"ipAddress\": \"<string>\",\n  \"userConsent\": \"<boolean>\",\n  \"consentTimestamp\": \"<dateTime>\",\n  \"deviceSessionId\": \"<string>\",\n  \"docvTransactionId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3.0/EmailAuthScore",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3.0",
+                            "EmailAuthScore"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"referenceId\": \"<string>\",\n  \"kyc\": {\n    \"reasonCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"fieldValidations\": {\n      \"Utd\": \"<number>\",\n      \"in_94\": \"<number>\"\n    }\n  },\n  \"fraud\": {\n    \"scores\": [\n      {\n        \"name\": \"<string>\",\n        \"version\": \"<string>\",\n        \"score\": \"<number>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"version\": \"<string>\",\n        \"score\": \"<number>\"\n      }\n    ],\n    \"reasonCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"synthetic\": {\n    \"scores\": [\n      {\n        \"name\": \"<string>\",\n        \"version\": \"<string>\",\n        \"score\": \"<number>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"version\": \"<string>\",\n        \"score\": \"<number>\"\n      }\n    ],\n    \"reasonCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"emailRisk\": {\n    \"score\": \"<number>\",\n    \"reasonCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"phoneRisk\": {\n    \"score\": \"<number>\",\n    \"reasonCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"addressRisk\": {\n    \"score\": \"<number>\",\n    \"reasonCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"watchlist\": {\n    \"global\": {\n      \"sources\": [\n        {\n          \"sourceListName\": \"<string>\",\n          \"matchCount\": \"<integer>\"\n        },\n        {\n          \"sourceListName\": \"<string>\",\n          \"matchCount\": \"<integer>\"\n        }\n      ]\n    }\n  },\n  \"decision\": {\n    \"name\": \"<string>\",\n    \"value\": \"reject\",\n    \"ruleSet\": \"<string>\",\n    \"version\": \"<string>\"\n  },\n  \"deceasedCheck\": {\n    \"veniam___c\": \"ea minim irure\"\n  },\n  \"accountIntelligence\": {\n    \"magnae\": 86184909.75507909\n  }\n}",
+                      "createdAt": "2026-06-05T15:17:50.000Z",
+                      "updatedAt": "2026-06-05T15:17:50.000Z",
+                      "uid": "35240-4717ce54-9779-42e9-81be-d2e64c55521e"
+                    },
+                    {
+                      "id": "c6d569ce-a947-48bb-8cb2-9b0dcf3dc24e",
+                      "name": "Malformed request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"modules\": [\n    \"kyc\",\n    \"docvtransaction\"\n  ],\n  \"customerUserId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"surName\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"nationalId\": \"<string>\",\n  \"email\": \"<email>\",\n  \"mobileNumber\": \"<string>\",\n  \"physicalAddress\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"ipAddress\": \"<string>\",\n  \"userConsent\": \"<boolean>\",\n  \"consentTimestamp\": \"<dateTime>\",\n  \"deviceSessionId\": \"<string>\",\n  \"docvTransactionId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3.0/EmailAuthScore",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3.0",
+                            "EmailAuthScore"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"msg\": \"<string>\",\n  \"referenceId\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:17:50.000Z",
+                      "updatedAt": "2026-06-05T15:17:50.000Z",
+                      "uid": "35240-c6d569ce-a947-48bb-8cb2-9b0dcf3dc24e"
+                    },
+                    {
+                      "id": "4a768d48-e648-4208-a263-6b808cf482e9",
+                      "name": "Missing or invalid API key.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"modules\": [\n    \"kyc\",\n    \"docvtransaction\"\n  ],\n  \"customerUserId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"surName\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"nationalId\": \"<string>\",\n  \"email\": \"<email>\",\n  \"mobileNumber\": \"<string>\",\n  \"physicalAddress\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"ipAddress\": \"<string>\",\n  \"userConsent\": \"<boolean>\",\n  \"consentTimestamp\": \"<dateTime>\",\n  \"deviceSessionId\": \"<string>\",\n  \"docvTransactionId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3.0/EmailAuthScore",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3.0",
+                            "EmailAuthScore"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"msg\": \"<string>\",\n  \"referenceId\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:17:50.000Z",
+                      "updatedAt": "2026-06-05T15:17:50.000Z",
+                      "uid": "35240-4a768d48-e648-4208-a263-6b808cf482e9"
+                    },
+                    {
+                      "id": "e0a6c611-3663-4f08-ac94-f1b7db2a94ad",
+                      "name": "Request throttled.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"modules\": [\n    \"kyc\",\n    \"docvtransaction\"\n  ],\n  \"customerUserId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"surName\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"nationalId\": \"<string>\",\n  \"email\": \"<email>\",\n  \"mobileNumber\": \"<string>\",\n  \"physicalAddress\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"zip\": \"<string>\",\n  \"country\": \"<string>\",\n  \"ipAddress\": \"<string>\",\n  \"userConsent\": \"<boolean>\",\n  \"consentTimestamp\": \"<dateTime>\",\n  \"deviceSessionId\": \"<string>\",\n  \"docvTransactionId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3.0/EmailAuthScore",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3.0",
+                            "EmailAuthScore"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<string>\",\n  \"msg\": \"<string>\",\n  \"referenceId\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:17:50.000Z",
+                      "updatedAt": "2026-06-05T15:17:50.000Z",
+                      "uid": "35240-e0a6c611-3663-4f08-ac94-f1b7db2a94ad"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:50.000Z",
+                  "updatedAt": "2026-06-05T15:17:50.000Z",
+                  "uid": "35240-c6e352a8-99b2-405a-b639-5dcad9e14ca6"
+                }
+              ],
+              "id": "46fc5e4f-11ff-41b0-8cf8-9d8abc2bcb8e",
+              "createdAt": "2026-06-05T15:17:50.000Z",
+              "updatedAt": "2026-06-05T15:17:50.000Z",
+              "uid": "35240-46fc5e4f-11ff-41b0-8cf8-9d8abc2bcb8e"
+            }
+          ],
+          "id": "6681f9c0-9ce0-4baa-ab83-b305affbc691",
+          "createdAt": "2026-06-05T15:17:50.000Z",
+          "updatedAt": "2026-06-05T15:17:50.000Z",
+          "uid": "35240-6681f9c0-9ce0-4baa-ab83-b305affbc691"
+        }
+      ],
+      "id": "2941564d-8ff0-4681-a3a1-cdd84e663a03",
+      "createdAt": "2026-06-05T15:17:50.000Z",
+      "updatedAt": "2026-06-05T15:17:50.000Z",
+      "uid": "35240-2941564d-8ff0-4681-a3a1-cdd84e663a03"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.socure.com"
+    }
+  ]
+}

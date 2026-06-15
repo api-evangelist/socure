@@ -1,0 +1,152 @@
+{
+  "item": [
+    {
+      "id": "c532abb5-afce-4ae1-9346-e7b778b7f0bd",
+      "name": "Account Intelligence",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c989b433-3829-4f91-b856-7d4b6747e870",
+          "name": "Validate A Bank Account",
+          "request": {
+            "name": "Validate A Bank Account",
+            "description": {
+              "content": "Validate a US bank account by routing number and account number with the\n`accountintelligence` module.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "3.0",
+                "EmailAuthScore"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"modules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"routingNumber\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"surName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4b30464a-6549-4400-9d10-f30d05128dad",
+              "name": "Account Intelligence result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "3.0",
+                    "EmailAuthScore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"modules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"routingNumber\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"surName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"referenceId\": \"string\",\n  \"accountIntelligence\": {\n    \"accountStatus\": \"unknown\",\n    \"ownerMatch\": \"exact\",\n    \"accountType\": \"string\",\n    \"reasonCodes\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.socure.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "10b27485-48bb-402b-b61d-c02e4a4cb8a0",
+    "name": "Socure Account Intelligence API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time validation of US bank accounts — verifying open/closed status,\nownership (name match), and account-type signals. Powers funding-account checks\nfor fintech onboarding, payroll, and ACH origination flows without requiring\nmicro-deposits or end-user credentials.\n",
+      "type": "text/plain"
+    }
+  }
+}

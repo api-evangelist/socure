@@ -1,0 +1,545 @@
+{
+  "info": {
+    "_postman_id": "7c282add-5c9d-44f5-8651-8af8aa9cb508",
+    "name": "Socure Predictive DocV API",
+    "description": "Predictive Document Verification (DocV) verifies government-issued ID documents\nand matches them to a live selfie with liveness detection. The DocV REST API\ncreates session-orchestrated transactions, manages document/selfie uploads, and\nretrieves verification outcomes. Session lifecycle events are also pushed via\nwebhooks \u2014 see the companion DocV AsyncAPI document.\n\n\nContact Support:\n Name: Socure Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:50.000Z",
+    "updatedAt": "2026-06-05T15:17:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7c282add-5c9d-44f5-8651-8af8aa9cb508"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "3.0",
+          "item": [
+            {
+              "name": "EmailAuthScore",
+              "item": [
+                {
+                  "name": "Create A DocV Transaction",
+                  "id": "b41672dd-d2be-43f3-b10b-44c4e433d629",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"modules\": [\n    \"docvtransaction\",\n    \"docvtransaction\"\n  ],\n  \"documentType\": \"license\",\n  \"country\": \"<string>\",\n  \"redirectUrl\": \"<uri>\",\n  \"webhookUrl\": \"<uri>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/3.0/EmailAuthScore",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "3.0",
+                        "EmailAuthScore"
+                      ]
+                    },
+                    "description": "Create a DocV transaction by passing `docvTransaction` in the modules array."
+                  },
+                  "response": [
+                    {
+                      "id": "fcb1e5fe-58db-4725-99f1-45ee4e6f8e97",
+                      "name": "DocV transaction created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"modules\": [\n    \"docvtransaction\",\n    \"docvtransaction\"\n  ],\n  \"documentType\": \"license\",\n  \"country\": \"<string>\",\n  \"redirectUrl\": \"<uri>\",\n  \"webhookUrl\": \"<uri>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3.0/EmailAuthScore",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3.0",
+                            "EmailAuthScore"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"docvTransactionId\": \"<string>\",\n  \"sessionUrl\": \"<uri>\",\n  \"referenceId\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:17:51.000Z",
+                      "updatedAt": "2026-06-05T15:17:51.000Z",
+                      "uid": "35240-fcb1e5fe-58db-4725-99f1-45ee4e6f8e97"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:17:51.000Z",
+                  "updatedAt": "2026-06-05T15:17:51.000Z",
+                  "uid": "35240-b41672dd-d2be-43f3-b10b-44c4e433d629"
+                }
+              ],
+              "id": "d7412b73-562b-4d7f-a6c1-e9f772c3db35",
+              "createdAt": "2026-06-05T15:17:51.000Z",
+              "updatedAt": "2026-06-05T15:17:51.000Z",
+              "uid": "35240-d7412b73-562b-4d7f-a6c1-e9f772c3db35"
+            },
+            {
+              "name": "devices",
+              "item": [
+                {
+                  "name": "{deviceId}",
+                  "item": [
+                    {
+                      "name": "documents",
+                      "item": [
+                        {
+                          "name": "Upload A DocV Document",
+                          "id": "798734bb-5727-49f7-9bb6-b4f8fb11fe23",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                              }
+                            ],
+                            "body": {
+                              "mode": "formdata",
+                              "formdata": [
+                                {
+                                  "description": " (This can only be one of license_front,license_back,passport,selfie,residence_permit)",
+                                  "key": "type",
+                                  "value": "residence_permit",
+                                  "type": "text"
+                                },
+                                {
+                                  "key": "image",
+                                  "type": "file",
+                                  "value": null
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3.0/devices/:deviceId/documents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3.0",
+                                "devices",
+                                ":deviceId",
+                                "documents"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2b7d8914-03f7-4ada-85b9-f00a119934dc",
+                                  "key": "deviceId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Upload a document image (front, back, or selfie) for a DocV transaction."
+                          },
+                          "response": [
+                            {
+                              "id": "a957ce5e-4bc8-448c-a657-e40fc2a23104",
+                              "name": "Upload acknowledged.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": " (This can only be one of license_front,license_back,passport,selfie,residence_permit)",
+                                      "key": "type",
+                                      "value": "residence_permit",
+                                      "type": "text"
+                                    },
+                                    {
+                                      "key": "image",
+                                      "type": "file"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/3.0/devices/:deviceId/documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "3.0",
+                                    "devices",
+                                    ":deviceId",
+                                    "documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "deviceId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:17:51.000Z",
+                              "updatedAt": "2026-06-05T15:17:51.000Z",
+                              "uid": "35240-a957ce5e-4bc8-448c-a657-e40fc2a23104"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:17:51.000Z",
+                          "updatedAt": "2026-06-05T15:17:51.000Z",
+                          "uid": "35240-798734bb-5727-49f7-9bb6-b4f8fb11fe23"
+                        }
+                      ],
+                      "id": "5df519fa-a097-45a2-9dea-207e6ffcc455",
+                      "createdAt": "2026-06-05T15:17:51.000Z",
+                      "updatedAt": "2026-06-05T15:17:51.000Z",
+                      "uid": "35240-5df519fa-a097-45a2-9dea-207e6ffcc455"
+                    }
+                  ],
+                  "id": "ec54dd74-1a29-4492-a456-187464f57b05",
+                  "createdAt": "2026-06-05T15:17:51.000Z",
+                  "updatedAt": "2026-06-05T15:17:51.000Z",
+                  "uid": "35240-ec54dd74-1a29-4492-a456-187464f57b05"
+                }
+              ],
+              "id": "3c1cd94e-5fd8-4d06-bc71-a036184bfc1e",
+              "createdAt": "2026-06-05T15:17:51.000Z",
+              "updatedAt": "2026-06-05T15:17:51.000Z",
+              "uid": "35240-3c1cd94e-5fd8-4d06-bc71-a036184bfc1e"
+            },
+            {
+              "name": "documents",
+              "item": [
+                {
+                  "name": "verify",
+                  "item": [
+                    {
+                      "name": "Verify A DocV Document",
+                      "id": "d24a7fc1-81c6-4e73-ba85-534f0f745ae3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"docvTransactionId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3.0/documents/verify",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3.0",
+                            "documents",
+                            "verify"
+                          ]
+                        },
+                        "description": "Finalize a DocV transaction and trigger document/selfie verification."
+                      },
+                      "response": [
+                        {
+                          "id": "886a8be4-5e9a-43ef-93a8-0fdfe4db25ea",
+                          "name": "Verification result.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"docvTransactionId\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3.0/documents/verify",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3.0",
+                                "documents",
+                                "verify"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"docvTransactionId\": \"<string>\",\n  \"decision\": {\n    \"value\": \"reject\",\n    \"reasonCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"documentData\": {\n    \"firstName\": \"<string>\",\n    \"surName\": \"<string>\",\n    \"dob\": \"<date>\",\n    \"documentNumber\": \"<string>\",\n    \"expirationDate\": \"<date>\",\n    \"documentType\": \"<string>\",\n    \"issuingCountry\": \"<string>\"\n  },\n  \"selfieMatch\": {\n    \"score\": \"<number>\",\n    \"decision\": \"<string>\"\n  },\n  \"liveness\": {\n    \"decision\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:17:51.000Z",
+                          "updatedAt": "2026-06-05T15:17:51.000Z",
+                          "uid": "35240-886a8be4-5e9a-43ef-93a8-0fdfe4db25ea"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:51.000Z",
+                      "updatedAt": "2026-06-05T15:17:51.000Z",
+                      "uid": "35240-d24a7fc1-81c6-4e73-ba85-534f0f745ae3"
+                    }
+                  ],
+                  "id": "0e433f50-3bd0-483e-bfe6-b5a0c84e72da",
+                  "createdAt": "2026-06-05T15:17:51.000Z",
+                  "updatedAt": "2026-06-05T15:17:51.000Z",
+                  "uid": "35240-0e433f50-3bd0-483e-bfe6-b5a0c84e72da"
+                },
+                {
+                  "name": "{docvTransactionId}",
+                  "item": [
+                    {
+                      "name": "Get A DocV Transaction",
+                      "id": "482e744f-f8ad-4a92-bc0e-cdbb6d4046d0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3.0/documents/:docvTransactionId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3.0",
+                            "documents",
+                            ":docvTransactionId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "66042752-7f38-4417-9cf4-dfc6ec96ced0",
+                              "key": "docvTransactionId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieve the current state and result of a DocV transaction."
+                      },
+                      "response": [
+                        {
+                          "id": "1d7acd28-e267-4472-836d-3e6e02a3b2c9",
+                          "name": "DocV transaction.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3.0/documents/:docvTransactionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3.0",
+                                "documents",
+                                ":docvTransactionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "docvTransactionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"docvTransactionId\": \"<string>\",\n  \"decision\": {\n    \"value\": \"reject\",\n    \"reasonCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"documentData\": {\n    \"firstName\": \"<string>\",\n    \"surName\": \"<string>\",\n    \"dob\": \"<date>\",\n    \"documentNumber\": \"<string>\",\n    \"expirationDate\": \"<date>\",\n    \"documentType\": \"<string>\",\n    \"issuingCountry\": \"<string>\"\n  },\n  \"selfieMatch\": {\n    \"score\": \"<number>\",\n    \"decision\": \"<string>\"\n  },\n  \"liveness\": {\n    \"decision\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:17:51.000Z",
+                          "updatedAt": "2026-06-05T15:17:51.000Z",
+                          "uid": "35240-1d7acd28-e267-4472-836d-3e6e02a3b2c9"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:51.000Z",
+                      "updatedAt": "2026-06-05T15:17:51.000Z",
+                      "uid": "35240-482e744f-f8ad-4a92-bc0e-cdbb6d4046d0"
+                    }
+                  ],
+                  "id": "6f023827-1c52-431f-8367-3c45f249de45",
+                  "createdAt": "2026-06-05T15:17:51.000Z",
+                  "updatedAt": "2026-06-05T15:17:51.000Z",
+                  "uid": "35240-6f023827-1c52-431f-8367-3c45f249de45"
+                }
+              ],
+              "id": "d90dcb03-35fa-4387-a7e1-3bad1ce10469",
+              "createdAt": "2026-06-05T15:17:51.000Z",
+              "updatedAt": "2026-06-05T15:17:51.000Z",
+              "uid": "35240-d90dcb03-35fa-4387-a7e1-3bad1ce10469"
+            }
+          ],
+          "id": "d7be56df-a149-4fb7-991a-2e7f64a496bb",
+          "createdAt": "2026-06-05T15:17:51.000Z",
+          "updatedAt": "2026-06-05T15:17:51.000Z",
+          "uid": "35240-d7be56df-a149-4fb7-991a-2e7f64a496bb"
+        }
+      ],
+      "id": "e30a2b7e-0c6f-4973-90e6-bc906a49f02b",
+      "createdAt": "2026-06-05T15:17:51.000Z",
+      "updatedAt": "2026-06-05T15:17:51.000Z",
+      "uid": "35240-e30a2b7e-0c6f-4973-90e6-bc906a49f02b"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.socure.com"
+    }
+  ]
+}

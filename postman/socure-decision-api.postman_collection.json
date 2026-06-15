@@ -1,0 +1,172 @@
+{
+  "info": {
+    "_postman_id": "ea96e867-df47-450b-a9b3-37b1901f5c98",
+    "name": "Socure Decision API",
+    "description": "The Decision module returns a deterministic outcome \u2014 accept, reject, review,\nrefer, or resubmit \u2014 derived from ID+ module scores and customer-configured rules\nauthored in the Socure Console. Decision is applied on every ID+ call when the\n`decision` module is included in the request modules array.\n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:18:11.000Z",
+    "updatedAt": "2026-06-05T15:18:11.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ea96e867-df47-450b-a9b3-37b1901f5c98"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "3.0",
+          "item": [
+            {
+              "name": "EmailAuthScore",
+              "item": [
+                {
+                  "name": "Evaluate A Decision",
+                  "id": "72aebd35-5c13-485a-b73b-d08f82b8bd46",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"modules\": [\n    \"decision\",\n    \"kyc\"\n  ],\n  \"customerUserId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"surName\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"nationalId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/3.0/EmailAuthScore",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "3.0",
+                        "EmailAuthScore"
+                      ]
+                    },
+                    "description": "Invoke the Decision module alongside other ID+ modules. The Decision block in\nthe response carries the configured rule set name, version, and the resulting\noutcome.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "a45e249c-f53c-4d49-a73b-61fd6d6612d0",
+                      "name": "Decision result.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"modules\": [\n    \"decision\",\n    \"kyc\"\n  ],\n  \"customerUserId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"surName\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"nationalId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3.0/EmailAuthScore",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3.0",
+                            "EmailAuthScore"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"referenceId\": \"<string>\",\n  \"decision\": {\n    \"name\": \"<string>\",\n    \"value\": \"accept\",\n    \"ruleSet\": \"<string>\",\n    \"version\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:18:11.000Z",
+                      "updatedAt": "2026-06-05T15:18:11.000Z",
+                      "uid": "35240-a45e249c-f53c-4d49-a73b-61fd6d6612d0"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:18:11.000Z",
+                  "updatedAt": "2026-06-05T15:18:11.000Z",
+                  "uid": "35240-72aebd35-5c13-485a-b73b-d08f82b8bd46"
+                }
+              ],
+              "id": "9de57a93-dfb0-47c9-8958-40ef32b71d1a",
+              "createdAt": "2026-06-05T15:18:11.000Z",
+              "updatedAt": "2026-06-05T15:18:11.000Z",
+              "uid": "35240-9de57a93-dfb0-47c9-8958-40ef32b71d1a"
+            }
+          ],
+          "id": "a59f5061-4d5d-48ce-931c-d3083cc6f82c",
+          "createdAt": "2026-06-05T15:18:11.000Z",
+          "updatedAt": "2026-06-05T15:18:11.000Z",
+          "uid": "35240-a59f5061-4d5d-48ce-931c-d3083cc6f82c"
+        }
+      ],
+      "id": "7bae17cf-b290-4181-81ec-8b56d56f5923",
+      "createdAt": "2026-06-05T15:18:11.000Z",
+      "updatedAt": "2026-06-05T15:18:11.000Z",
+      "uid": "35240-7bae17cf-b290-4181-81ec-8b56d56f5923"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.socure.com"
+    }
+  ]
+}
