@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/socure-account-intelligence-api-openapi.yml, openapi/socure-decision-api-openapi.yml,
+  openapi/socure-docv-api-openapi.yml, openapi/socure-idplus-api-openapi.yml, openapi/socure-watchlist-monitoring-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: SocureToken
+  type: apiKey
+  in: header
+  parameter: Authorization
+  sources:
+  - openapi/socure-account-intelligence-api-openapi.yml
+  - openapi/socure-decision-api-openapi.yml
+  - openapi/socure-docv-api-openapi.yml
+  - openapi/socure-idplus-api-openapi.yml
+  - openapi/socure-watchlist-monitoring-api-openapi.yml

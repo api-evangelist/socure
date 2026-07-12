@@ -127,6 +127,12 @@ apis:
       workflow deployments; RiskOS Launch is the self-serve productized workflow offering. Note - the RiskOS API surface
       is gated behind customer onboarding; this profile tracks the documentation entry point only.
 common:
+  - type: VulnerabilityDisclosure
+    url: security/socure-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/socure-domain-security.yml
+  - type: Authentication
+    url: authentication/socure-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/socure/overview
   - type: Arazzo
