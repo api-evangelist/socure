@@ -1,12 +1,16 @@
 openapi: 3.0.3
 info:
-  title: Socure Decision API
+  title: Socure Account Intelligence Decision API
   version: '3.0'
-  description: |
-    The Decision module returns a deterministic outcome — accept, reject, review,
-    refer, or resubmit — derived from ID+ module scores and customer-configured rules
-    authored in the Socure Console. Decision is applied on every ID+ call when the
-    `decision` module is included in the request modules array.
+  description: 'Real-time validation of US bank accounts — verifying open/closed status,
+
+    ownership (name match), and account-type signals. Powers funding-account checks
+
+    for fintech onboarding, payroll, and ACH origination flows without requiring
+
+    micro-deposits or end-user credentials.
+
+    '
 servers:
 - url: https://api.socure.com
   description: Production
@@ -23,10 +27,13 @@ paths:
       - Decision
       operationId: evaluateDecision
       summary: Evaluate A Decision
-      description: |
-        Invoke the Decision module alongside other ID+ modules. The Decision block in
+      description: 'Invoke the Decision module alongside other ID+ modules. The Decision block in
+
         the response carries the configured rule set name, version, and the resulting
+
         outcome.
+
+        '
       requestBody:
         required: true
         content:

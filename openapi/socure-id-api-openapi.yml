@@ -1,29 +1,21 @@
 openapi: 3.0.3
 info:
-  title: Socure ID+ API
+  title: Socure Account Intelligence ID+ API
   version: '3.0'
-  description: |
-    The Socure ID+ API is the unified REST surface for the ID+ platform. A single
-    `POST /api/3.0/EmailAuthScore` (legacy name retained for compatibility) accepts a
-    `modules` array describing which modules to evaluate — KYC (Socure Verify), eCBSV,
-    Sigma Identity Fraud, Sigma Synthetic Fraud, Sigma First-Party Fraud, Email
-    RiskScore, Phone RiskScore, Address RiskScore, Digital Intelligence, Graph
-    Intelligence, Global Watchlist Screening, Deceased Check, Account Intelligence,
-    Prefill, and the Decision rules engine — and returns a single combined response
-    with `referenceId`, module result blocks, and an optional `decision` block.
-  contact:
-    name: Socure Developer Support
-    url: https://developer.socure.com
-  license:
-    name: Socure Customer Terms
-    url: https://developer.socure.com/customer-terms
+  description: 'Real-time validation of US bank accounts — verifying open/closed status,
+
+    ownership (name match), and account-type signals. Powers funding-account checks
+
+    for fintech onboarding, payroll, and ACH origination flows without requiring
+
+    micro-deposits or end-user credentials.
+
+    '
 servers:
 - url: https://api.socure.com
   description: Production
 - url: https://sandbox.socure.com
   description: Sandbox
-- url: https://api.socure.us
-  description: GovCloud production
 security:
 - SocureToken: []
 tags:
@@ -36,10 +28,13 @@ paths:
       - ID+
       operationId: evaluateIdentity
       summary: Evaluate Identity
-      description: |
-        Submit an identity payload along with a `modules` array selecting one or more
+      description: 'Submit an identity payload along with a `modules` array selecting one or more
+
         Socure modules to evaluate. Returns the combined module result blocks and an
+
         optional `decision` block when the Decision module is requested.
+
+        '
       requestBody:
         required: true
         content:
@@ -60,14 +55,6 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  securitySchemes:
-    SocureToken:
-      type: apiKey
-      in: header
-      name: Authorization
-      description: |
-        `SocureApiKey <api-key>` token issued in the Socure Console. GovCloud customers
-        present their GovCloud-scoped key. Treat the key as a bearer secret.
   schemas:
     IdPlusRequest:
       type: object
@@ -141,34 +128,41 @@ components:
         docvTransactionId:
           type: string
           description: DocV transaction ID to include document verification results.
-    IdPlusResponse:
+    RiskScoreResult:
       type: object
       properties:
+        score:
+          type: number
+          minimum: 0
+          maximum: 1
+        reasonCodes:
+          type: array
+          items:
+            type: string
+    WatchlistResult:
+      type: object
+      properties:
+        global:
+          type: object
+          properties:
+            sources:
+              type: array
+              items:
+                type: object
+                properties:
+                  sourceListName:
+                    type: string
+                  matchCount:
+                    type: integer
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        msg:
+          type: string
         referenceId:
           type: string
-          description: Globally unique identifier for this evaluation.
-        kyc:
-          $ref: '#/components/schemas/KycResult'
-        fraud:
-          $ref: '#/components/schemas/SigmaResult'
-        synthetic:
-          $ref: '#/components/schemas/SigmaResult'
-        emailRisk:
-          $ref: '#/components/schemas/RiskScoreResult'
-        phoneRisk:
-          $ref: '#/components/schemas/RiskScoreResult'
-        addressRisk:
-          $ref: '#/components/schemas/RiskScoreResult'
-        watchlist:
-          $ref: '#/components/schemas/WatchlistResult'
-        decision:
-          $ref: '#/components/schemas/DecisionResult'
-        deceasedCheck:
-          type: object
-          additionalProperties: true
-        accountIntelligence:
-          type: object
-          additionalProperties: true
     KycResult:
       type: object
       properties:
@@ -202,32 +196,6 @@ components:
           type: array
           items:
             type: string
-    RiskScoreResult:
-      type: object
-      properties:
-        score:
-          type: number
-          minimum: 0
-          maximum: 1
-        reasonCodes:
-          type: array
-          items:
-            type: string
-    WatchlistResult:
-      type: object
-      properties:
-        global:
-          type: object
-          properties:
-            sources:
-              type: array
-              items:
-                type: object
-                properties:
-                  sourceListName:
-                    type: string
-                  matchCount:
-                    type: integer
     DecisionResult:
       type: object
       properties:
@@ -245,24 +213,43 @@ components:
           type: string
         version:
           type: string
-    Error:
+    IdPlusResponse:
       type: object
       properties:
-        status:
-          type: string
-        msg:
-          type: string
         referenceId:
           type: string
+          description: Globally unique identifier for this evaluation.
+        kyc:
+          $ref: '#/components/schemas/KycResult'
+        fraud:
+          $ref: '#/components/schemas/SigmaResult'
+        synthetic:
+          $ref: '#/components/schemas/SigmaResult'
+        emailRisk:
+          $ref: '#/components/schemas/RiskScoreResult'
+        phoneRisk:
+          $ref: '#/components/schemas/RiskScoreResult'
+        addressRisk:
+          $ref: '#/components/schemas/RiskScoreResult'
+        watchlist:
+          $ref: '#/components/schemas/WatchlistResult'
+        decision:
+          $ref: '#/components/schemas/DecisionResult'
+        deceasedCheck:
+          type: object
+          additionalProperties: true
+        accountIntelligence:
+          type: object
+          additionalProperties: true
   responses:
-    BadRequest:
-      description: Malformed request.
+    Unauthorized:
+      description: Missing or invalid API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid API key.
+    BadRequest:
+      description: Malformed request.
       content:
         application/json:
           schema:
@@ -273,3 +260,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  securitySchemes:
+    SocureToken:
+      type: apiKey
+      in: header
+      name: Authorization

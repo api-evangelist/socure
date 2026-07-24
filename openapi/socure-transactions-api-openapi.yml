@@ -1,16 +1,16 @@
 openapi: 3.0.3
 info:
-  title: Socure Predictive DocV API
+  title: Socure Account Intelligence Transactions API
   version: '3.0'
-  description: |
-    Predictive Document Verification (DocV) verifies government-issued ID documents
-    and matches them to a live selfie with liveness detection. The DocV REST API
-    creates session-orchestrated transactions, manages document/selfie uploads, and
-    retrieves verification outcomes. Session lifecycle events are also pushed via
-    webhooks — see the companion DocV AsyncAPI document.
-  contact:
-    name: Socure Developer Support
-    url: https://developer.socure.com
+  description: 'Real-time validation of US bank accounts — verifying open/closed status,
+
+    ownership (name match), and account-type signals. Powers funding-account checks
+
+    for fintech onboarding, payroll, and ACH origination flows without requiring
+
+    micro-deposits or end-user credentials.
+
+    '
 servers:
 - url: https://api.socure.com
   description: Production
@@ -21,8 +21,6 @@ security:
 tags:
 - name: Transactions
   description: DocV session orchestration
-- name: Uploads
-  description: Document and selfie upload management
 paths:
   /api/3.0/EmailAuthScore:
     post:
@@ -44,40 +42,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DocvTransaction'
-  /api/3.0/devices/{deviceId}/documents:
-    parameters:
-    - name: deviceId
-      in: path
-      required: true
-      schema:
-        type: string
-    post:
-      tags:
-      - Uploads
-      operationId: uploadDocvDocument
-      summary: Upload A DocV Document
-      description: Upload a document image (front, back, or selfie) for a DocV transaction.
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - license_front
-                  - license_back
-                  - passport
-                  - selfie
-                  - residence_permit
-                image:
-                  type: string
-                  format: binary
-      responses:
-        '200':
-          description: Upload acknowledged.
   /api/3.0/documents/verify:
     post:
       tags:
@@ -119,11 +83,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/DocvDecision'
 components:
-  securitySchemes:
-    SocureToken:
-      type: apiKey
-      in: header
-      name: Authorization
   schemas:
     CreateDocvTransactionRequest:
       type: object
@@ -159,13 +118,6 @@ components:
           type: string
           format: uri
         referenceId:
-          type: string
-    VerifyDocvRequest:
-      type: object
-      required:
-      - docvTransactionId
-      properties:
-        docvTransactionId:
           type: string
     DocvDecision:
       type: object
@@ -216,3 +168,15 @@ components:
           properties:
             decision:
               type: string
+    VerifyDocvRequest:
+      type: object
+      required:
+      - docvTransactionId
+      properties:
+        docvTransactionId:
+          type: string
+  securitySchemes:
+    SocureToken:
+      type: apiKey
+      in: header
+      name: Authorization

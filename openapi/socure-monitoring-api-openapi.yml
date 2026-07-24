@@ -1,0 +1,105 @@
+openapi: 3.0.3
+info:
+  title: Socure Account Intelligence Monitoring API
+  version: '3.0'
+  description: 'Real-time validation of US bank accounts — verifying open/closed status,
+
+    ownership (name match), and account-type signals. Powers funding-account checks
+
+    for fintech onboarding, payroll, and ACH origination flows without requiring
+
+    micro-deposits or end-user credentials.
+
+    '
+servers:
+- url: https://api.socure.com
+  description: Production
+- url: https://sandbox.socure.com
+  description: Sandbox
+security:
+- SocureToken: []
+tags:
+- name: Monitoring
+paths:
+  /api/3.0/watchlist/monitoring/profiles:
+    post:
+      tags:
+      - Monitoring
+      operationId: enrollMonitoringProfile
+      summary: Enroll A Monitoring Profile
+      description: Enroll an identity for continuous watchlist monitoring.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MonitoringEnrollment'
+      responses:
+        '200':
+          description: Profile enrolled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitoringProfile'
+  /api/3.0/watchlist/monitoring/profiles/{profileId}:
+    parameters:
+    - name: profileId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Monitoring
+      operationId: getMonitoringProfile
+      summary: Get A Monitoring Profile
+      responses:
+        '200':
+          description: Monitoring profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitoringProfile'
+    delete:
+      tags:
+      - Monitoring
+      operationId: removeMonitoringProfile
+      summary: Remove A Monitoring Profile
+      responses:
+        '204':
+          description: Profile removed.
+components:
+  schemas:
+    MonitoringProfile:
+      type: object
+      properties:
+        profileId:
+          type: string
+        customerUserId:
+          type: string
+        enrolledAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - active
+          - removed
+    MonitoringEnrollment:
+      type: object
+      required:
+      - referenceId
+      properties:
+        referenceId:
+          type: string
+          description: ID+ referenceId from the original watchlist evaluation.
+        customerUserId:
+          type: string
+        webhookUrl:
+          type: string
+          format: uri
+  securitySchemes:
+    SocureToken:
+      type: apiKey
+      in: header
+      name: Authorization

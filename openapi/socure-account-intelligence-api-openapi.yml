@@ -2,11 +2,15 @@ openapi: 3.0.3
 info:
   title: Socure Account Intelligence API
   version: '3.0'
-  description: |
-    Real-time validation of US bank accounts — verifying open/closed status,
+  description: 'Real-time validation of US bank accounts — verifying open/closed status,
+
     ownership (name match), and account-type signals. Powers funding-account checks
+
     for fintech onboarding, payroll, and ACH origination flows without requiring
+
     micro-deposits or end-user credentials.
+
+    '
 servers:
 - url: https://api.socure.com
   description: Production
@@ -23,9 +27,11 @@ paths:
       - Account Intelligence
       operationId: validateBankAccount
       summary: Validate A Bank Account
-      description: |
-        Validate a US bank account by routing number and account number with the
+      description: 'Validate a US bank account by routing number and account number with the
+
         `accountintelligence` module.
+
+        '
       requestBody:
         required: true
         content:

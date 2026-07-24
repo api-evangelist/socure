@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  title: Socure Account Intelligence Uploads API
+  version: '3.0'
+  description: 'Real-time validation of US bank accounts — verifying open/closed status,
+
+    ownership (name match), and account-type signals. Powers funding-account checks
+
+    for fintech onboarding, payroll, and ACH origination flows without requiring
+
+    micro-deposits or end-user credentials.
+
+    '
+servers:
+- url: https://api.socure.com
+  description: Production
+- url: https://sandbox.socure.com
+  description: Sandbox
+security:
+- SocureToken: []
+tags:
+- name: Uploads
+  description: Document and selfie upload management
+paths:
+  /api/3.0/devices/{deviceId}/documents:
+    parameters:
+    - name: deviceId
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      tags:
+      - Uploads
+      operationId: uploadDocvDocument
+      summary: Upload A DocV Document
+      description: Upload a document image (front, back, or selfie) for a DocV transaction.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - license_front
+                  - license_back
+                  - passport
+                  - selfie
+                  - residence_permit
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Upload acknowledged.
+components:
+  securitySchemes:
+    SocureToken:
+      type: apiKey
+      in: header
+      name: Authorization
