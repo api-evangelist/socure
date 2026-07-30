@@ -1,131 +1,245 @@
 aid: socure
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/socure.png
 url: https://raw.githubusercontent.com/api-evangelist/socure/refs/heads/main/apis.yml
 apis:
-  - aid: socure:socure-idplus-api
-    name: Socure ID+ API
-    tags:
-      - Identity Verification
-      - Fraud Prevention
-      - KYC
-      - Compliance
-      - AML
-    humanURL: https://developer.socure.com/reference/idplus
-    properties:
-      - url: https://developer.socure.com/reference/idplus
-        type: Documentation
-      - url: https://developer.socure.com/docs/id-plus/endpoints-and-apis/api-endpoints
-        type: Documentation
-      - url: https://developer.socure.com/reference/authentication
-        name: API Authentication
-        type: Documentation
-      - url: openapi/socure-idplus-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/socure-idplus-request-schema.json
-        type: JSONSchema
-      - url: json-schema/socure-idplus-response-schema.json
-        type: JSONSchema
-      - url: json-ld/socure-context.jsonld
-        type: JSONLD
-    description: >-
-      The Socure ID+ API is the unified REST surface for the ID+ platform, exposing every module — KYC (Socure Verify),
-      eCBSV, Sigma Identity Fraud, Sigma Synthetic, Sigma First-Party Fraud, Email/Phone/Address RiskScore, Digital
-      Intelligence, Graph Intelligence, Global Watchlist Screening, Deceased Check, Account Intelligence, Prefill, and
-      the Decision rules engine — through a single multi-module POST that returns a combined response with referenceId,
-      decision, KYC, fraud, and risk score blocks.
-  - aid: socure:socure-docv-api
-    name: Socure Predictive DocV API
-    tags:
-      - Identity Verification
-      - Document Verification
-      - Biometrics
-      - Liveness
-    humanURL: https://developer.socure.com/docs/id-plus/modules/docv/docv-overview
-    properties:
-      - url: https://developer.socure.com/docs/id-plus/modules/docv/docv-overview
-        type: Documentation
-      - url: https://developer.socure.com/docs/webhooks/docv-events
-        name: DocV Webhook Events
-        type: Documentation
-      - url: openapi/socure-docv-api-openapi.yml
-        type: OpenAPI
-      - url: asyncapi/socure-docv-asyncapi.yml
-        type: AsyncAPI
-    description: >-
-      Predictive Document Verification (DocV) verifies government-issued ID documents and matches them to a live selfie
-      with liveness detection. Includes a session-orchestration REST API (create transaction, retrieve decision, manage
-      uploads) and a webhook stream (`APP_OPENED`, `DOCUMENTS_UPLOADED`, `VERIFICATION_COMPLETED`, `SESSION_EXPIRED`)
-      for asynchronous notification of session lifecycle events.
-  - aid: socure:socure-watchlist-monitoring-api
-    name: Socure Global Watchlist Monitoring API
-    tags:
-      - AML
-      - Compliance
-      - Watchlist
-      - Sanctions
-      - PEP
-    humanURL: https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
-    properties:
-      - url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
-        type: Documentation
-      - url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
-        name: Watchlist Monitoring Webhooks
-        type: Documentation
-      - url: openapi/socure-watchlist-monitoring-api-openapi.yml
-        type: OpenAPI
-      - url: asyncapi/socure-watchlist-asyncapi.yml
-        type: AsyncAPI
-    description: >-
-      Continuous monitoring of customers against global sanctions lists (OFAC, UN, EU, HMT, DFAT), PEP lists, and
-      adverse media. Submit profiles for ongoing screening, retrieve match alerts, manage match dispositions, and
-      receive webhook callbacks when a customer matches a newly added or updated list entry.
-  - aid: socure:socure-decision-api
-    name: Socure Decision API
-    tags:
-      - Decisioning
-      - Rules Engine
-      - Identity Verification
-    humanURL: https://developer.socure.com/docs/id-plus/modules/decision
-    properties:
-      - url: https://developer.socure.com/docs/id-plus/modules/decision
-        type: Documentation
-      - url: openapi/socure-decision-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Socure's rule-based decisioning module returns a single deterministic outcome — accept, reject, review, refer, or
-      resubmit — derived from ID+ module scores and customer-configured rules. Decision rules are authored in the Socure
-      Console and applied on every ID+ call when the `decision.module` block is included in the request modules array.
-  - aid: socure:socure-account-intelligence-api
-    name: Socure Account Intelligence API
-    tags:
-      - Bank Account Verification
-      - Account Validation
-      - Open Banking
-    humanURL: https://developer.socure.com/docs/id-plus/modules/account-intelligence
-    properties:
-      - url: https://developer.socure.com/docs/id-plus/modules/account-intelligence
-        type: Documentation
-      - url: openapi/socure-account-intelligence-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Real-time validation of US bank accounts — verifying open/closed status, ownership (name match), and account-type
-      signals. Powers funding-account checks for fintech onboarding, payroll, and ACH origination flows without
-      requiring micro-deposits or end-user credentials.
-  - aid: socure:socure-riskos-api
-    name: Socure RiskOS API
-    tags:
-      - Orchestration
-      - Workflows
-      - Identity Verification
-      - Fraud Prevention
-    humanURL: https://help.socure.com/riskos/docs
-    properties:
-      - url: https://help.socure.com/riskos/docs
-        type: Documentation
-    description: >-
-      RiskOS is Socure's identity and fraud orchestration platform that combines ID+ modules, customer-configured
-      workflows, case management, and a no-code rules editor under a unified API. RiskOS Enterprise supports custom
-      workflow deployments; RiskOS Launch is the self-serve productized workflow offering. Note - the RiskOS API surface
-      is gated behind customer onboarding; this profile tracks the documentation entry point only.
+- aid: socure:socure-decision-api
+  name: Socure Decision API
+  tags:
+  - Decisioning
+  - Rules Engine
+  - Identity Verification
+  humanURL: https://developer.socure.com/docs/id-plus/modules/decision
+  properties:
+  - url: https://developer.socure.com/docs/id-plus/modules/decision
+    type: Documentation
+  - url: openapi/socure-decision-api-openapi.yml
+    type: OpenAPI
+  description: >-
+    Socure's rule-based decisioning module returns a single deterministic outcome — accept, reject, review,
+    refer, or resubmit — derived from ID+ module scores and customer-configured rules. Decision rules
+    are authored in the Socure Console and applied on every ID+ call when the `decision.module` block
+    is included in the request modules array.
+- aid: socure:socure-account-intelligence-api
+  name: Socure Account Intelligence API
+  tags:
+  - Bank Account Verification
+  - Account Validation
+  - Open Banking
+  humanURL: https://developer.socure.com/docs/id-plus/modules/account-intelligence
+  properties:
+  - url: https://developer.socure.com/docs/id-plus/modules/account-intelligence
+    type: Documentation
+  - url: openapi/socure-account-intelligence-api-openapi.yml
+    type: OpenAPI
+  description: >-
+    Real-time validation of US bank accounts — verifying open/closed status, ownership (name match), and
+    account-type signals. Powers funding-account checks for fintech onboarding, payroll, and ACH origination
+    flows without requiring micro-deposits or end-user credentials.
+- aid: socure:socure-riskos-api
+  name: Socure RiskOS API
+  tags:
+  - Orchestration
+  - Workflows
+  - Identity Verification
+  - Fraud Prevention
+  humanURL: https://help.socure.com/riskos/docs
+  properties:
+  - url: https://help.socure.com/riskos/docs
+    type: Documentation
+  description: >-
+    RiskOS is Socure's identity and fraud orchestration platform that combines ID+ modules, customer-configured
+    workflows, case management, and a no-code rules editor under a unified API. RiskOS Enterprise supports
+    custom workflow deployments; RiskOS Launch is the self-serve productized workflow offering. Note -
+    the RiskOS API surface is gated behind customer onboarding; this profile tracks the documentation
+    entry point only.
+- aid: socure:socure-alerts-api
+  name: socure Alerts API
+  description: The Alerts API from socure — 2 operation(s) for alerts.
+  humanURL: https://developer.socure.com/reference/idplus
+  tags:
+  - Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/socure-alerts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.socure.com/reference/idplus
+  - type: Documentation
+    url: https://developer.socure.com/docs/id-plus/endpoints-and-apis/api-endpoints
+  - type: Documentation
+    url: https://developer.socure.com/reference/authentication
+  - type: JSONSchema
+    url: json-schema/socure-idplus-request-schema.json
+  - type: JSONSchema
+    url: json-schema/socure-idplus-response-schema.json
+  - type: JSONLD
+    url: json-ld/socure-context.jsonld
+  - type: Documentation
+    url: https://developer.socure.com/docs/id-plus/modules/docv/docv-overview
+  - type: Documentation
+    url: https://developer.socure.com/docs/webhooks/docv-events
+  - type: AsyncAPI
+    url: asyncapi/socure-docv-asyncapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
+  - type: Documentation
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
+  - type: AsyncAPI
+    url: asyncapi/socure-watchlist-asyncapi.yml
+- aid: socure:socure-id-api
+  name: socure ID+ API
+  description: Unified multi-module identity, fraud, and risk evaluation
+  humanURL: https://developer.socure.com/reference/idplus
+  tags:
+  - ID+
+  properties:
+  - type: OpenAPI
+    url: openapi/socure-id-api-openapi.yml
+  - type: Documentation
+    url: https://developer.socure.com/reference/idplus
+  - type: Documentation
+    url: https://developer.socure.com/docs/id-plus/endpoints-and-apis/api-endpoints
+  - type: Documentation
+    url: https://developer.socure.com/reference/authentication
+  - type: JSONSchema
+    url: json-schema/socure-idplus-request-schema.json
+  - type: JSONSchema
+    url: json-schema/socure-idplus-response-schema.json
+  - type: JSONLD
+    url: json-ld/socure-context.jsonld
+  - type: Documentation
+    url: https://developer.socure.com/docs/id-plus/modules/docv/docv-overview
+  - type: Documentation
+    url: https://developer.socure.com/docs/webhooks/docv-events
+  - type: AsyncAPI
+    url: asyncapi/socure-docv-asyncapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
+  - type: Documentation
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
+  - type: AsyncAPI
+    url: asyncapi/socure-watchlist-asyncapi.yml
+- aid: socure:socure-monitoring-api
+  name: socure Monitoring API
+  description: The Monitoring API from socure — 2 operation(s) for monitoring.
+  humanURL: https://developer.socure.com/reference/idplus
+  tags:
+  - Monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/socure-monitoring-api-openapi.yml
+  - type: Documentation
+    url: https://developer.socure.com/reference/idplus
+  - type: Documentation
+    url: https://developer.socure.com/docs/id-plus/endpoints-and-apis/api-endpoints
+  - type: Documentation
+    url: https://developer.socure.com/reference/authentication
+  - type: JSONSchema
+    url: json-schema/socure-idplus-request-schema.json
+  - type: JSONSchema
+    url: json-schema/socure-idplus-response-schema.json
+  - type: JSONLD
+    url: json-ld/socure-context.jsonld
+  - type: Documentation
+    url: https://developer.socure.com/docs/id-plus/modules/docv/docv-overview
+  - type: Documentation
+    url: https://developer.socure.com/docs/webhooks/docv-events
+  - type: AsyncAPI
+    url: asyncapi/socure-docv-asyncapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
+  - type: Documentation
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
+  - type: AsyncAPI
+    url: asyncapi/socure-watchlist-asyncapi.yml
+- aid: socure:socure-transactions-api
+  name: socure Transactions API
+  description: DocV session orchestration
+  humanURL: https://developer.socure.com/reference/idplus
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/socure-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.socure.com/reference/idplus
+  - type: Documentation
+    url: https://developer.socure.com/docs/id-plus/endpoints-and-apis/api-endpoints
+  - type: Documentation
+    url: https://developer.socure.com/reference/authentication
+  - type: JSONSchema
+    url: json-schema/socure-idplus-request-schema.json
+  - type: JSONSchema
+    url: json-schema/socure-idplus-response-schema.json
+  - type: JSONLD
+    url: json-ld/socure-context.jsonld
+  - type: Documentation
+    url: https://developer.socure.com/docs/id-plus/modules/docv/docv-overview
+  - type: Documentation
+    url: https://developer.socure.com/docs/webhooks/docv-events
+  - type: AsyncAPI
+    url: asyncapi/socure-docv-asyncapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
+  - type: Documentation
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
+  - type: AsyncAPI
+    url: asyncapi/socure-watchlist-asyncapi.yml
+- aid: socure:socure-uploads-api
+  name: socure Uploads API
+  description: Document and selfie upload management
+  humanURL: https://developer.socure.com/reference/idplus
+  tags:
+  - Uploads
+  properties:
+  - type: OpenAPI
+    url: openapi/socure-uploads-api-openapi.yml
+  - type: Documentation
+    url: https://developer.socure.com/reference/idplus
+  - type: Documentation
+    url: https://developer.socure.com/docs/id-plus/endpoints-and-apis/api-endpoints
+  - type: Documentation
+    url: https://developer.socure.com/reference/authentication
+  - type: JSONSchema
+    url: json-schema/socure-idplus-request-schema.json
+  - type: JSONSchema
+    url: json-schema/socure-idplus-response-schema.json
+  - type: JSONLD
+    url: json-ld/socure-context.jsonld
+  - type: Documentation
+    url: https://developer.socure.com/docs/id-plus/modules/docv/docv-overview
+  - type: Documentation
+    url: https://developer.socure.com/docs/webhooks/docv-events
+  - type: AsyncAPI
+    url: asyncapi/socure-docv-asyncapi.yml
+  - type: Documentation
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
+  - type: Documentation
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
+  - type: AsyncAPI
+    url: asyncapi/socure-watchlist-asyncapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/socure-agentic-access.yml
