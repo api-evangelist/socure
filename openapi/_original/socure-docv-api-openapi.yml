@@ -1,0 +1,218 @@
+openapi: 3.0.3
+info:
+  title: Socure Predictive DocV API
+  version: '3.0'
+  description: |
+    Predictive Document Verification (DocV) verifies government-issued ID documents
+    and matches them to a live selfie with liveness detection. The DocV REST API
+    creates session-orchestrated transactions, manages document/selfie uploads, and
+    retrieves verification outcomes. Session lifecycle events are also pushed via
+    webhooks — see the companion DocV AsyncAPI document.
+  contact:
+    name: Socure Developer Support
+    url: https://developer.socure.com
+servers:
+- url: https://api.socure.com
+  description: Production
+- url: https://sandbox.socure.com
+  description: Sandbox
+security:
+- SocureToken: []
+tags:
+- name: Transactions
+  description: DocV session orchestration
+- name: Uploads
+  description: Document and selfie upload management
+paths:
+  /api/3.0/EmailAuthScore:
+    post:
+      tags:
+      - Transactions
+      operationId: createDocvTransaction
+      summary: Create A DocV Transaction
+      description: Create a DocV transaction by passing `docvTransaction` in the modules array.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDocvTransactionRequest'
+      responses:
+        '200':
+          description: DocV transaction created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocvTransaction'
+  /api/3.0/devices/{deviceId}/documents:
+    parameters:
+    - name: deviceId
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      tags:
+      - Uploads
+      operationId: uploadDocvDocument
+      summary: Upload A DocV Document
+      description: Upload a document image (front, back, or selfie) for a DocV transaction.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - license_front
+                  - license_back
+                  - passport
+                  - selfie
+                  - residence_permit
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Upload acknowledged.
+  /api/3.0/documents/verify:
+    post:
+      tags:
+      - Transactions
+      operationId: verifyDocvDocument
+      summary: Verify A DocV Document
+      description: Finalize a DocV transaction and trigger document/selfie verification.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyDocvRequest'
+      responses:
+        '200':
+          description: Verification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocvDecision'
+  /api/3.0/documents/{docvTransactionId}:
+    parameters:
+    - name: docvTransactionId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Transactions
+      operationId: getDocvTransaction
+      summary: Get A DocV Transaction
+      description: Retrieve the current state and result of a DocV transaction.
+      responses:
+        '200':
+          description: DocV transaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocvDecision'
+components:
+  securitySchemes:
+    SocureToken:
+      type: apiKey
+      in: header
+      name: Authorization
+  schemas:
+    CreateDocvTransactionRequest:
+      type: object
+      required:
+      - modules
+      properties:
+        modules:
+          type: array
+          items:
+            type: string
+            enum:
+            - docvtransaction
+        documentType:
+          type: string
+          enum:
+          - license
+          - passport
+          - residence_permit
+        country:
+          type: string
+        redirectUrl:
+          type: string
+          format: uri
+        webhookUrl:
+          type: string
+          format: uri
+    DocvTransaction:
+      type: object
+      properties:
+        docvTransactionId:
+          type: string
+        sessionUrl:
+          type: string
+          format: uri
+        referenceId:
+          type: string
+    VerifyDocvRequest:
+      type: object
+      required:
+      - docvTransactionId
+      properties:
+        docvTransactionId:
+          type: string
+    DocvDecision:
+      type: object
+      properties:
+        docvTransactionId:
+          type: string
+        decision:
+          type: object
+          properties:
+            value:
+              type: string
+              enum:
+              - accept
+              - reject
+              - resubmit
+            reasonCodes:
+              type: array
+              items:
+                type: string
+        documentData:
+          type: object
+          properties:
+            firstName:
+              type: string
+            surName:
+              type: string
+            dob:
+              type: string
+              format: date
+            documentNumber:
+              type: string
+            expirationDate:
+              type: string
+              format: date
+            documentType:
+              type: string
+            issuingCountry:
+              type: string
+        selfieMatch:
+          type: object
+          properties:
+            score:
+              type: number
+            decision:
+              type: string
+        liveness:
+          type: object
+          properties:
+            decision:
+              type: string

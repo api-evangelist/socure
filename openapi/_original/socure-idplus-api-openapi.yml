@@ -1,0 +1,275 @@
+openapi: 3.0.3
+info:
+  title: Socure ID+ API
+  version: '3.0'
+  description: |
+    The Socure ID+ API is the unified REST surface for the ID+ platform. A single
+    `POST /api/3.0/EmailAuthScore` (legacy name retained for compatibility) accepts a
+    `modules` array describing which modules to evaluate — KYC (Socure Verify), eCBSV,
+    Sigma Identity Fraud, Sigma Synthetic Fraud, Sigma First-Party Fraud, Email
+    RiskScore, Phone RiskScore, Address RiskScore, Digital Intelligence, Graph
+    Intelligence, Global Watchlist Screening, Deceased Check, Account Intelligence,
+    Prefill, and the Decision rules engine — and returns a single combined response
+    with `referenceId`, module result blocks, and an optional `decision` block.
+  contact:
+    name: Socure Developer Support
+    url: https://developer.socure.com
+  license:
+    name: Socure Customer Terms
+    url: https://developer.socure.com/customer-terms
+servers:
+- url: https://api.socure.com
+  description: Production
+- url: https://sandbox.socure.com
+  description: Sandbox
+- url: https://api.socure.us
+  description: GovCloud production
+security:
+- SocureToken: []
+tags:
+- name: ID+
+  description: Unified multi-module identity, fraud, and risk evaluation
+paths:
+  /api/3.0/EmailAuthScore:
+    post:
+      tags:
+      - ID+
+      operationId: evaluateIdentity
+      summary: Evaluate Identity
+      description: |
+        Submit an identity payload along with a `modules` array selecting one or more
+        Socure modules to evaluate. Returns the combined module result blocks and an
+        optional `decision` block when the Decision module is requested.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IdPlusRequest'
+      responses:
+        '200':
+          description: Identity evaluation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdPlusResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  securitySchemes:
+    SocureToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: |
+        `SocureApiKey <api-key>` token issued in the Socure Console. GovCloud customers
+        present their GovCloud-scoped key. Treat the key as a bearer secret.
+  schemas:
+    IdPlusRequest:
+      type: object
+      required:
+      - modules
+      properties:
+        modules:
+          type: array
+          description: Modules to evaluate in this request.
+          items:
+            type: string
+            enum:
+            - kyc
+            - ecbsv
+            - sigma
+            - synthetic
+            - fraud
+            - emailrisk
+            - phonerisk
+            - addressrisk
+            - decision
+            - watchlist
+            - watchliststandard
+            - alertlist
+            - decasedcheck
+            - devicerisk
+            - graphintelligence
+            - accountintelligence
+            - prefill
+            - docvtransaction
+        customerUserId:
+          type: string
+          description: Customer-supplied unique identifier for the end user.
+        firstName:
+          type: string
+        surName:
+          type: string
+        dob:
+          type: string
+          format: date
+        nationalId:
+          type: string
+          description: SSN/ITIN/national identifier.
+        email:
+          type: string
+          format: email
+        mobileNumber:
+          type: string
+        physicalAddress:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+          description: ISO-3166-1 alpha-2 country code.
+        ipAddress:
+          type: string
+        userConsent:
+          type: boolean
+          description: Required for eCBSV.
+        consentTimestamp:
+          type: string
+          format: date-time
+        deviceSessionId:
+          type: string
+          description: Device session ID from the SigmaDevice SDK.
+        docvTransactionId:
+          type: string
+          description: DocV transaction ID to include document verification results.
+    IdPlusResponse:
+      type: object
+      properties:
+        referenceId:
+          type: string
+          description: Globally unique identifier for this evaluation.
+        kyc:
+          $ref: '#/components/schemas/KycResult'
+        fraud:
+          $ref: '#/components/schemas/SigmaResult'
+        synthetic:
+          $ref: '#/components/schemas/SigmaResult'
+        emailRisk:
+          $ref: '#/components/schemas/RiskScoreResult'
+        phoneRisk:
+          $ref: '#/components/schemas/RiskScoreResult'
+        addressRisk:
+          $ref: '#/components/schemas/RiskScoreResult'
+        watchlist:
+          $ref: '#/components/schemas/WatchlistResult'
+        decision:
+          $ref: '#/components/schemas/DecisionResult'
+        deceasedCheck:
+          type: object
+          additionalProperties: true
+        accountIntelligence:
+          type: object
+          additionalProperties: true
+    KycResult:
+      type: object
+      properties:
+        reasonCodes:
+          type: array
+          items:
+            type: string
+        fieldValidations:
+          type: object
+          additionalProperties:
+            type: number
+            minimum: 0
+            maximum: 1
+    SigmaResult:
+      type: object
+      properties:
+        scores:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              version:
+                type: string
+              score:
+                type: number
+                minimum: 0
+                maximum: 1
+        reasonCodes:
+          type: array
+          items:
+            type: string
+    RiskScoreResult:
+      type: object
+      properties:
+        score:
+          type: number
+          minimum: 0
+          maximum: 1
+        reasonCodes:
+          type: array
+          items:
+            type: string
+    WatchlistResult:
+      type: object
+      properties:
+        global:
+          type: object
+          properties:
+            sources:
+              type: array
+              items:
+                type: object
+                properties:
+                  sourceListName:
+                    type: string
+                  matchCount:
+                    type: integer
+    DecisionResult:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+          enum:
+          - accept
+          - reject
+          - review
+          - refer
+          - resubmit
+        ruleSet:
+          type: string
+        version:
+          type: string
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        msg:
+          type: string
+        referenceId:
+          type: string
+  responses:
+    BadRequest:
+      description: Malformed request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Request throttled.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

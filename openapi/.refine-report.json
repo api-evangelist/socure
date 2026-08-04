@@ -1,0 +1,26 @@
+{
+  "provider": "socure",
+  "sources": [
+    "socure-account-intelligence-api-openapi.yml",
+    "socure-alerts-api-openapi.yml",
+    "socure-decision-api-openapi.yml",
+    "socure-id-api-openapi.yml",
+    "socure-monitoring-api-openapi.yml",
+    "socure-transactions-api-openapi.yml",
+    "socure-uploads-api-openapi.yml"
+  ],
+  "outputs": [
+    "socure-account-intelligence-api-openapi.yml",
+    "socure-alerts-api-openapi.yml",
+    "socure-decision-api-openapi.yml",
+    "socure-id-api-openapi.yml",
+    "socure-monitoring-api-openapi.yml",
+    "socure-transactions-api-openapi.yml",
+    "socure-uploads-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
