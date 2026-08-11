@@ -1,0 +1,177 @@
+# Socure
+
+> Socure is the leading AI-driven platform for digital identity verification, fraud prevention, compliance, and risk decisioning — helping businesses verify consumers, businesses, and employees across their lifecycle. The platform serves 3,000+ organizations, including 18 of the top 20 banks.
+
+Socure's tagline is "AI for identity, risk, compliance, age and workforce." Its vertically integrated platform is built around RiskOS (unified fraud, compliance, and risk decisioning), the Sigma fraud model suite, identity verification (Socure Verify), document verification (Predictive DocV), and compliance/watchlist screening. Headquartered at 885 Tahoe Blvd., Suite 1, Incline Village, NV 89451, US.
+
+## Core pages
+
+- [Home](https://www.socure.com/): AI for identity, risk, compliance, age and workforce.
+- [Products catalogue](https://www.socure.com/products): The industry's only fully vertically integrated platform, delivering unparalleled auto-approval and fraud capture rates for verifying consumers, businesses and employees.
+- [Use cases](https://www.socure.com/use-cases): Solutions mapped to buyer outcomes across the customer lifecycle.
+- [Socure Launch](https://www.socure.com/launch): Self-serve RiskOS for startups and builders — ship new products in hours.
+- [Talk to an expert](https://www.socure.com/talk-to-an-expert): Contact Socure sales.
+- [Explore demos](https://www.socure.com/demo): Interactive product demos.
+- [Request a demo](https://www.socure.com/request-demo): Request a guided demo.
+- [Contact us](https://www.socure.com/contact-us): General contact.
+
+## Solutions
+
+- [RiskOS](https://www.socure.com/solutions/riskos): Unified fraud, compliance, and risk decisioning platform.
+- [Fraud Prevention Solutions](https://www.socure.com/fraud-prevention-solutions): Eliminate the need for limited, single-point solutions and gain a holistic view of digital identity with the leading fraud prevention solution.
+- [Compliance Solutions](https://www.socure.com/compliance-solutions): Built on RiskOS, Socure's unified decisioning platform.
+- [KYC Compliance](https://www.socure.com/kyc-compliance): Socure is the new standard for compliance professionals, offering precise identity resolution of nearly any customer.
+- [Identity Fraud Solution](https://www.socure.com/identity-fraud-solution): Capture up to 99% of all identity fraud in the top 5% of riskiest users.
+
+## Products
+
+- [Sigma Identity Fraud](https://www.socure.com/products/sigma-identity-fraud): Detect stolen identities and organized fraud attacks in real time – all while approving more legitimate customers.
+- [Sigma Synthetic Fraud](https://www.socure.com/products/sigma-synthetic-fraud): Identify fabricated and manipulated identities in real time—while approving more legitimate customers.
+- [Sigma First-Party Fraud](https://www.socure.com/products/sigma-first-party-fraud): Accurately predict risk and abuse patterns with unprecedented visibility into suspicious activity across the broader digital economy.
+- [Socure Verify](https://www.socure.com/products/identity-verification): Automate the customer onboarding process with unrivaled data coverage and industry-leading technology that delivers exceptional customer experiences with uncompromised compliance.
+- [Predictive DocV](https://www.socure.com/products/document-verification): Verify global identity documents instantly and accurately.
+- [Global Watchlist Screening with Monitoring](https://www.socure.com/products/global-watchlist): Screen individuals, businesses, wallets, payments, transactions, and media – on a global scale with local precision.
+- [Email RiskScore](https://www.socure.com/products/email-risk): Email RiskScores assess the risk and ownership strength of email information to help organizations detect fraud early, reduce abuse, and optimize decisions across onboarding, authentication, and payments.
+- [Phone RiskScore](https://www.socure.com/products/phone-risk): Socure's Phone RiskScores assess the risk and ownership strength of phone-related data to help organizations stop fraud early and optimize decisions across onboarding, authentication, and payments.
+- [Address RiskScore](https://www.socure.com/products/address-risk): Socure Address RiskScores assess the likelihood that a physical address is genuine and linked to the asserted identity based on hundreds of signals.
+- [Graph Intelligence](https://www.socure.com/products/graph-intelligence): Transform complex identity connections into actionable insights.
+- [Digital Intelligence](https://www.socure.com/products/digital-intelligence): Real-time data intelligence for online risk decisions.
+- [Socure Account Intelligence](https://www.socure.com/products/account-intelligence): Reduce failed payments, stop fraud, and ensure funds reach the right destination every time with real-time account status and ownership checks.
+- [Portfolio Scrub](https://www.socure.com/products/portfolio-scrub): Identify Fraud and Compliance Risk within Your Existing Customer Accounts.
+- [Deceased Check](https://www.socure.com/products/deceased-check): Verify deceased identities at any point in the customer lifecycle, without requiring a comprehensive CIP/KYC check.
+- [eCBSV](https://www.socure.com/products/ecbsv): Strengthen Identity Risk Assessment & Support Financial Inclusion.
+- [Control Center](https://www.socure.com/products/control-center): Fully Automated Banking-as-a-Service Management Platform for Sponsor Banks.
+- [SNA & OTP](https://www.socure.com/products/sna-otp): From passive Silent Network Authentication to intelligent One Time Password, Socure authenticates users across devices, channels, and risk levels without compromising speed or trust.
+
+## Use cases
+
+- [Consumer onboarding](https://www.socure.com/use-cases/onboarding): Socure's AI-powered platform delivers the most accurate identity, fraud, and risk decisions in milliseconds, effortlessly verifying every demographic.
+- [Business onboarding](https://www.socure.com/use-cases/business-onboarding): Verify good businesses for onboarding, underwriting, tax registration, and credit assessment using Socure's end-to-end Business Onboarding solution.
+- [Bank account verification](https://www.socure.com/use-cases/bank-account-verification): Check account status, ownership, and fraud risk in one automated workflow.
+- [Login & authentication](https://www.socure.com/use-cases/login-authentication): Deliver frictionless authentication & AI-driven decisioning to optimize user experience and prevent account takeover at onboarding, login, high-risk transactions, and account recovery.
+- [Trust & safety](https://www.socure.com/use-cases/trust-and-safety): Keep your community safe and thriving with instant, accurate user verification.
+- [Contact center](https://www.socure.com/use-cases/contact-center): Automate step-up authentication user journeys with continuous identity certainty in the contact center.
+- [Advanced pre-fill](https://www.socure.com/use-cases/advanced-pre-fill): Convert more verified users in seconds—backed by the market's most accurate identity graph and risk engine.
+- [Workforce verification](https://www.socure.com/use-cases/workforce-verification): Enable instant workforce verification to stop fraudulent candidates up front using smart workflows like Know Your Job Candidate.
+- [Age assurance](https://www.socure.com/use-cases/age-assurance): Meet age, consent, and privacy requirements globally with AI-driven age verification solutions.
+- [Hosted flows](https://www.socure.com/use-cases/hosted-flows): Hosted Flows deliver branded sign-up, login, and account management—embedding fraud, risk, and compliance at every step.
+- [Payment screening](https://www.socure.com/use-cases/payment-screening): Screen senders, beneficiaries, bank accounts and crypto addresses for sanctions risk in a single API call.
+- [International](https://www.socure.com/use-cases/global-identity-verification): Purpose built for global scale and local precision.
+- [RiskOS AI Suite](https://www.socure.com/use-cases/riskos-ai-suite): The RiskOS AI Suite embeds intelligent assistants and agents directly into every workflow.
+
+## Industries
+
+- [Fintechs](https://www.socure.com/industries/fintechs): Empower your fintech programs with seamless oversight, robust fraud prevention, and streamlined compliance solutions.
+- [Sponsor Banks](https://www.socure.com/industries/sponsor-banks): Enable scalable growth, simplified operations, and alignment with your sponsor bank through Socure's AI-powered platform.
+- [Banking](https://www.socure.com/industries/banking): Power a seamless customer experience and confident compliance with AI-driven identity verification and fraud prevention solutions that deliver unmatched accuracy.
+- [Crypto](https://www.socure.com/industries/crypto): Stop scams, verify good users and prevent account takeover attacks in real time.
+- [eCommerce](https://www.socure.com/industries/ecommerce): Block fraud and reduce chargebacks with real-time risk checks.
+- [Social & Dating](https://www.socure.com/industries/social-and-dating): Foster a thriving online community with accurate, AI-powered identity verification.
+- [Marketplace & Gig Economy](https://www.socure.com/industries/gig-economy): Inspire confidence and foster a community of trust with seamless, holistic user verification.
+- [Gaming](https://www.socure.com/industries/gaming): Power fast sign-ups, block fraud, and promote responsible gaming across every stage of the player journey.
+- [Workforce](https://www.socure.com/industries/workforce): Drive trust and user certainty with instant identity verification and risk decisions across the employee lifecycle.
+- [Telco](https://www.socure.com/industries/telco): Drive higher conversions with AI-powered identity verification that streamlines onboarding, prevents fraud, and delivers a seamless experience whether customers sign up online, in-store, or through partners.
+- [Public Sector](https://www.socure.com/industries/public-sector): Accelerate your mission with Socure for Government—a proven identity verification and fraud prevention platform for delivering instant identity decisions, helping agencies reduce fraud, streamlining access, and building digital trust across every population.
+- [Federal](https://www.socure.com/industries/federal): Enable public access fast with FedRAMP authorized friction-free verification to maximize trust and inclusivity.
+- [State & Local](https://www.socure.com/industries/state-and-local): Approve residents fast with automated StateRAMP certified, friction-free verification tool that maximizes trust and inclusivity.
+- [Higher Education](https://www.socure.com/industries/higher-education): Approve applicants fast with automated, friction-free verification tools that maximize trust and accuracy.
+
+## Glossary
+
+- [Identity Verification](https://www.socure.com/glossary/identity-verification): Identity verification is the process of confirming that an individual is a real person, that their claimed identity matches their actual identity, and that it is safe to do business with them.
+- [Digital Identity Verification](https://www.socure.com/glossary/digital-identity-verification): Verifying a person's identity through digital channels in real time.
+- [Digital Identity](https://www.socure.com/glossary/digital-identity): A digital identity is a unique, verifiable representation of an individual's identity in the digital world, enabling secure online transactions and interactions.
+- [Identity Verification Software](https://www.socure.com/glossary/identity-verification-software): Identity verification software is a digital solution employing a combination of advanced algorithms, biometric data comparison, and document analysis to authenticate individuals engaged in business transactions.
+- [Identity Proofing](https://www.socure.com/glossary/identity-proofing): Identity proofing, also referred to as identity assurance, refers to the evidence-based process of confirming an individual's identity and assessing the risk of transacting with them.
+- [Biometric Verification](https://www.socure.com/glossary/biometric-verification): Biometric verification leverages inherent biological characteristics such as fingerprints, facial features, iris patterns, or voice recognition to identify customers.
+- [Selfie ID Verification](https://www.socure.com/glossary/selfie-id-verification): Selfie ID verification is a security feature that allows digital users to verify their identity remotely by taking a real-time photo of themselves.
+- [eKYC](https://www.socure.com/glossary/ekyc): eKYC stands for electronic Know Your Customer, a digital process used to verify the identity of customers online.
+- [Know Your Customer (KYC)](https://www.socure.com/glossary/know-your-customer-kyc): Know Your Customer (KYC) is a process followed by regulated entities such as financial institutions, to confirm their customers' identity and assess potential risks.
+- [KYC Compliance](https://www.socure.com/glossary/kyc-compliance): KYC compliance means fulfilling regulatory due-diligence obligations to establish customer identification and verification procedures that help identify and mitigate the risk of financial crime.
+- [KYC for Crypto](https://www.socure.com/glossary/kyc-crypto): KYC requirements and processes for crypto exchanges and platforms.
+- [Customer Identification Program (CIP)](https://www.socure.com/glossary/customer-identification-program): The Customer Identification Program (CIP) is a process financial institutions follow to verify the identity of their customers.
+- [CIP Compliance](https://www.socure.com/glossary/cip-compliance): CIP compliance fulfills the Customer Identification Program (CIP) obligations mandated in laws such as Section 326 of the US Patriot Act and the Bank Secrecy Act, by verifying customer identities using documentary and non-documentary evidence.
+- [Customer Due Diligence](https://www.socure.com/glossary/customer-due-diligence): Assessing and monitoring customer risk as part of AML compliance.
+- [Anti-Money Laundering (AML)](https://www.socure.com/glossary/anti-money-laundering): Anti-Money Laundering (AML) is a set of laws, regulations and procedures aimed to prevent the generation of income through illegal means, and ensuring that financial institutions or other regulated entities are not used for the purpose of money laundering activities.
+- [AML & KYC](https://www.socure.com/glossary/anti-money-laundering-kyc): Anti-Money Laundering (AML) is a set of laws, regulations, and procedures aimed to prevent income generation through illegal means and ensure that financial institutions or other regulated entities are not used for money laundering activities.
+- [Financial Crime](https://www.socure.com/glossary/financial-crime): Financial crime refers to crimes that involve taking money or other property that belongs to someone else to obtain financial gain.
+- [Financial Crime Compliance](https://www.socure.com/glossary/financial-crime-compliance): Financial crime compliance is more than checking a box.
+- [Sanction Screening](https://www.socure.com/glossary/sanction-screening): Sanctions screening (or OFAC screening, and more broadly, watchlist or financial crimes screening) is a critical component of financial crime compliance.
+- [Global Watchlist](https://www.socure.com/glossary/global-watchlist): Global watchlist databases are used to run regular identity checks against suspected terrorists, money launderers, fraudsters, politically exposed persons (PEPs), and adverse media or sanctions lists maintained by governments, regulatory compliance agencies, and commercial enterprises.
+- [UBO Verification](https://www.socure.com/glossary/ubo-verification): UBO verification involves identifying natural persons (not just legal entities) who own 25% or more of a business, or who exercise significant control through voting rights, board positions, or trust arrangements.
+- [Identity Fraud](https://www.socure.com/glossary/identity-fraud): Identity fraud occurs when someone unlawfully obtains and uses another person's personal information without their consent, typically for financial gain.
+- [Identity Fraud Detection in Banking](https://www.socure.com/glossary/identity-fraud-detection-in-banking): Detecting and preventing identity fraud in banking.
+- [Identity Fraud Management](https://www.socure.com/glossary/identity-fraud-management): Identity fraud management is a comprehensive approach encompassing various strategies, practices, and tools designed to prevent, detect, and mitigate identity fraud.
+- [Identity Fraud Detection & Prevention Software](https://www.socure.com/glossary/identity-fraud-detection-and-prevention-software): Identity fraud detection and prevention software monitors, evaluates, and prevents fraudulent new applications for credit or services and transactions.
+- [Fraud Prevention](https://www.socure.com/glossary/fraud-prevention): Fraud prevention is a systematic approach to anticipating, identifying, and blocking bad actors from engaging in dishonest and illegal activities for financial gain.
+- [Synthetic Identity Fraud](https://www.socure.com/glossary/synthetic-identity-fraud): Synthetic identity fraud is a type of identity theft where criminals combine real and fake information to create a new, fictitious identity.
+- [Synthetic Identity](https://www.socure.com/glossary/synthetic-identity): A synthetic identity is a partially fabricated identity that does not correspond to a real person.
+- [Synthetic Identity Fraud Solutions](https://www.socure.com/glossary/synthetic-identity-fraud-solutions): Synthetic identity fraud is the creation of fake identities combining factual and fabricated details.
+- [First-Party Fraud](https://www.socure.com/glossary/first-party-fraud): First-party fraud refers to the use of one's own identity to open an account and/or commit a dishonest act for personal or financial gain.
+- [Demand Deposit Account (DDA) Fraud](https://www.socure.com/glossary/demand-deposit-account-fraud): DDA fraud refers to identity fraud and synthetic identity fraud targeting checking accounts—also known as demand deposit accounts—usually opened online or via mobile apps.
+- [Bust-Out Fraud](https://www.socure.com/glossary/bust-out-fraud): Bust-out fraud is a type of credit card fraud that involves an individual or group of individuals establishing a normal usage pattern and repayment history and then maxing out the credit line with no intention of repaying the balance.
+- [Sleeper Fraud](https://www.socure.com/glossary/sleeper-fraud): Sleeper fraud is a type of synthetic identity fraud that involves a fraudulent identity — referred to as a "sleeper" — that is established and then left dormant for an extended period.
+- [New Account Fraud](https://www.socure.com/glossary/new-account-fraud): New account fraud is a type of fraud where a criminal uses someone else's personal information to open a new account, such as a credit card or loan account, without the victim's knowledge or consent.
+- [Application Fraud](https://www.socure.com/glossary/application-fraud): Application Fraud refers to the act of using false, stolen, or manipulated information to fraudulently obtain products, services, or financial accounts.
+- [Account Takeover](https://www.socure.com/glossary/account-takeover): Account takeover fraud is a form of identity theft where a bad actor gains unauthorized access to a victim's online account.
+- [Chargeback Fraud](https://www.socure.com/glossary/chargeback-fraud): Chargeback fraud is a type of first-party fraud in which a consumer intentionally disputes a legitimate transaction to obtain a refund they aren't entitled to.
+- [Zelle Fraud](https://www.socure.com/glossary/zelle-fraud): Zelle fraud is when a bad actor talks a consumer into sending money through the Zelle app or an online banking site that offers Zelle transfers for fraudulent financial gain.
+- [P2P Fraud](https://www.socure.com/glossary/p2p-fraud): P2P fraud is a consumer scam whereby a bad actor uses social engineering to trick a consumer into sending money through a P2P channel for fraudulent financial gain.
+- [Bank Account Verification](https://www.socure.com/glossary/bank-account-verification): Confirming that a bank account is valid, open, and owned by the asserted individual.
+- [Login & Authentication](https://www.socure.com/glossary/login-and-authentication): Authenticating users at login, high-risk actions, and account recovery.
+- [Age Verification System](https://www.socure.com/glossary/age-verification-system): An age verification system is a multifaceted technological framework designed to confirm the authenticity of an individual's age before granting access to age-restricted content, services, or products in various digital and physical environments.
+- [Customer Auto-Approval](https://www.socure.com/glossary/customer-auto-approval): Auto-approval occurs when a consumer is able to complete the digital identity verification process without manual review or human intervention.
+- [Data Breach](https://www.socure.com/glossary/data-breach): A data breach is an event in which sensitive or confidential data is copied, viewed, or exfiltrated by an individual not authorized to access the information.
+- [Open Banking Regulations](https://www.socure.com/glossary/open-banking-regulations): Open banking enables consumers to securely share their financial data with authorized third parties, and is aimed at promoting competition and innovation in the financial services industry.
+- [Identity Trends](https://www.socure.com/glossary/identity-trends): Trends shaping digital identity and verification.
+- [Glossary (full index)](https://www.socure.com/glossary): All identity, fraud, and compliance terms.
+
+## Developers
+
+- [ID+ Documentation](https://developer.socure.com): Developer docs for the Socure ID+ platform and APIs.
+- [RiskOS Documentation](https://help.socure.com/riskos/docs): Developer docs for RiskOS.
+- [SocureGov / GovCloud Docs](https://developer.socure.us/): Developer docs for the government cloud environment.
+- [SocureGov RiskOS Docs](https://riskos.docs.socure.us/govcloud/reference/get-started): Getting started with SocureGov RiskOS.
+- [Tech Blog](https://www.socure.com/tech-blog): Engineering and data science articles from Socure.
+
+## Company
+
+- [Company](https://www.socure.com/company): About Socure — "Certainty in Identity."
+- [Risk Insights Network](https://www.socure.com/company/socure-risk-insights-network): Consortium fraud intelligence network.
+- [News & Press](https://www.socure.com/company/news-and-press): Company news, press releases, and announcements.
+- [Events](https://www.socure.com/company/events): Webinars and events.
+- [Careers](https://www.socure.com/company/careers): Open roles at Socure.
+- [Partners](https://www.socure.com/partners): Partner ecosystem.
+- [RiskOS Partner Ecosystem](https://www.socure.com/riskos-partner-ecosystem): Integrated data and technology partners for RiskOS.
+- [Responsible AI at Socure](https://www.socure.com/responsible-ai-at-socure): Socure's responsible AI principles.
+- [Trust Center](https://trust.socure.com): Security, compliance, and certifications.
+
+## Content & resources
+
+- [Resources hub](https://www.socure.com/resources): Case studies, reports, ebooks, whitepapers, videos, and podcasts.
+- [Case studies](https://www.socure.com/resources?type=casestudies): Customer success stories.
+- [Reports](https://www.socure.com/resources?type=reports): Research reports and analyst recognition.
+- [Blog](https://www.socure.com/blog): Product, fraud research, and regulatory insights.
+- [Tech Blog](https://www.socure.com/tech-blog): Engineering and data science.
+- [Glossary](https://www.socure.com/glossary): Identity, fraud, and compliance definitions.
+
+Note: the full list of individual blog posts, news & press articles, webinars/events, and resource assets is large and changes frequently — see the sitemap at https://www.socure.com/sitemap.xml for the complete, current set.
+
+## Legal
+
+- [Policies](https://www.socure.com/policies): Index of Socure legal policies.
+- [Terms of Service](https://www.socure.com/terms-of-service): Website and service terms.
+- [Code of Conduct](https://www.socure.com/code-of-conduct): Corporate code of conduct.
+- [Supplier Code of Conduct](https://www.socure.com/code-of-conduct/supplier): Code of conduct for suppliers.
+- [Privacy Policy (EN)](https://www.socure.com/privacy-en): Privacy policy (English).
+- [DocV Privacy Notice (EN)](https://www.socure.com/docv-privacy-en): Predictive DocV privacy notice.
+- [DocV Terms of Use](https://www.socure.com/docv-terms-of-use): Predictive DocV terms of use.
+- [Candidate & Employee Privacy Policy](https://www.socure.com/candidate-and-employee-privacy-policy): Privacy policy for candidates and employees.
+- [Privacy Rights FAQ](https://www.socure.com/privacy-rights-faq): FAQ on exercising privacy rights.
+- [Data Rights](https://www.socure.com/datarights): Submit a data rights request.
+
+## Meta / infra
+
+- [Sitemap](https://www.socure.com/sitemap.xml): Every URL on the site.
+- [Robots](https://www.socure.com/robots.txt): Crawler policy.
+- [LLMs.txt](https://www.socure.com/llms.txt): This file.
