@@ -6,17 +6,19 @@
       "feed_url": "https://www.socure.com/blog",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "none",
+      "error": "parse_failed"
     },
     {
       "source": "https://www.socure.com/news",
       "feed_url": "https://www.socure.com/news",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "none",
+      "error": "parse_failed"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-08-06T14:08:46Z",
+  "fetched": "2026-08-15T12:11:08Z",
   "agent_pulled": "2026-07-04"
 }
