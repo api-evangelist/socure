@@ -1,0 +1,357 @@
+{
+  "item": [
+    {
+      "id": "72001c44-c9f5-4617-a027-2d53d444c959",
+      "name": "Transactions",
+      "description": {
+        "content": "DocV session orchestration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "44c64a72-1945-4ea1-a3a8-5f2ca2319692",
+          "name": "Create A DocV Transaction",
+          "request": {
+            "name": "Create A DocV Transaction",
+            "description": {
+              "content": "Create a DocV transaction by passing `docvTransaction` in the modules array.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "3.0",
+                "EmailAuthScore"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"modules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"documentType\": \"<string>\",\n  \"country\": \"<string>\",\n  \"redirectUrl\": \"<uri>\",\n  \"webhookUrl\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "21cf8045-6a8a-4e49-b4e1-5fc354bb616e",
+              "name": "DocV transaction created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "3.0",
+                    "EmailAuthScore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"modules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"documentType\": \"<string>\",\n  \"country\": \"<string>\",\n  \"redirectUrl\": \"<uri>\",\n  \"webhookUrl\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docvTransactionId\": \"string\",\n  \"sessionUrl\": \"https://ddPQ.bxrl7j2Wnv1nKVgKYLRUaxneN6\",\n  \"referenceId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "764a3009-d862-4fb2-81a8-15f56e9f2e5c",
+          "name": "Verify A DocV Document",
+          "request": {
+            "name": "Verify A DocV Document",
+            "description": {
+              "content": "Finalize a DocV transaction and trigger document/selfie verification.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "3.0",
+                "documents",
+                "verify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"docvTransactionId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ff52b9c-96c5-4a7a-b0d1-7f927dc7307a",
+              "name": "Verification result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "3.0",
+                    "documents",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"docvTransactionId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docvTransactionId\": \"string\",\n  \"decision\": {\n    \"value\": \"accept\",\n    \"reasonCodes\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"documentData\": {\n    \"firstName\": \"string\",\n    \"surName\": \"string\",\n    \"dob\": \"2004-04-20\",\n    \"documentNumber\": \"string\",\n    \"expirationDate\": \"1989-12-27\",\n    \"documentType\": \"string\",\n    \"issuingCountry\": \"string\"\n  },\n  \"selfieMatch\": {\n    \"score\": 48.13691242818052,\n    \"decision\": \"string\"\n  },\n  \"liveness\": {\n    \"decision\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f009d264-ec3d-40d6-986e-68f40a0746a4",
+          "name": "Get A DocV Transaction",
+          "request": {
+            "name": "Get A DocV Transaction",
+            "description": {
+              "content": "Retrieve the current state and result of a DocV transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "3.0",
+                "documents",
+                ":docvTransactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "docvTransactionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab1e3f37-0474-4da5-a26e-567ca4a9e001",
+              "name": "DocV transaction.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "3.0",
+                    "documents",
+                    ":docvTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "docvTransactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"docvTransactionId\": \"string\",\n  \"decision\": {\n    \"value\": \"reject\",\n    \"reasonCodes\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"documentData\": {\n    \"firstName\": \"string\",\n    \"surName\": \"string\",\n    \"dob\": \"1970-07-15\",\n    \"documentNumber\": \"string\",\n    \"expirationDate\": \"1984-06-26\",\n    \"documentType\": \"string\",\n    \"issuingCountry\": \"string\"\n  },\n  \"selfieMatch\": {\n    \"score\": 6369.50816980583,\n    \"decision\": \"string\"\n  },\n  \"liveness\": {\n    \"decision\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.socure.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8659abb1-020d-440b-9443-71491c8fff34",
+    "name": "Socure Account Intelligence Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time validation of US bank accounts — verifying open/closed status,\nownership (name match), and account-type signals. Powers funding-account checks\nfor fintech onboarding, payroll, and ACH origination flows without requiring\nmicro-deposits or end-user credentials.\n",
+      "type": "text/plain"
+    }
+  }
+}

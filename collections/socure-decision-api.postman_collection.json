@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "e8352483-0cdc-48f4-b83a-05ad3c2a6b8f",
+      "id": "801c3987-9677-49b7-ae9c-797e3c5a5c22",
       "name": "Decision",
       "description": {
         "content": "",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "f64a90c2-a5c2-410e-85eb-f4182fe2e833",
+          "id": "77a238a2-944f-40f4-9fcd-3c630ebe8148",
           "name": "Evaluate A Decision",
           "request": {
             "name": "Evaluate A Decision",
@@ -53,7 +53,7 @@
           },
           "response": [
             {
-              "id": "ddca896b-9255-40aa-958d-62f88a5396af",
+              "id": "d0c353e6-991e-41fe-a2fd-cbc19f39bd91",
               "name": "Decision result.",
               "originalRequest": {
                 "url": {
@@ -101,7 +101,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"referenceId\": \"string\",\n  \"decision\": {\n    \"name\": \"string\",\n    \"value\": \"refer\",\n    \"ruleSet\": \"string\",\n    \"version\": \"string\"\n  }\n}",
+              "body": "{\n  \"referenceId\": \"string\",\n  \"decision\": {\n    \"name\": \"string\",\n    \"value\": \"review\",\n    \"ruleSet\": \"string\",\n    \"version\": \"string\"\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -141,11 +141,11 @@
     ]
   },
   "info": {
-    "_postman_id": "709f1b68-737f-4e27-8415-e521643ea352",
-    "name": "Socure Decision API",
+    "_postman_id": "4815aaf9-5c43-4c5f-8c53-06ea2ef4ad42",
+    "name": "Socure Account Intelligence Decision API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
-      "content": "The Decision module returns a deterministic outcome — accept, reject, review,\nrefer, or resubmit — derived from ID+ module scores and customer-configured rules\nauthored in the Socure Console. Decision is applied on every ID+ call when the\n`decision` module is included in the request modules array.\n",
+      "content": "Real-time validation of US bank accounts — verifying open/closed status,\nownership (name match), and account-type signals. Powers funding-account checks\nfor fintech onboarding, payroll, and ACH origination flows without requiring\nmicro-deposits or end-user credentials.\n",
       "type": "text/plain"
     }
   }

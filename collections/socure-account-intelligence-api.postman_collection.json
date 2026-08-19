@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "c532abb5-afce-4ae1-9346-e7b778b7f0bd",
+      "id": "9915ed50-c9f6-4179-8150-4deb302263f1",
       "name": "Account Intelligence",
       "description": {
         "content": "",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "c989b433-3829-4f91-b856-7d4b6747e870",
+          "id": "3d9d9aba-1712-4316-9cf6-1e080e346225",
           "name": "Validate A Bank Account",
           "request": {
             "name": "Validate A Bank Account",
@@ -53,7 +53,7 @@
           },
           "response": [
             {
-              "id": "4b30464a-6549-4400-9d10-f30d05128dad",
+              "id": "851e4988-f85a-4d62-a090-31585f7fa074",
               "name": "Account Intelligence result.",
               "originalRequest": {
                 "url": {
@@ -101,7 +101,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"referenceId\": \"string\",\n  \"accountIntelligence\": {\n    \"accountStatus\": \"unknown\",\n    \"ownerMatch\": \"exact\",\n    \"accountType\": \"string\",\n    \"reasonCodes\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "body": "{\n  \"referenceId\": \"string\",\n  \"accountIntelligence\": {\n    \"accountStatus\": \"open\",\n    \"ownerMatch\": \"partial\",\n    \"accountType\": \"string\",\n    \"reasonCodes\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -141,7 +141,7 @@
     ]
   },
   "info": {
-    "_postman_id": "10b27485-48bb-402b-b61d-c02e4a4cb8a0",
+    "_postman_id": "981d2fe3-9308-494a-b6f3-7124d9787922",
     "name": "Socure Account Intelligence API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
