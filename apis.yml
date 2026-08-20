@@ -188,6 +188,8 @@ apis:
   description: DocV session orchestration
   humanURL: https://developer.socure.com/reference/idplus
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
