@@ -12,8 +12,11 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: docvApi
-  url: ../openapi/socure-docv-api-openapi.yml
+- name: transactionsApi
+  url: ../openapi/socure-transactions-api-openapi.yml
+  type: openapi
+- name: uploadsApi
+  url: ../openapi/socure-uploads-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: docv-verify-and-poll

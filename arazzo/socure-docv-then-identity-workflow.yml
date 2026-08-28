@@ -12,11 +12,11 @@ info:
     descriptions.
   version: 1.0.0
 sourceDescriptions:
-- name: docvApi
-  url: ../openapi/socure-docv-api-openapi.yml
+- name: idApi
+  url: ../openapi/socure-id-api-openapi.yml
   type: openapi
-- name: idplusApi
-  url: ../openapi/socure-idplus-api-openapi.yml
+- name: transactionsApi
+  url: ../openapi/socure-transactions-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: docv-then-identity

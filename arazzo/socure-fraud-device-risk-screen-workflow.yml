@@ -12,11 +12,11 @@ info:
     OpenAPI descriptions.
   version: 1.0.0
 sourceDescriptions:
-- name: idplusApi
-  url: ../openapi/socure-idplus-api-openapi.yml
+- name: idApi
+  url: ../openapi/socure-id-api-openapi.yml
   type: openapi
-- name: watchlistApi
-  url: ../openapi/socure-watchlist-monitoring-api-openapi.yml
+- name: monitoringApi
+  url: ../openapi/socure-monitoring-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: fraud-device-risk-screen

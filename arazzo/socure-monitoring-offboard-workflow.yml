@@ -10,8 +10,8 @@ info:
     and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: watchlistApi
-  url: ../openapi/socure-watchlist-monitoring-api-openapi.yml
+- name: monitoringApi
+  url: ../openapi/socure-monitoring-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: monitoring-offboard
