@@ -28,39 +28,6 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/socure.png
 url: https://raw.githubusercontent.com/api-evangelist/socure/refs/heads/main/apis.yml
 apis:
-- aid: socure:socure-decision-api
-  name: Socure Decision API
-  tags:
-  - Decisioning
-  - Rules Engine
-  - Identity Verification
-  humanURL: https://developer.socure.com/docs/id-plus/modules/decision
-  properties:
-  - url: https://developer.socure.com/docs/id-plus/modules/decision
-    type: Documentation
-  - url: openapi/socure-decision-api-openapi.yml
-    type: OpenAPI
-  description: >-
-    Socure's rule-based decisioning module returns a single deterministic outcome — accept, reject, review,
-    refer, or resubmit — derived from ID+ module scores and customer-configured rules. Decision rules
-    are authored in the Socure Console and applied on every ID+ call when the `decision.module` block
-    is included in the request modules array.
-- aid: socure:socure-account-intelligence-api
-  name: Socure Account Intelligence API
-  tags:
-  - Bank Account Verification
-  - Account Validation
-  - Open Banking
-  humanURL: https://developer.socure.com/docs/id-plus/modules/account-intelligence
-  properties:
-  - url: https://developer.socure.com/docs/id-plus/modules/account-intelligence
-    type: Documentation
-  - url: openapi/socure-account-intelligence-api-openapi.yml
-    type: OpenAPI
-  description: >-
-    Real-time validation of US bank accounts — verifying open/closed status, ownership (name match), and
-    account-type signals. Powers funding-account checks for fintech onboarding, payroll, and ACH origination
-    flows without requiring micro-deposits or end-user credentials.
 - aid: socure:socure-riskos-api
   name: Socure RiskOS API
   tags:

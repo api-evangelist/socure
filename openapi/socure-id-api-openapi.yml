@@ -1,21 +1,37 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Socure Account Intelligence ID+ API
+  title: Socure ID+ ID+ API
   version: '3.0'
-  description: 'Real-time validation of US bank accounts — verifying open/closed status,
+  description: 'The Socure ID+ API is the unified REST surface for the ID+ platform. A single
 
-    ownership (name match), and account-type signals. Powers funding-account checks
+    `POST /api/3.0/EmailAuthScore` (legacy name retained for compatibility) accepts a
 
-    for fintech onboarding, payroll, and ACH origination flows without requiring
+    `modules` array describing which modules to evaluate — KYC (Socure Verify), eCBSV,
 
-    micro-deposits or end-user credentials.
+    Sigma Identity Fraud, Sigma Synthetic Fraud, Sigma First-Party Fraud, Email
+
+    RiskScore, Phone RiskScore, Address RiskScore, Digital Intelligence, Graph
+
+    Intelligence, Global Watchlist Screening, Deceased Check, Account Intelligence,
+
+    Prefill, and the Decision rules engine — and returns a single combined response
+
+    with `referenceId`, module result blocks, and an optional `decision` block.
 
     '
+  contact:
+    name: Socure Developer Support
+    url: https://developer.socure.com
+  license:
+    name: Socure Customer Terms
+    url: https://developer.socure.com/customer-terms
 servers:
 - url: https://api.socure.com
   description: Production
 - url: https://sandbox.socure.com
   description: Sandbox
+- url: https://api.socure.us
+  description: GovCloud production
 security:
 - SocureToken: []
 tags:
@@ -56,6 +72,49 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
+    RiskScoreResult:
+      type: object
+      properties:
+        score:
+          type: number
+          minimum: 0
+          maximum: 1
+        reasonCodes:
+          type: array
+          items:
+            type: string
+    DecisionResult:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+          enum:
+          - accept
+          - reject
+          - review
+          - refer
+          - resubmit
+        ruleSet:
+          type: string
+        version:
+          type: string
+    WatchlistResult:
+      type: object
+      properties:
+        global:
+          type: object
+          properties:
+            sources:
+              type: array
+              items:
+                type: object
+                properties:
+                  sourceListName:
+                    type: string
+                  matchCount:
+                    type: integer
     IdPlusRequest:
       type: object
       required:
@@ -128,91 +187,6 @@ components:
         docvTransactionId:
           type: string
           description: DocV transaction ID to include document verification results.
-    RiskScoreResult:
-      type: object
-      properties:
-        score:
-          type: number
-          minimum: 0
-          maximum: 1
-        reasonCodes:
-          type: array
-          items:
-            type: string
-    WatchlistResult:
-      type: object
-      properties:
-        global:
-          type: object
-          properties:
-            sources:
-              type: array
-              items:
-                type: object
-                properties:
-                  sourceListName:
-                    type: string
-                  matchCount:
-                    type: integer
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-        msg:
-          type: string
-        referenceId:
-          type: string
-    KycResult:
-      type: object
-      properties:
-        reasonCodes:
-          type: array
-          items:
-            type: string
-        fieldValidations:
-          type: object
-          additionalProperties:
-            type: number
-            minimum: 0
-            maximum: 1
-    SigmaResult:
-      type: object
-      properties:
-        scores:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              version:
-                type: string
-              score:
-                type: number
-                minimum: 0
-                maximum: 1
-        reasonCodes:
-          type: array
-          items:
-            type: string
-    DecisionResult:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-          enum:
-          - accept
-          - reject
-          - review
-          - refer
-          - resubmit
-        ruleSet:
-          type: string
-        version:
-          type: string
     IdPlusResponse:
       type: object
       properties:
@@ -241,15 +215,51 @@ components:
         accountIntelligence:
           type: object
           additionalProperties: true
+    SigmaResult:
+      type: object
+      properties:
+        scores:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              version:
+                type: string
+              score:
+                type: number
+                minimum: 0
+                maximum: 1
+        reasonCodes:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        msg:
+          type: string
+        referenceId:
+          type: string
+    KycResult:
+      type: object
+      properties:
+        reasonCodes:
+          type: array
+          items:
+            type: string
+        fieldValidations:
+          type: object
+          additionalProperties:
+            type: number
+            minimum: 0
+            maximum: 1
   responses:
     Unauthorized:
       description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Malformed request.
       content:
         application/json:
           schema:
@@ -260,8 +270,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Malformed request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     SocureToken:
       type: apiKey
       in: header
       name: Authorization
+      description: '`SocureApiKey <api-key>` token issued in the Socure Console. GovCloud customers
+
+        present their GovCloud-scoped key. Treat the key as a bearer secret.
+
+        '

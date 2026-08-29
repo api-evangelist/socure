@@ -1,16 +1,21 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Socure Account Intelligence Transactions API
+  title: Socure Predictive DocV Transactions API
   version: '3.0'
-  description: 'Real-time validation of US bank accounts — verifying open/closed status,
+  description: 'Predictive Document Verification (DocV) verifies government-issued ID documents
 
-    ownership (name match), and account-type signals. Powers funding-account checks
+    and matches them to a live selfie with liveness detection. The DocV REST API
 
-    for fintech onboarding, payroll, and ACH origination flows without requiring
+    creates session-orchestrated transactions, manages document/selfie uploads, and
 
-    micro-deposits or end-user credentials.
+    retrieves verification outcomes. Session lifecycle events are also pushed via
+
+    webhooks — see the companion DocV AsyncAPI document.
 
     '
+  contact:
+    name: Socure Developer Support
+    url: https://developer.socure.com
 servers:
 - url: https://api.socure.com
   description: Production
@@ -109,6 +114,13 @@ components:
         webhookUrl:
           type: string
           format: uri
+    VerifyDocvRequest:
+      type: object
+      required:
+      - docvTransactionId
+      properties:
+        docvTransactionId:
+          type: string
     DocvTransaction:
       type: object
       properties:
@@ -168,13 +180,6 @@ components:
           properties:
             decision:
               type: string
-    VerifyDocvRequest:
-      type: object
-      required:
-      - docvTransactionId
-      properties:
-        docvTransactionId:
-          type: string
   securitySchemes:
     SocureToken:
       type: apiKey

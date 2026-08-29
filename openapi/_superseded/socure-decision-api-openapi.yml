@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Socure Account Intelligence API
+  title: Socure Account Intelligence Decision API
   version: '3.0'
   description: 'Real-time validation of US bank accounts — verifying open/closed status,
 
@@ -19,17 +19,19 @@ servers:
 security:
 - SocureToken: []
 tags:
-- name: Account Intelligence
+- name: Decision
 paths:
   /api/3.0/EmailAuthScore:
     post:
       tags:
-      - Account Intelligence
-      operationId: validateBankAccount
-      summary: Validate A Bank Account
-      description: 'Validate a US bank account by routing number and account number with the
+      - Decision
+      operationId: evaluateDecision
+      summary: Evaluate A Decision
+      description: 'Invoke the Decision module alongside other ID+ modules. The Decision block in
 
-        `accountintelligence` module.
+        the response carries the configured rule set name, version, and the resulting
+
+        outcome.
 
         '
       requestBody:
@@ -40,32 +42,31 @@ paths:
               type: object
               required:
               - modules
-              - routingNumber
-              - accountNumber
               properties:
                 modules:
                   type: array
                   items:
                     type: string
                     enum:
-                    - accountintelligence
-                routingNumber:
+                    - decision
+                    - kyc
+                    - sigma
+                    - synthetic
+                    - watchlist
+                customerUserId:
                   type: string
-                  description: 9-digit ABA routing number.
-                accountNumber:
-                  type: string
-                accountType:
-                  type: string
-                  enum:
-                  - checking
-                  - savings
                 firstName:
                   type: string
                 surName:
                   type: string
+                dob:
+                  type: string
+                  format: date
+                nationalId:
+                  type: string
       responses:
         '200':
-          description: Account Intelligence result.
+          description: Decision result.
           content:
             application/json:
               schema:
@@ -73,27 +74,23 @@ paths:
                 properties:
                   referenceId:
                     type: string
-                  accountIntelligence:
+                  decision:
                     type: object
                     properties:
-                      accountStatus:
+                      name:
+                        type: string
+                      value:
                         type: string
                         enum:
-                        - open
-                        - closed
-                        - unknown
-                      ownerMatch:
+                        - accept
+                        - reject
+                        - review
+                        - refer
+                        - resubmit
+                      ruleSet:
                         type: string
-                        enum:
-                        - exact
-                        - partial
-                        - none
-                      accountType:
+                      version:
                         type: string
-                      reasonCodes:
-                        type: array
-                        items:
-                          type: string
 components:
   securitySchemes:
     SocureToken:

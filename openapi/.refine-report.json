@@ -1,26 +1,33 @@
 {
   "provider": "socure",
   "sources": [
-    "socure-account-intelligence-api-openapi.yml",
-    "socure-alerts-api-openapi.yml",
-    "socure-decision-api-openapi.yml",
-    "socure-id-api-openapi.yml",
-    "socure-monitoring-api-openapi.yml",
-    "socure-transactions-api-openapi.yml",
-    "socure-uploads-api-openapi.yml"
+    "_original/socure-docv-api-openapi.yml",
+    "_original/socure-idplus-api-openapi.yml",
+    "_original/socure-watchlist-monitoring-api-openapi.yml"
   ],
   "outputs": [
-    "socure-account-intelligence-api-openapi.yml",
-    "socure-alerts-api-openapi.yml",
-    "socure-decision-api-openapi.yml",
-    "socure-id-api-openapi.yml",
-    "socure-monitoring-api-openapi.yml",
     "socure-transactions-api-openapi.yml",
-    "socure-uploads-api-openapi.yml"
+    "socure-uploads-api-openapi.yml",
+    "socure-id-api-openapi.yml",
+    "socure-alerts-api-openapi.yml",
+    "socure-monitoring-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "socure-docv-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "socure-idplus-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "socure-watchlist-monitoring-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "socure-account-intelligence-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "socure-alerts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "socure-decision-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "socure-id-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "socure-monitoring-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "socure-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "socure-uploads-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

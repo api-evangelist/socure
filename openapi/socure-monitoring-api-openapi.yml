@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Socure Account Intelligence Monitoring API
+  title: Socure Global Watchlist Monitoring API
   version: '3.0'
-  description: 'Real-time validation of US bank accounts — verifying open/closed status,
+  description: 'Continuous monitoring of customer identities against global sanctions lists
 
-    ownership (name match), and account-type signals. Powers funding-account checks
+    (OFAC, UN, EU, HMT, DFAT), PEP lists, and adverse media sources. Submit profiles
 
-    for fintech onboarding, payroll, and ACH origination flows without requiring
+    for monitoring, retrieve match alerts, manage match dispositions, and receive
 
-    micro-deposits or end-user credentials.
+    webhook callbacks when a customer matches a newly added or updated list entry.
 
     '
 servers:
@@ -70,6 +70,19 @@ paths:
           description: Profile removed.
 components:
   schemas:
+    MonitoringEnrollment:
+      type: object
+      required:
+      - referenceId
+      properties:
+        referenceId:
+          type: string
+          description: ID+ referenceId from the original watchlist evaluation.
+        customerUserId:
+          type: string
+        webhookUrl:
+          type: string
+          format: uri
     MonitoringProfile:
       type: object
       properties:
@@ -85,19 +98,6 @@ components:
           enum:
           - active
           - removed
-    MonitoringEnrollment:
-      type: object
-      required:
-      - referenceId
-      properties:
-        referenceId:
-          type: string
-          description: ID+ referenceId from the original watchlist evaluation.
-        customerUserId:
-          type: string
-        webhookUrl:
-          type: string
-          format: uri
   securitySchemes:
     SocureToken:
       type: apiKey
