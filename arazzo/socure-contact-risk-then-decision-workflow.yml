@@ -11,11 +11,11 @@ info:
     and executed without opening the underlying OpenAPI descriptions.
   version: 1.0.0
 sourceDescriptions:
-- name: decisionApi
-  url: ../openapi/socure-decision-api-openapi.yml
-  type: openapi
 - name: idApi
   url: ../openapi/socure-id-api-openapi.yml
+  type: openapi
+- name: transactionsApi
+  url: ../openapi/socure-transactions-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: contact-risk-then-decision
@@ -113,7 +113,7 @@ workflows:
     description: >-
       Run a decision evaluation for the applicant now that all contact signals
       scored below the configured threshold.
-    operationId: evaluateDecision
+    operationId: createDocvTransaction
     parameters:
     - name: Authorization
       in: header
