@@ -225,6 +225,8 @@ apis:
   - type: AsyncAPI
     url: asyncapi/socure-watchlist-asyncapi.yml
 common:
+  - type: Website
+    url: https://www.socure.com/
   - type: AgenticAccess
     url: agentic-access/socure-agentic-access.yml
   - type: VulnerabilityDisclosure
