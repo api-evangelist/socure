@@ -41,11 +41,12 @@ apis:
   properties:
   - url: https://help.socure.com/riskos/docs
     type: Documentation
-  description: RiskOS is Socure's identity and fraud orchestration platform that combines ID+ modules,
-    customer-configured workflows, case management, and a no-code rules editor under a unified API. RiskOS
-    Enterprise supports custom workflow deployments; RiskOS Launch is the self-serve productized workflow
-    offering. Note - the RiskOS API surface is gated behind customer onboarding; this profile tracks the
-    documentation entry point only.
+  description: >-
+    RiskOS is Socure's identity and fraud orchestration platform that combines ID+ modules, customer-configured
+    workflows, case management, and a no-code rules editor under a unified API. RiskOS Enterprise supports
+    custom workflow deployments; RiskOS Launch is the self-serve productized workflow offering. Note -
+    the RiskOS API surface is gated behind customer onboarding; this profile tracks the documentation
+    entry point only.
 - aid: socure:socure-alerts-api
   name: socure Alerts API
   description: The Alerts API from socure — 2 operation(s) for alerts.
@@ -74,42 +75,11 @@ apis:
   - type: AsyncAPI
     url: asyncapi/socure-docv-asyncapi.yml
   - type: Documentation
-    url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
   - type: Documentation
-    url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
-  - type: AsyncAPI
-    url: asyncapi/socure-watchlist-asyncapi.yml
-- aid: socure:socure-id-api
-  name: socure ID+ API
-  description: Unified multi-module identity, fraud, and risk evaluation
-  humanURL: https://developer.socure.com/reference/idplus
-  tags:
-  - ID+
-  properties:
-  - type: OpenAPI
-    url: openapi/socure-id-api-openapi.yml
-  - type: Documentation
-    url: https://developer.socure.com/reference/idplus
-  - type: Documentation
-    url: https://developer.socure.com/docs/id-plus/endpoints-and-apis/api-endpoints
-  - type: Documentation
-    url: https://developer.socure.com/reference/authentication
-  - type: JSONSchema
-    url: json-schema/socure-idplus-request-schema.json
-  - type: JSONSchema
-    url: json-schema/socure-idplus-response-schema.json
-  - type: JSONLD
-    url: json-ld/socure-context.jsonld
-  - type: Documentation
-    url: https://developer.socure.com/docs/id-plus/modules/docv/docv-overview
-  - type: Documentation
-    url: https://developer.socure.com/docs/webhooks/docv-events
-  - type: AsyncAPI
-    url: asyncapi/socure-docv-asyncapi.yml
-  - type: Documentation
-    url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
-  - type: Documentation
-    url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
   - type: AsyncAPI
     url: asyncapi/socure-watchlist-asyncapi.yml
 - aid: socure:socure-monitoring-api
@@ -140,9 +110,11 @@ apis:
   - type: AsyncAPI
     url: asyncapi/socure-docv-asyncapi.yml
   - type: Documentation
-    url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
   - type: Documentation
-    url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
   - type: AsyncAPI
     url: asyncapi/socure-watchlist-asyncapi.yml
 - aid: socure:socure-transactions-api
@@ -175,9 +147,11 @@ apis:
   - type: AsyncAPI
     url: asyncapi/socure-docv-asyncapi.yml
   - type: Documentation
-    url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
   - type: Documentation
-    url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
   - type: AsyncAPI
     url: asyncapi/socure-watchlist-asyncapi.yml
 - aid: socure:socure-uploads-api
@@ -208,9 +182,11 @@ apis:
   - type: AsyncAPI
     url: asyncapi/socure-docv-asyncapi.yml
   - type: Documentation
-    url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/global-watchlist-overview
   - type: Documentation
-    url: https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
+    url: >-
+      https://developer.socure.com/docs/id-plus/modules/global-watchlist/configuration/watchlist-monitoring-overview
   - type: AsyncAPI
     url: asyncapi/socure-watchlist-asyncapi.yml
 common:
