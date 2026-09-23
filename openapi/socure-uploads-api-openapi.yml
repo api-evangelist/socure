@@ -10,9 +10,7 @@ info:
 
     retrieves verification outcomes. Session lifecycle events are also pushed via
 
-    webhooks — see the companion DocV AsyncAPI document.
-
-    '
+    webhooks — see the companion DocV AsyncAPI document.'
   contact:
     name: Socure Developer Support
     url: https://developer.socure.com

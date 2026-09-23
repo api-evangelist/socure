@@ -10,9 +10,7 @@ info:
 
     retrieves verification outcomes. Session lifecycle events are also pushed via
 
-    webhooks — see the companion DocV AsyncAPI document.
-
-    '
+    webhooks — see the companion DocV AsyncAPI document.'
   contact:
     name: Socure Developer Support
     url: https://developer.socure.com
@@ -89,48 +87,6 @@ paths:
                 $ref: '#/components/schemas/DocvDecision'
 components:
   schemas:
-    CreateDocvTransactionRequest:
-      type: object
-      required:
-      - modules
-      properties:
-        modules:
-          type: array
-          items:
-            type: string
-            enum:
-            - docvtransaction
-        documentType:
-          type: string
-          enum:
-          - license
-          - passport
-          - residence_permit
-        country:
-          type: string
-        redirectUrl:
-          type: string
-          format: uri
-        webhookUrl:
-          type: string
-          format: uri
-    VerifyDocvRequest:
-      type: object
-      required:
-      - docvTransactionId
-      properties:
-        docvTransactionId:
-          type: string
-    DocvTransaction:
-      type: object
-      properties:
-        docvTransactionId:
-          type: string
-        sessionUrl:
-          type: string
-          format: uri
-        referenceId:
-          type: string
     DocvDecision:
       type: object
       properties:
@@ -180,6 +136,48 @@ components:
           properties:
             decision:
               type: string
+    VerifyDocvRequest:
+      type: object
+      required:
+      - docvTransactionId
+      properties:
+        docvTransactionId:
+          type: string
+    DocvTransaction:
+      type: object
+      properties:
+        docvTransactionId:
+          type: string
+        sessionUrl:
+          type: string
+          format: uri
+        referenceId:
+          type: string
+    CreateDocvTransactionRequest:
+      type: object
+      required:
+      - modules
+      properties:
+        modules:
+          type: array
+          items:
+            type: string
+            enum:
+            - docvtransaction
+        documentType:
+          type: string
+          enum:
+          - license
+          - passport
+          - residence_permit
+        country:
+          type: string
+        redirectUrl:
+          type: string
+          format: uri
+        webhookUrl:
+          type: string
+          format: uri
   securitySchemes:
     SocureToken:
       type: apiKey

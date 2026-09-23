@@ -8,9 +8,7 @@ info:
 
     for monitoring, retrieve match alerts, manage match dispositions, and receive
 
-    webhook callbacks when a customer matches a newly added or updated list entry.
-
-    '
+    webhook callbacks when a customer matches a newly added or updated list entry.'
 servers:
 - url: https://api.socure.com
   description: Production

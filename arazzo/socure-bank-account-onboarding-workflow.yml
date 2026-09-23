@@ -13,10 +13,10 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: accountIntelligenceApi
-  url: ../openapi/socure-account-intelligence-api-openapi.yml
+  url: ../openapi/_superseded/socure-account-intelligence-api-openapi.yml
   type: openapi
 - name: decisionApi
-  url: ../openapi/socure-decision-api-openapi.yml
+  url: ../openapi/_superseded/socure-decision-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: bank-account-onboarding
