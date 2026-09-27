@@ -136,13 +136,6 @@ components:
           properties:
             decision:
               type: string
-    VerifyDocvRequest:
-      type: object
-      required:
-      - docvTransactionId
-      properties:
-        docvTransactionId:
-          type: string
     DocvTransaction:
       type: object
       properties:
@@ -178,6 +171,13 @@ components:
         webhookUrl:
           type: string
           format: uri
+    VerifyDocvRequest:
+      type: object
+      required:
+      - docvTransactionId
+      properties:
+        docvTransactionId:
+          type: string
   securitySchemes:
     SocureToken:
       type: apiKey

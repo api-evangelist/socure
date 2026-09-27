@@ -68,19 +68,6 @@ paths:
           description: Profile removed.
 components:
   schemas:
-    MonitoringEnrollment:
-      type: object
-      required:
-      - referenceId
-      properties:
-        referenceId:
-          type: string
-          description: ID+ referenceId from the original watchlist evaluation.
-        customerUserId:
-          type: string
-        webhookUrl:
-          type: string
-          format: uri
     MonitoringProfile:
       type: object
       properties:
@@ -96,6 +83,19 @@ components:
           enum:
           - active
           - removed
+    MonitoringEnrollment:
+      type: object
+      required:
+      - referenceId
+      properties:
+        referenceId:
+          type: string
+          description: ID+ referenceId from the original watchlist evaluation.
+        customerUserId:
+          type: string
+        webhookUrl:
+          type: string
+          format: uri
   securitySchemes:
     SocureToken:
       type: apiKey
