@@ -87,6 +87,48 @@ paths:
                 $ref: '#/components/schemas/DocvDecision'
 components:
   schemas:
+    VerifyDocvRequest:
+      type: object
+      required:
+      - docvTransactionId
+      properties:
+        docvTransactionId:
+          type: string
+    DocvTransaction:
+      type: object
+      properties:
+        docvTransactionId:
+          type: string
+        sessionUrl:
+          type: string
+          format: uri
+        referenceId:
+          type: string
+    CreateDocvTransactionRequest:
+      type: object
+      required:
+      - modules
+      properties:
+        modules:
+          type: array
+          items:
+            type: string
+            enum:
+            - docvtransaction
+        documentType:
+          type: string
+          enum:
+          - license
+          - passport
+          - residence_permit
+        country:
+          type: string
+        redirectUrl:
+          type: string
+          format: uri
+        webhookUrl:
+          type: string
+          format: uri
     DocvDecision:
       type: object
       properties:
@@ -136,48 +178,6 @@ components:
           properties:
             decision:
               type: string
-    DocvTransaction:
-      type: object
-      properties:
-        docvTransactionId:
-          type: string
-        sessionUrl:
-          type: string
-          format: uri
-        referenceId:
-          type: string
-    CreateDocvTransactionRequest:
-      type: object
-      required:
-      - modules
-      properties:
-        modules:
-          type: array
-          items:
-            type: string
-            enum:
-            - docvtransaction
-        documentType:
-          type: string
-          enum:
-          - license
-          - passport
-          - residence_permit
-        country:
-          type: string
-        redirectUrl:
-          type: string
-          format: uri
-        webhookUrl:
-          type: string
-          format: uri
-    VerifyDocvRequest:
-      type: object
-      required:
-      - docvTransactionId
-      properties:
-        docvTransactionId:
-          type: string
   securitySchemes:
     SocureToken:
       type: apiKey
