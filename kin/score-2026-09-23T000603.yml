@@ -1,21 +1,19 @@
-# Kin Score artifact — socure — 2026-08-25T154045
+# Kin Score artifact — socure — 2026-09-23T000603
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: socure
-  schema_version: 0.14.0
-  scored_at: '2026-08-25'
-  run_ts: 2026-08-25T154045
-  composite: 64.3
+  schema_version: 0.22.0
+  scored_at: '2026-09-23'
+  run_ts: 2026-09-23T000603
+  composite: 63.5
   band: strong
   facets:
-    discoverability: 63.0
-    contract_quality: 70.3
-    governance: 28.8
-    operational_transparency: 60.5
-    developer_ergonomics: 66.7
-    commercial_clarity: 78.9
+    discoverability: 72.2
+    contract_quality: 69.1
     contract_governance: 28.8
+    operational_transparency: 60.5
+    developer_ergonomics: 63.1
     access_clarity: 78.9
   agent_readiness:
     score: 20.9
@@ -40,10 +38,6 @@ kin_score:
       protected_resource_metadata: false
       dynamic_client_registration: false
       agentic_commerce: false
-  regulatory:
-    applies: false
-    undetermined: true
-    note: provider carries no tags; regime could not be determined
   provenance:
     agentic_access: derived
     contracts:
