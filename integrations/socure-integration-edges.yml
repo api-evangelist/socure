@@ -1,0 +1,46 @@
+generated: '2026-10-14'
+method: searched
+checked:
+- okta/integrations/okta-integration-edges.yml
+- ping-identity/integrations/ping-identity-integration-edges.yml
+source:
+- okta/integrations/okta-integration-edges.yml
+- ping-identity/integrations/ping-identity-integration-edges.yml
+edges:
+- partner_name: Okta (own)
+  partner: okta
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.okta.com/integrations/socureid/
+  mirror_of: okta/integrations/okta-integration-edges.yml
+  apps:
+  - Socure ID+
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Identity Verification
+  badges:
+  - UNVERIFIED
+  features:
+  - INLINE_HOOKS
+- partner_name: Ping Identity (own)
+  partner: ping-identity
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.pingone.com/item/socure-id-auth-tree-nodes
+  mirror_of: ping-identity/integrations/ping-identity-integration-edges.yml
+  apps:
+  - Socure ID+ Auth Tree Nodes
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
